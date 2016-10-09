@@ -1,0 +1,31 @@
+---
+title: "Religion Analysis"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Explore dataset
+First, let's explore the target dataset(PublicDataSet_ReligiousRestrictions_2007to2014.dta)
+```{r cars}
+library(foreign)
+data <- read.dta("PublicDataSet_ReligiousRestrictions_2007to2014.dta")
+View(data)
+str(data)
+```
+So we got the information that there are 81 variables and 1580 objections.
+
+From the document, we know that the data are presented as a semiwide-format dataset, in which each row is a country-year observation(for example,"Afghanistan, 2007"). The dataset covers 198 countries and self-administering territories: 192 of the 193 member states of the United Nations as of 2013, plus 6 self-administering territories - Kosovo, Hong Kong, Macau, the Palestinian territories, Taiwan and Western Sahara. Some of these institutions don't have the whole data from 2007 to 2014 but juse a few years(for example, the South Sudan only has the data from 2011 to 2014)
+
+The coulums contain all of the variables presented in Pew Research Center's annual reports on restrictions on religion. as well as some additional variables analyzed in separate studies. The **Government Restrictions Index(GRI)** is based on **20** indicators of ways that national and local government restrict religion, including through coercion and force. The **Social Hostilities Index(SHI)** is based on **13** indicators of ways in which private individuals and social groups infringe upon religious beliefs and pritices, including religiously biased crimes, mob violence and efforts to stop particular religious groups from growing or oprating. 
+
+
+## Including Plots
+
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
