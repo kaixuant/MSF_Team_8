@@ -22,94 +22,31 @@ From the document, we know that the data are presented as a semiwide-format data
 The coulums contain all of the variables presented in Pew Research Center's annual reports on restrictions on religion. as well as some additional variables analyzed in separate studies. The **Government Restrictions Index(GRI)** is based on **20** indicators of ways that national and local government restrict religion, including through coercion and force. The **Social Hostilities Index(SHI)** is based on **13** indicators of ways in which private individuals and social groups infringe upon religious beliefs and pritices, including religiously biased crimes, mob violence and efforts to stop particular religious groups from growing or oprating. 
 
 |**Variable**|**Description**|
-|:-----------|:--------------|
+| :----------------------- | :--------------------------------------------------|
 |`Nation_fk`|Index of countries|
-|`Region5`|5 regions each country belong to|
-|`Region6`|6 regions each country belong to
+|`Region5`|5 regions the countries belong to|
+|`Region6`|6 regions the countries belong to|
 |`Ctry_EditorialName`|Country name|
 |`Question_Year`|Observation year|
 |`GRI`|Government restriction index from 0 to 10. Higher number indicates higher government restriction|
 |`SHI`|Social Hostilities Index from 0 to 10. Higher number indicates higher social hostilities|
-|`GRI_Q_1`|Whether a country's constitution explicitly protect religious freedom. (0 = Yes, 0.5 = Does not mention specifically but protects religious practices, 1 = No)
-|`GRI_Q_2`|Whether a country's constitution 
-|`GRI_Q_3`|
-|`GRI_Q_4`|
-|`GRI_Q_5`|
-|`GRI_Q_6`|
-|`GRI_Q_7`|
-|`GRI_Q_8`|
-|`GRI_Q_9`|
-|`GRI_Q_10`|
-|`GRI_Q_11`|
-|`GRI_Q_11_Christianity`|
-|`GRI_Q_11_Islam`|
-|`GRI_Q_11_Buddhism`|
-|`GRI_Q_11_Hinduism`|
-|`GRI_Q_11_Judaism`|
-|`GRI_Q_11_Folk_Religions`|
-|`GRI_Q_11_Other_Religions`|
-|`GRI_Q_12`|
-|`GRI_Q_13`|
-|`GRI_Q_14`|
-|`GRI_Q_15`|
-|`GRI_Q_16`|
-|`GRI_Q_16_reasons`|
-|`GRI_Q_17`|
-|`GRI_Q_18`|
-|`GRI_Q_19`|
-|`GRI_Q_19_extent`|
-|`GRI_Q_19_Property_Damage`|
-|`GRI_Q_19_Detentions`|
-|`GRI_Q_19_Displacements`|
-|`GRI_Q_19_Abuse`|
-|`GRI_Q_19_Deaths`|
-|`GRI_Q_20`|
-|`GRI_Q_20_1`|
-|`GRI_Q_20_2`|
-|`GRI_Q_20_3`|
-|`GRI_Q_20_3_a`|
-|`GRI_Q_20_3_b`|
-|`GRI_Q_20_3_c`|
-|`GRI_Q_20_4`|
-|`GRI_Q_20_5`|
-|`SHI_Q_1_Harassment`|
-|`SHI_Q_1_Property_Damage`|
-|`SHI_Q_1_Detentions`|
-|`SHI_Q_1_Displacements`|
-|`SHI_Q_1_Assaults`|
-|`SHI_Q_1_Deaths`|
-|`SHI_Q_1_Extent`|
-|`SHI_Q_1_harass_Christianity`|
-|`SHI_Q_1_harass_Islam`|
-|`SHI_Q_1_harass_Buddhism`|
-|`SHI_Q_1_harass_Hinduism`|
-|`SHI_Q_1_harass_Judaism`|
-|`SHI_Q_1_harass_Folk_Religions`|
-|`SHI_Q_1_harass_Other_Religions`|
-|`SHI_Q_2`|
-|`SHI_Q_3`|
-|`SHI_Q_4`|
-|`SHI_Q_4_extent`|
-|`SHI_Q_5`|
-|`SHI_Q_5_extent`|
-|`SHI_Q_6`|
-|`SHI_Q_7`|
-|`SHI_Q_8`|
-|`SHI_Q_9`|
-|`SHI_Q_10`|
-|`SHI_Q_11`|
-|`SHI_Q_12`|
-|`SHI_Q_13`|
-|`GRX_22_blasphemy`|
-|`GRX_22_apostasy`|
-|`GRX_22_hate_speech`|
-|`GRX_22_criticism_of_religion`|
-|`GRX_30`|  
-
 
 ```{r libraries}
 library(ggplot2)
 library(reshape2)
+```
+
+## Merge datasets
+
+```{r, echo = FALSE}
+data_2014 <- data[data$Question_Year == 2014,]
+
+hdi_lab <- read.csv("./data/2015_Statistical_Annex_Table_1.csv")
+hdi <- read.csv("./data/2015_Statistical_Annex_Table_1.csv", header = FALSE, skip = 3)
+names(hdi) <- c("HDI_Rank", "Country", "HDI", "Life_Exp", "Exp_School", "Mean_School", "GNI_pc", "GNI_min_HDI_rank", "x")
+hdi <- hdi[1:188,1:8]
+
+Res_2014 <- merge(data_2014, hdi, by.x = "Ctry_EditorialName", by.y = "Country", all = TRUE)
 ```
 
 # Questions
