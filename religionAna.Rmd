@@ -45,8 +45,41 @@ hdi_lab <- read.csv("./data/2015_Statistical_Annex_Table_1.csv")
 hdi <- read.csv("./data/2015_Statistical_Annex_Table_1.csv", header = FALSE, skip = 3)
 names(hdi) <- c("HDI_Rank", "Country", "HDI", "Life_Exp", "Exp_School", "Mean_School", "GNI_pc", "GNI_min_HDI_rank", "x")
 hdi <- hdi[1:188,1:8]
+str(hdi)
+
+# Some country names are different in hdi, therefore they need to be changed before being merged
+hdi$Country <- as.character(hdi$Country)
+
+hdi$Country[hdi$Country == 'Bolivia (Plurinational State of)'] <- 'Bolivia'
+hdi$Country[hdi$Country == 'Bosnia and Herzegovina'] <- 'Bosnia-Herzegovina'
+hdi$Country[hdi$Country == 'Brunei Darussalam'] <- 'Brunei'
+hdi$Country[hdi$Country == 'Cabo Verde'] <- 'Cape Verde'
+hdi$Country[hdi$Country == 'Congo (Democratic Republic of the)'] <- 'Democratic Republic of the Congo'
+hdi$Country[hdi$Country == 'Congo'] <- 'Republic of the Congo'
+hdi$Country[hdi$Country == "Côte d'Ivoire"] <- 'Ivory Coast'
+hdi$Country[hdi$Country == 'Hong Kong, China (SAR)'] <- 'Hong Kong'
+hdi$Country[hdi$Country == 'Iran (Islamic Republic of)'] <- 'Iran'
+hdi$Country[hdi$Country == 'Korea (Republic of)'] <- 'South Korea'
+hdi$Country[hdi$Country == "Lao People's Democratic Republic"] <- 'Laos'
+hdi$Country[hdi$Country == 'Micronesia (Federated States of)'] <- 'Federated States of Micronesia'
+hdi$Country[hdi$Country == 'Myanmar'] <- 'Burma (Myanmar)'
+hdi$Country[hdi$Country == 'Moldova (Republic of)'] <- 'Moldova'
+hdi$Country[hdi$Country == 'Palestine, State of'] <- 'Palestinian territories'
+hdi$Country[hdi$Country == 'Russian Federation'] <- 'Russia'
+hdi$Country[hdi$Country == 'Syrian Arab Republic'] <- 'Syria'
+hdi$Country[hdi$Country == 'Tanzania (United Republic of)'] <- 'Tanzania'
+hdi$Country[hdi$Country == 'The former Yugoslav Republic of Macedonia'] <- 'Republic of Macedonia'
+hdi$Country[hdi$Country == 'Venezuela (Bolivarian Republic of)'] <- 'Venezuela'
+hdi$Country[hdi$Country == 'Viet Nam'] <- 'Vietnam'
+hdi$Country <- gsub("Saint", "St.", hdi$Country)
 
 Res_2014 <- merge(data_2014, hdi, by.x = "Ctry_EditorialName", by.y = "Country", all = TRUE)
+
+# GNI per capita data was read as factor and there is comma to indicate thousands.
+Res_2014$GNI_pc <- as.numeric(gsub(",", "", Res_2014$GNI_pc))
+
+View(Res_2014)
+
 ```
 
 # Questions
