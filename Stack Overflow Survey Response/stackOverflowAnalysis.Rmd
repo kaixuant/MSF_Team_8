@@ -9,6 +9,12 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r libraries}
+library(ggplot2)
+library(plyr)
+```
+
+
 # 2016 Stack Overflow Survey data analysis
 
 <<<<<<< HEAD
@@ -29,12 +35,51 @@ data.clear <- data[complete.cases(data[,c("age_midpoint","salary_midpoint")]),]
 
 # Next we just make the category data (salary) to continuous data by adding some noise term( Normal distribution with the standard deviation 10)
 data.clear["salary_norm"] <- data.clear[,"salary_midpoint"] + runif(nrow(data.clear),0,1)*5000
+
+# delete the data which has no specific gende
+data.clear <- data.clear[(data.clear[,"gender"] == "Male") | (data.clear[,"gender"] == "Female") ,]
+
 ```
 From the summary table, we can see that there are 56030 observations and 66 variables for the survey.
 
 For the collectors: there are six collectors: Facebook, House ads, Meta Stack Overflow Post, Miscellaneous, Reddit, and Twitter.
 
 For the age-range, we saw that there are 303 observations don't have age, so we need to delete these dirty data.
+
+
+# 2. Descriptive statistives analysis for the dataset
+
+## 2.1 The occpupation
+### 2.1.1 Describe the proportion of different occupation
+```{r}
+ggplot(data.clear,aes(x = occupation)) +geom_bar(position = "dodge") + theme(axis.text.x = element_text(angle = 45,colour = "black",size=13,hjust=1))
+```
+
+From the barchart, we can conclude that more respondents consider themself Full-stack developers than any other roles. The second largest one is back-end web developers, and the third one is students. The smallest one is mobile developer - Windows Phone, which may be due to the market shares of Windows Phone is a little.
+
+### 2.1.2 What is the salary differene for different occupation developers?
+```{r}
+occupation.salary <- ddply(data.clear, "occupation", function(x) mean(x[,"salary_midpoint"]))  # calculate the average salaries for different occupations
+names(occupation.salary)[2] <- "average_salary"  # rename the column names
+
+#View(occupation.salary)
+ggplot(occupation.salary) + geom_bar(aes(x = reorder(occupation,average_salary), y = average_salary), stat = "identity", position = "dodge")+ theme(axis.text.x = element_text(angle = 45,colour = "black",size=13,hjust=1)) 
+```
+
+From the barchart, we conclude that the engineering manager and Executive(VP oF Eng., CTO, CIO, etc) have the highest average salary, which is above 100,000 dollars. Most of the other occupation developers' average salaries are around 50,000 dollars. And the student developers have the lowest average salaries, just 12,500 dollars.
+
+### 2.1.2 How about the gender propertion and average salaries of different occupation developers?
+```{r}
+occupation.gender.salary <- ddply(data.clear, .(occupation,gender), function(x) mean(x[,"salary_midpoint"]))  # calculate the average salaries for different occupations
+View(occupation.gender.salary)
+```
+
+
+
+
+
+
+
 =======
 Correlation Calculation with different varialbes with "salary_midpoint":
 >>>>>>> 86e56dbf5972ab96985b972ff099b871fb957576
