@@ -16,6 +16,9 @@ Correlation Calculation with different varialbes with "salary_midpoint":
 ```{r, echo=FALSE}
 cor.test(stack[, "salary_midpoint"], stack[, "age_midpoint"])
 cor.test(stack[, "salary_midpoint"], stack[, "programming_ability"])
+cor.test(stack[, "salary_midpoint"], stack[, "programming_ability"])
+cor.test(stack[, "salary_midpoint"], stack[, "programming_ability"])
+cor.test(stack[, "salary_midpoint"], stack[, "programming_ability"])
 
 ```
 
