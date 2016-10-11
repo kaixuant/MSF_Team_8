@@ -1,6 +1,6 @@
 ---
 title: "Stack Overflow Analysis"
-author: ""
+author: "Group 8"
 date: "11 October, 2016"
 output: html_document
 ---
@@ -34,18 +34,18 @@ table(data[,"age_range"])
 # delete the missing age_midpoint data, salary_midpoint data
 data.clear <- data[complete.cases(data[,c("age_midpoint","salary_midpoint")]),]
 
-# Next we just make the category data (salary) to continuous data by adding some noise term( Normal distribution with the standard deviation 10)
+# Next we just make the category data (salary) to continuous data by adding some noise term(Normal distribution with the standard deviation 10)
 data.clear["salary_norm"] <- data.clear[,"salary_midpoint"] + runif(nrow(data.clear),0,1)*5000
 
 # delete the data which has no specific gende
 data.clear <- data.clear[(data.clear[,"gender"] == "Male") | (data.clear[,"gender"] == "Female") ,]
 
 ```
-From the summary table, we can see that there are 56030 observations and 66 variables for the survey.
+From the summary table, we can see that there are 56,030 observations and 66 variables for the survey.
 
 For the collectors: there are six collectors: Facebook, House ads, Meta Stack Overflow Post, Miscellaneous, Reddit, and Twitter.
 
-For the age-range, we saw that there are 303 observations don't have age, so we need to delete these dirty data.
+For the age-range: we saw that there are 303 observations don't have age, so we need to delete these dirty data.
 
 
 
@@ -72,6 +72,7 @@ For the age-range, we saw that there are 303 observations don't have age, so we 
 ggplot(data.clear,aes(x = occupation)) +geom_bar(position = "dodge") + theme(axis.text.x = element_text(angle = 45,colour = "black",size=13,hjust=1))
 
 ggplot(data.clear,aes(x = occupation, fill = gender)) +geom_bar(position = "dodge") + theme(axis.text.x = element_text(angle = 45,colour = "black",size=13,hjust=1))
+
 ```
 
 From the barchart, we can conclude that more respondents consider themself Full-stack developers than any other roles. The second largest one is back-end web developers, and the third one is students. The smallest one is mobile developer - Windows Phone, which may be due to the market shares of Windows Phone is a little. From the second barchart, we find that the numbers of male developers is much larger than that of female developers.
@@ -83,6 +84,7 @@ names(occupation.salary)[2] <- "average_salary"  # rename the column names
 
 #View(occupation.salary)
 ggplot(occupation.salary) + geom_bar(aes(x = reorder(occupation,average_salary), y = average_salary), stat = "identity", position = "dodge")+ theme(axis.text.x = element_text(angle = 45,colour = "black",size=13,hjust=1)) 
+
 ```
 
 From the barchart, we conclude that the engineering manager and Executive(VP oF Eng., CTO, CIO, etc) have the highest average salary, which is above 100,000 dollars. Most of the other occupation developers' average salaries are around 50,000 dollars. And the student developers have the lowest average salaries, just 12,500 dollars.
@@ -90,9 +92,11 @@ From the barchart, we conclude that the engineering manager and Executive(VP oF 
 ### 2.1.3 How about the gender propertion and average salaries of different occupation developers?
 ```{r}
 occupation.gender.salary <- ddply(data.clear, .(occupation,gender), function(x) mean(x[,"salary_midpoint"]))  # calculate the average salaries for different occupations
+
 #View(occupation.gender.salary)
 names(occupation.gender.salary)[3] <- "average_salary"  # rename the column names
 ggplot(occupation.gender.salary) + geom_bar(aes(x = reorder(occupation,average_salary), y = average_salary, fill = gender), stat = "identity", position = "dodge")+ theme(axis.text.x = element_text(angle = 45,colour = "black",size=13,hjust=1))
+
 ```
 
 From barchart, we conclude that for most occupations, there are not so much differences for salaries. So there are no discrimination for developers on salaries.
@@ -102,8 +106,10 @@ From barchart, we conclude that for most occupations, there are not so much diff
 # using cast function to make the long-to-wide format data
 occupation.gender.salary.cast <- dcast(occupation.gender.salary, gender ~ occupation)
 View(occupation.gender.salary.cast)
+
 # substitute NA value to 0
 occupation.gender.salary.cast[is.na(occupation.gender.salary.cast)] <- 0
+
 # Proportion test prepartion
 #change data from dataframe to matrix
 occupation.gender.salary.cast.matrix <- data.matrix(occupation.gender.salary.cast)
@@ -111,6 +117,7 @@ colnames(occupation.gender.salary.cast.matrix)[29] <- "System_administrator"  #c
 View(occupation.gender.salary.cast.matrix)
 chitest.data <- subset(occupation.gender.salary.cast.matrix, select = Analyst:(System_administrator))
 chisq.test(chitest.data)
+
 ```
 
 From chisq test, we got that the p-value is much smaller than 0.05, so we reject the Non Hyphothesis, which means ......
@@ -130,20 +137,13 @@ From chisq test, we got that the p-value is much smaller than 0.05, so we reject
 
 
 =======
-Correlation Calculation with different varialbes with "salary_midpoint":
->>>>>>> 86e56dbf5972ab96985b972ff099b871fb957576
+# 3. Correlation Analysis
 
-```{r, echo=FALSE}
+## Correlation test on different variables with "salary_midpoint":
+
+```{r}
 summary(Stack[,"gender"])
 
-#fixed gender
-Stack[,"gender2"] <- NA
-for (i in 1:nrow(Stack)){
-  if (Stack[i,"gender"] == "Female") Stack[i,"gender2"] <- "Female"
-  if (Stack[i,"gender"] == "Male") Stack[i,"gender2"] <- "Male"
-}
-
-library(ggplot2)
 #Number of female/male
 summary(Stack[,"gender2"] == "Female") #3202 female
 summary(Stack[,"gender2"] == "Male") #51388 male
