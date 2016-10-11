@@ -167,9 +167,34 @@ cor.test(data.clear[, "salary_midpoint"], data.clear[, "big_mac_index"])
 
 Based on the correlation test, it could be observed that salary has a relatively strong positive relationship with age, programming ability, experience, and the big mac index. The big mac index has the highest correlation with salary, which indicates that the salary level is strongly positive related to the consumption level of one area. Furthermore, the working experience demonstrates high positive correlation with salary as well. This shows that working experience has a huge impact on the salary level.
 
-## Linear Regression Test with "salary_midpoint" as the dependent variable
-lm2 <- lm(salary_midpoint~ experience_midpoint + gender2 + big_mac_index + age_midpoint + programming_ability, data = Stack)
-summary(lm2)
+## Single Variable Linear Regression Test with "salary_midpoint" as the dependent variable
+```{r}
+# Detect the linear relationship between salary and the big mac index as it shows strong positive correlation with salary
+model1 <- lm(salary_midpoint ~ big_mac_index, data = data.clear)
+summary(model1)
+
+# Detect the linear relationship between salary and working experience as it shows strong positive correlation with salary
+model2 <- lm(salary_midpoint ~ experience_midpoint, data = data.clear)
+summary(model2)
+
+# Detect the linear relationship between salary and programming ability as it shows strong positive correlation with salary
+model3 <- lm(salary_midpoint ~ programming_ability, data = data.clear)
+summary(model3)
+
+# Detect the linear relationship between salary and age as it shows strong positive correlation with salary
+model4 <- lm(salary_midpoint ~ age_midpoint, data = data.clear)
+summary(model4)
+```
+
+Based on the above analysis, it could be observed that these four variables all have certain linear relationship with salary, which could contribute to the further investigation on multi-variables linear relationship with salary
+
+## Multiple Variables Linear Regression Test with "salary_midpoint" as the dependent variable
+```{r}
+model5 <- lm(salary_midpoint~ experience_midpoint + big_mac_index + age_midpoint + programming_ability, data = data.clear)
+summary(model5)
+
+model6 <- lm(salary_midpoint~ experience_midpoint + gender + big_mac_index + age_midpoint + programming_ability, data = data.clear)
+summary(model6)
 
 ```
 
