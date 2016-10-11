@@ -35,7 +35,7 @@ table(data[,"age_range"])
 data.clear <- data[complete.cases(data[,c("age_midpoint","salary_midpoint")]),]
 
 # Next we just make the category data (salary) to continuous data by adding some noise term(Normal distribution with the standard deviation 10)
-data.clear["salary_norm"] <- data.clear[,"salary_midpoint"] + runif(nrow(data.clear),0,1)*5000
+# data.clear["salary_norm"] <- data.clear[,"salary_midpoint"] + runif(nrow(data.clear),0,1)*5000
 
 # delete the data which has no specific gende
 data.clear <- data.clear[(data.clear[,"gender"] == "Male") | (data.clear[,"gender"] == "Female") ,]
@@ -147,14 +147,14 @@ Based on the survey from Stack Overflow, we want to do an analysis on the salary
 summary(data.clear[,"gender"])
 
 #Number of female/male
-summary(data.clear[,"gender2"] == "Female") #3202 female
-summary(data.clear[,"gender2"] == "Male") #51388 male
+summary(data.clear[,"gender"] == "Female") #3202 female
+summary(data.clear[,"gender"] == "Male") #51388 male
 
 # Salary by gender
 ggplot(data=data.clear) + geom_boxplot(aes(gender, salary_midpoint))
 
 # T-test on gender and salary
-t.test(data.clear[data.clear[,"gender2"]=="Female", "salary_midpoint"], data.clear[data.clear[,"gender2"]=="Male", "salary_midpoint"], alternative = "two.sided")
+t.test(data.clear[data.clear[,"gender"]=="Female", "salary_midpoint"], data.clear[data.clear[,"gender"]=="Male", "salary_midpoint"], alternative = "two.sided")
 
 ```
 
@@ -183,21 +183,26 @@ Based on the correlation test, it could be observed that salary has a relatively
 # Detect the linear relationship between salary and the big mac index as it shows strong positive correlation with salary
 model1 <- lm(salary_midpoint ~ big_mac_index, data = data.clear)
 summary(model1)
+ggplot(data = data.clear, aes(x = big_mac_index, y = salary_midpoint, color = gender)) + geom_point() + geom_smooth(method='lm',formula = y~x)
 
 # Detect the linear relationship between salary and working experience as it shows strong positive correlation with salary
 model2 <- lm(salary_midpoint ~ experience_midpoint, data = data.clear)
 summary(model2)
+ggplot(data = data.clear, aes(x = experience_midpoint, y = salary_midpoint, color = gender)) + geom_point() + geom_smooth(method='lm',formula = y~x)
 
 # Detect the linear relationship between salary and programming ability as it shows strong positive correlation with salary
 model3 <- lm(salary_midpoint ~ programming_ability, data = data.clear)
 summary(model3)
+ggplot(data = data.clear, aes(x = programming_ability, y = salary_midpoint, color = gender)) + geom_point() + geom_smooth(method='lm',formula = y~x)
 
 # Detect the linear relationship between salary and age as it shows strong positive correlation with salary
 model4 <- lm(salary_midpoint ~ age_midpoint, data = data.clear)
 summary(model4)
+ggplot(data = data.clear, aes(x = age_midpoint, y = salary_midpoint, color = gender)) + geom_point(position = "dodge") + geom_smooth(method='lm',formula = y~x)
 ```
 
-Based on the above analysis, it could be observed that these four variables all have certain linear relationship with salary, which could contribute to the further investigation on multi-variables linear relationship with salary
+Based on the above analysis, it could be observed that these four variables all have certain linear relationship with salary, which could contribute to the further investigation on multi-variables linear relationship with salary.
+Also, it could be observed from the graphs that there is not much difference between male and female in general. However, as the increase of the independent variable, female will usually earn smaller amount of salary than male.
 
 ## Multiple Variables Linear Regression Test with "salary_midpoint" as the dependent variable
 ```{r}
