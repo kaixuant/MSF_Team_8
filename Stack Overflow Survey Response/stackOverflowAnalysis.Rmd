@@ -11,13 +11,12 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # 2016 Stack Overflow Survey data analysis
 
+Correlation Calculation with different varialbes with "salary_midpoint":
 
+```{r, echo=FALSE}
+cor.test(stack[, "salary_midpoint"], stack[, "age_midpoint"])
+cor.test(stack[, "salary_midpoint"], stack[, "programming_ability"])
 
-
-
-
-```{r pressure, echo=FALSE}
-plot(pressure)
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
