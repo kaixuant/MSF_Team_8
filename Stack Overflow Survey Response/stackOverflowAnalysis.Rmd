@@ -14,6 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 Correlation Calculation with different varialbes with "salary_midpoint":
 
 ```{r, echo=FALSE}
+# Correlation test among different variables with "salary_midpoint"
 cor.test(stack[, "salary_midpoint"], stack[, "age_midpoint"])
 cor.test(stack[, "salary_midpoint"], stack[, "programming_ability"])
 cor.test(stack[, "salary_midpoint"], stack[, "experience_midpoint"])
