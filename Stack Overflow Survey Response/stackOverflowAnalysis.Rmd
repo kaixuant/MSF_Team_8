@@ -1,7 +1,7 @@
 ---
 title: "Stack Overflow Analysis"
 author: ""
-date: "2016年10月11日"
+date: "11 October, 2016"
 output: html_document
 ---
 
@@ -11,6 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # 2016 Stack Overflow Survey data analysis
 
+<<<<<<< HEAD
 ## 1. Explore and clean the dataset
 ```{r}
 data <- read.csv("./Stack Overflow Survey Response/2016 Stack Overflow Survey Responses.csv")
@@ -34,13 +35,17 @@ From the summary table, we can see that there are 56030 observations and 66 vari
 For the collectors: there are six collectors: Facebook, House ads, Meta Stack Overflow Post, Miscellaneous, Reddit, and Twitter.
 
 For the age-range, we saw that there are 303 observations don't have age, so we need to delete these dirty data.
+=======
+Correlation Calculation with different varialbes with "salary_midpoint":
+>>>>>>> 86e56dbf5972ab96985b972ff099b871fb957576
 
+```{r, echo=FALSE}
+cor.test(stack[, "salary_midpoint"], stack[, "age_midpoint"])
+cor.test(stack[, "salary_midpoint"], stack[, "programming_ability"])
+cor.test(stack[, "salary_midpoint"], stack[, "programming_ability"])
+cor.test(stack[, "salary_midpoint"], stack[, "programming_ability"])
+cor.test(stack[, "salary_midpoint"], stack[, "programming_ability"])
 
-
-
-
-```{r pressure, echo=FALSE}
-plot(pressure)
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
