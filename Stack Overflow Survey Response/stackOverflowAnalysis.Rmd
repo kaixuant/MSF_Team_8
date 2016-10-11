@@ -14,14 +14,6 @@ knitr::opts_chunk$set(echo = TRUE)
 Correlation Calculation with different varialbes with "salary_midpoint":
 
 ```{r, echo=FALSE}
-# Correlation test among different variables with "salary_midpoint"
-cor.test(stack[, "salary_midpoint"], stack[, "age_midpoint"])
-cor.test(stack[, "salary_midpoint"], stack[, "programming_ability"])
-cor.test(stack[, "salary_midpoint"], stack[, "experience_midpoint"])
-cor.test(stack[, "salary_midpoint"], stack[, "big_mac_index"])
-
-
-
 summary(Stack[,"gender"])
 
 #fixed gender
@@ -42,6 +34,11 @@ ggplot(data=Stack) + geom_boxplot(aes(gender2, salary_midpoint))
 # T-test on gender and salary
 t.test(Stack[Stack[,"gender2"]=="Female", "salary_midpoint"], Stack[Stack[,"gender2"]=="Male", "salary_midpoint"], alternative = "two.sided")
 
+# Correlation test among different variables with "salary_midpoint"
+cor.test(stack[, "salary_midpoint"], stack[, "age_midpoint"])
+cor.test(stack[, "salary_midpoint"], stack[, "programming_ability"])
+cor.test(stack[, "salary_midpoint"], stack[, "experience_midpoint"])
+cor.test(stack[, "salary_midpoint"], stack[, "big_mac_index"])
 
 lm2 <- lm(salary_midpoint~ experience_midpoint + gender2 + big_mac_index + age_midpoint + programming_ability, data = Stack)
 summary(lm2)
