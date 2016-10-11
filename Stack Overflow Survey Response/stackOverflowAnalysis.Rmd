@@ -141,6 +141,8 @@ From chisq test, we got that the p-value is much smaller than 0.05, so we reject
 
 ## Correlation test on different variables with "salary_midpoint":
 
+Based on the survey from Stack Overflow, we want to do an analysis on the salary distribution and find a linear model who describes this variable through other independ variables. The first variable we want to include in our analysis is gender. We want to see if there is a significant difference in the salary distribution when looking at gender.
+
 ```{r}
 summary(data.clear[,"gender"])
 
@@ -156,7 +158,16 @@ t.test(data.clear[data.clear[,"gender2"]=="Female", "salary_midpoint"], data.cle
 
 ```
 
+The dataset only include 3202 women, compared to 51388 men. This might interfere with our results. The boxplot looks almost the same for both gender, and after running a t-test we cannot say that there is a significant difference in the two means.
+
 ## Correlation test among different variables with "salary_midpoint"
+
+Other variables we find interesting is age, the Big Mac index, IT and programming experience and programming ability. We will use correlation tests and linear regression to see how these independent variables will relate to salary.
+
+We would expect the salary to increase with age, and therefore we add age as an independent variable in our model. The big mac index shows the average price of a Big Mac in a country, and this index is sometimes used to describe the purchasing power parity in a country. We expect that respondents from countries with a high Big Mac score also have higher wages.  
+
+Since this survey is mainly answered by people using Stack Overflow, we would expect some of the respondents having jobs where coding is a part of their job. Therefore, we want to include programming ability to see if this will have a significant impact on salary. We also want to include IT and programming experience, and we believe that more experience will result in a higher salary.
+
 ```{r}
 cor.test(data.clear[, "salary_midpoint"], data.clear[, "age_midpoint"])
 cor.test(data.clear[, "salary_midpoint"], data.clear[, "programming_ability"])
@@ -197,5 +208,14 @@ model6 <- lm(salary_midpoint~ experience_midpoint + gender + big_mac_index + age
 summary(model6)
 
 ```
+
+In our model we get an adjusted R-squared equal to 0.4493, which means that 44.93% of the salary variable is described in this model. All the dependent variables are significant at the 1% level, except for gender which is significant at the 5% level. 
+
+The intercept tells us what the salary will be if all our independent variables are zero. This number is negative and does not give us any valuable information without combining it with more variables. If we look at the age variable we can see that by increasing age by one year, salary will increase by 1140 dollars. The estimate of experience tells us that one more year of experience will increase salary by 2010 dollars. 
+
+Of the beta estimates we see that the Big Mac index has the biggest impact on salary. When the Big Mac price of a country increase by 1 dollar, we will expect the salary to respondents from this country to increase by 16 700 dollars. 
+
+If the respondent’s ability in programming increase by one on a scale from 1 to 10, the salary will increase by 3885 dollars. The gender variable does not have a big influence on salary in this model, but from this sample the model indicates that men tends to have lower salary than women.  
+
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
