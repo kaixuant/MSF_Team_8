@@ -168,7 +168,7 @@ cor.test(data.clear[, "salary_midpoint"], data.clear[, "big_mac_index"])
 Based on the correlation test, it could be observed that salary has a relatively strong positive relationship with age, programming ability, experience, and the big mac index. The big mac index has the highest correlation with salary, which indicates that the salary level is strongly positive related to the consumption level of one area. Furthermore, the working experience demonstrates high positive correlation with salary as well. This shows that working experience has a huge impact on the salary level.
 
 ## Single Variable Linear Regression Test with "salary_midpoint" as the dependent variable
-```{r, echo = FALSE}
+```{r}
 # Detect the linear relationship between salary and the big mac index as it shows strong positive correlation with salary
 model1 <- lm(salary_midpoint ~ big_mac_index, data = data.clear)
 summary(model1)
@@ -194,7 +194,7 @@ Based on the above analysis, it could be observed that these four variables all 
 Also, it could be observed from the graphs that there is not much difference between male and female in general. However, as the increase of the independent variable, female will usually earn smaller amount of salary than male.
 
 ## Multiple Variables Linear Regression Test with "salary_midpoint" as the dependent variable
-```{r, echo = FALSE}
+```{r}
 model5 <- lm(salary_midpoint~ experience_midpoint + big_mac_index + age_midpoint + programming_ability, data = data.clear)
 summary(model5)
 
