@@ -11,6 +11,29 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # 2016 Stack Overflow Survey data analysis
 
+## 1. Explore and clean the dataset
+```{r}
+data <- read.csv("./Stack Overflow Survey Response/2016 Stack Overflow Survey Responses.csv")
+View(data)
+#str(data)
+data.summary <- summary(data)
+View(data.summary)
+summary(data[,"collector"])
+summary(data[,"country"])
+table(data[,"so_region"])
+table(data[,"age_range"])
+
+# delete the missing age_midpoint data, salary_midpoint data
+data.clear <- data[complete.cases(data[,c("age_midpoint","salary_midpoint")]),]
+
+# Next we just make the category data (salary) to continuous data by adding some noise term( Normal distribution with the standard deviation 10)
+data.clear["salary_norm"] <- data.clear[,"salary_midpoint"] + runif(nrow(data.clear),0,1)*5000
+```
+From the summary table, we can see that there are 56030 observations and 66 variables for the survey.
+
+For the collectors: there are six collectors: Facebook, House ads, Meta Stack Overflow Post, Miscellaneous, Reddit, and Twitter.
+
+For the age-range, we saw that there are 303 observations don't have age, so we need to delete these dirty data.
 
 
 
