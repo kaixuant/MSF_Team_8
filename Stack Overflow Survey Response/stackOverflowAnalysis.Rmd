@@ -172,21 +172,26 @@ Based on the correlation test, it could be observed that salary has a relatively
 # Detect the linear relationship between salary and the big mac index as it shows strong positive correlation with salary
 model1 <- lm(salary_midpoint ~ big_mac_index, data = data.clear)
 summary(model1)
+ggplot(data = data.clear, aes(x = big_mac_index, y = salary_midpoint, color = gender)) + geom_point() + geom_smooth(method='lm',formula = y~x)
 
 # Detect the linear relationship between salary and working experience as it shows strong positive correlation with salary
 model2 <- lm(salary_midpoint ~ experience_midpoint, data = data.clear)
 summary(model2)
+ggplot(data = data.clear, aes(x = experience_midpoint, y = salary_midpoint, color = gender)) + geom_point() + geom_smooth(method='lm',formula = y~x)
 
 # Detect the linear relationship between salary and programming ability as it shows strong positive correlation with salary
 model3 <- lm(salary_midpoint ~ programming_ability, data = data.clear)
 summary(model3)
+ggplot(data = data.clear, aes(x = programming_ability, y = salary_midpoint, color = gender)) + geom_point() + geom_smooth(method='lm',formula = y~x)
 
 # Detect the linear relationship between salary and age as it shows strong positive correlation with salary
 model4 <- lm(salary_midpoint ~ age_midpoint, data = data.clear)
 summary(model4)
+ggplot(data = data.clear, aes(x = age_midpoint, y = salary_midpoint, color = gender)) + geom_point(position = "dodge") + geom_smooth(method='lm',formula = y~x)
 ```
 
-Based on the above analysis, it could be observed that these four variables all have certain linear relationship with salary, which could contribute to the further investigation on multi-variables linear relationship with salary
+Based on the above analysis, it could be observed that these four variables all have certain linear relationship with salary, which could contribute to the further investigation on multi-variables linear relationship with salary.
+Also, it could be observed from the graphs that there is not much difference between male and female in general. However, as the increase of the independent variable, female will usually earn smaller amount of salary than male.
 
 ## Multiple Variables Linear Regression Test with "salary_midpoint" as the dependent variable
 ```{r}
