@@ -1,7 +1,7 @@
 ---
 title: "Stack Overflow Analysis"
 author: ""
-date: "2016年10月11日"
+date: "11 October, 2016"
 output: html_document
 ---
 
