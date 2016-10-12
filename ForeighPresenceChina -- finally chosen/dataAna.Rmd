@@ -12,7 +12,7 @@ library(ggplot2)
 library(scales)
 ```
 
-## 1. Explore the dataset
+## 1. Exploring the Dataset
 ```{r}
 load("./ForeighPresenceChina -- finally chosen/ForeignPresence&ETCs.RData")
 data <- as.data.frame(x)
@@ -20,6 +20,70 @@ str(data)
 View(summary(data))
 mode(data[,"province"])
 ```
+### 1.1. Description
+
+The dataset contains 40 variables and 11360 observations. The data covered 11360 different companies observed across 30 provinces in China out of a total of 276,474 companies recorded in 2004 by National Bureau of Statistics of China (2014). The variables are divided into three groups, i.e. firm-level variables, industry-level variables and province-level variables. Firm-level variables consist of the properties of each firm, which include the type of ownership, revenue, number of employees and several variables that highlight the relationship between a firm and the government of China in 2004. Industry-level variables illustrate the scale of the industry and the market share of different groups of companies, including foreign firms and the industry leaders. Also, They also try highlight the amount of govenrment influence by measuring the linear combination of the amount of help received by government officials as well as the median of tax rate incurred by each firm in the industry. Lastly, province-level variables indicate the macroeconomic information regarding a province, such as its GDP per capita and the level of MNC activities in the region (e.g. foreign direct investments and trades). Below are the details of each variable analysed in this report.
+
+
+#### Firm-Level Variables
+|Variable|Description|
+|:------------|:------------------------------------------------|
+|`idstd`|Company ID|
+|`lectcs`|Log of firm expenditures on entertainment as a percentage of annual revenue.|
+|`soe`|Whether a firm is state-owned or not. (1 = Yes, 0 = No)|
+|`collective`|Whether a firm is collectively-owned. (1 = Yes, 0 = No)|
+|`private`|Whether a firm is privately-owned. (1 = Yes, 0 = No)|
+|`foreign_HMT`|Whether a firm is owned by foreign owner from Hong Kong, Macao or Taiwan.|
+|`foreign_NonHMT`|Whether a firm is owned by foreign owner other not from Hong Kong, Macao or Taiwan.|
+|`mixedown`|Other firms not identified in `soe`, `collective`, `private`, `foreign_HMT` and `foreign_NonHMT` are coded 1.|
+|`revenue`|Total revenue in 2004 in log form|
+|`lemp`|Total number of employee in 2004 in log form|
+|`sales_otherprov`|Whether a firm sells to other provinces. (1 = Yes, 0 = No)|
+|`govtsales`|Proportion of revenue from transactions with the government|
+|`soesales`|Proportion of revenue from transactions with state-owned enterprises|
+|`relationship`|Years of relationships between the firm and its main clients|
+|`licenses`|Number of licenses required to operate|
+|`lceopay`|CEO annual salary in log form|
+|`interaction`|Number of days of interactions with the government|
+|`gm_govt`|Whether the general manager is appointed by the government. (1 = Yes, 0 = No)|
+
+
+#### Industry-Level Variables
+|Variable|Description|
+|:------------|:------------------------------------------------|
+|`foreign_output`|The share of output by foreign-owned firms|
+|`HMT_output`|Percentage output by firms owned by shareholders from Hong Kong, Macao or Taiwan|
+|`NonHMT_output`|Percentage output by firms owned by other foreign nationals|
+|`w_con_pdc4`|Market share of four biggest firms in the industry|
+|`w_con_pdc8`|Market share of eight biggest firms in the industry|
+|`marketsize`|The market size of the industry|
+|`growthrate`|Output growth 2001-2003|
+|`last_intensity`|the ratio of fixed asset per number of employees in log form|
+|`lscale`|The mean of the size of firms that has 50% of industry market share in log form|
+|`mgovthelp`|A linear combination of government helpfullness based on the contribution of government officials|
+|`mtaxrate`|Median of firms tax paid divided by total revenue|
+|`prov_ind`|Industry ID by Province|
+
+#### Province-Level Variables
+|Variable|Description|
+|:--------------|:------------------------------------------------|
+|`MNC`|Principal factor analysis of FDI inflow and MNC trades in a province|
+|`lwdist`|Geographic distance|
+|`lgdpper2003`|Log of GDP per capita of the province in 2003|
+|`gdp2003`|GDP in 2003|
+|`lpop2003`|Log of the province's population in 2003|
+|`province`|The name of the province|
+|`provinceID`|Province ID|
+
+
+** I'm trying to explain the stregth and limitations here **
+
+This dataset represent the ties between firms and the government of China. Given the unique feature of Chinese industry that most of big firms in China are state-owned **(needs citation)**, this dataset..
+
+However, the dataset possess some limitations...
+
+
+
 
 ## 2. Statistics description of the dataset 
 ### 2.1 About the province
