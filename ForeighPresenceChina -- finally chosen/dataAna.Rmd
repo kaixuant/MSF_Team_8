@@ -9,7 +9,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r}
 load("./ForeighPresenceChina -- finally chosen/ForeignPresence&ETCs.RData")
-
+str(x)
 ```
 
 
