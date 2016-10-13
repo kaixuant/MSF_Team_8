@@ -173,7 +173,7 @@ ggplot(data=mnc) + geom_boxplot(aes(ownership, revenue))
 
 ```
 
-As we can see of the barplot there is a lot of companies in the bar with "mixed" ownership compared to the other categories. Therefore it might be difficult to do any valuable analysis on this data. If we look at the boxplot we can see that it looks like the distribution of revenue might be different between the different kind of ownership. To investigate this further we need a t-test.
+As we can see of the barplot there is a lot of companies in the bar with "mixed" ownership compared to the other categories. Therefore it might be difficult to do any valuable analysis on this data. If we look at the boxplot we can see that it looks like the distribution of revenue might be different between the different kind of ownership.
 
 # 4. Analysis
 ## 4.1 Correlation Analysis
