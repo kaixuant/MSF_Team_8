@@ -8,18 +8,20 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # 1. Introduction
+Business environment in China is unique. Multinational companies (MNC) often find it difficult to compete with local companies.
 
+**add more stuff here**
 
-
-
+This report analyse replication dataset provided by Zhu (2016) that consisted of information about different companies in 30 provinces in China. The relationship between variables that affect company revenue will be investigated using correlation test and other different statistical testing. Then, we will examine the significant variables using linear regression to calculate their impact to the log of company revenue.
 
 # 2. Theory
-
+Companies with strong relationship with the government benefit from easier access to government-related resources and bureaucratic processes, however, research conducted on this relationship with companies' financial performance is varied. In China, of 98 companies in 2014 Fortune 500 list, 76 of them are state-owned (Cendrowski, 2015) and it shows the importance of government of China in the development of these companies.
 
 
 
 
 # 3. Methods
+
 ```{r library we need}
 library(ggplot2)
 library(scales)
@@ -130,16 +132,16 @@ So we can get that there is no strong relationship between the weighted geograph
 
 #### 3.3.1.4 The variance of captal GDP and total GDP of differene provinces. 
 ```{r}
-var.test(data.prov[,"gdp2003"], data.prov[,"lgdpper2003"],alternative = "two.sided")
+var.test(mnc.prov[,"gdp2003"], mnc.prov[,"lgdpper2003"],alternative = "two.sided")
 
 ```
 We can conclude that  the p value is 0.04, which is smaller than 0.05, so we can reject the None Hypothesis, and accept the alternative hypothesis: the variance of capital gdp and total gdp is not identital.
 
 #### 3.3.1.5 what kind of province-level variables influence province's total GDP?
 ```{r}
-pairs(gdp2003 ~ lgdpper2003 + lwdist + lpop2003 + MNC, data = data.prov)
+pairs(gdp2003 ~ lgdpper2003 + lwdist + lpop2003 + MNC, data = mnc.prov)
 #linear regression 
-lm_gdp2003 <- lm(gdp2003 ~ lgdpper2003 + lwdist + lpop2003 , data = data.prov)
+lm_gdp2003 <- lm(gdp2003 ~ lgdpper2003 + lwdist + lpop2003 , data = mnc.prov)
 summary(lm_gdp2003)
 ```
 
@@ -170,7 +172,7 @@ mean(mnc[mnc[,"ownership"]=="private", "revenue"])
 mean(mnc[mnc[,"ownership"]=="foreign_HMT", "revenue"])
 mean(mnc[mnc[,"ownership"]=="foreign_NonHMT", "revenue"])
 
-ggplot(data=mnc) + geom_boxplot(aes(ownership, revenue))
+ggplot(data=mnc) + geom_boxplot(aes(ownership, revenue, col = ownership))
 
 ```
 
@@ -188,7 +190,7 @@ In this case, we analysis the factors:
 ######2. Proportion of sales to the government: we think this factor could help to increase the revenue as sales to Chinese government meaning stable sales with only low risk
 ######3. Interaction with the government: we add this factor because with more time working on the government assignments and communications, it would be easier for the company to know news and policies from the goverment and act accordingly and timely.
 
-```{r}
+```{r, echo = FALSE}
 cor.test(mnc[, "revenue"], mnc[, "mgovthelp"])
 cor.test(mnc[, "revenue"], mnc[, "govtsales"])
 cor.test(mnc[, "revenue"], mnc[, "interaction"])
@@ -208,7 +210,7 @@ The factors are to be analyzed are:
 ######4. Relationship with clients and suppliers: since a good and long existing relationship with the clients and suppliers could help with the increase of the revenue, we would like to test this factor and see its correlation with the revenue.
 ######5. Licenses: we think this factor has some correlation with the revenue as more licenses one company holds, it would be possible for that company to generate more revenue.
 ######6. CEO annual income: we think the performance of the company's CEO largely affect the revenue that company earns. Thus, we examined this factor to observe the correlation.
-```{r}
+```{r, echo = FALSE}
 cor.test(mnc[, "revenue"], mnc[, "lgdpper2003"])
 cor.test(mnc[, "revenue"], mnc[, "marketsize"])
 cor.test(mnc[, "revenue"], mnc[, "growthrate"])
