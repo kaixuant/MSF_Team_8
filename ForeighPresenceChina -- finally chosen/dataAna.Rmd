@@ -150,23 +150,17 @@ ggplot(data=x) + geom_bar(aes(ownership))
 ## Correlation test on different variables with "salary_midpoint":
 The dataset only include 3202 women, compared to 51388 men. This might interfere with our results. The boxplot looks almost the same for both gender, and after running a t-test we cannot say that there is a significant difference in the two means.
 
-## Correlation test among different variables with "salary_midpoint"
-
-Other variables we find interesting is age, the Big Mac index, IT and programming experience and programming ability. We will use correlation tests and linear regression to see how these independent variables will relate to salary.
-
-We would expect the salary to increase with age, and therefore we add age as an independent variable in our model. The big mac index shows the average price of a Big Mac in a country, and this index is sometimes used to describe the purchasing power parity in a country. We expect that respondents from countries with a high Big Mac score also have higher wages.  
-
-Since this survey is mainly answered by people using Stack Overflow, we would expect some of the respondents having jobs where coding is a part of their job. Therefore, we want to include programming ability to see if this will have a significant impact on salary. We also want to include IT and programming experience, and we believe that more experience will result in a higher salary.
-
+## Correlation test among different variables with "revenue (log of total business income)"
+According to the dataset provided, we would like to examine the correlation of market size, output growth rate, help from government and GDP with the total business income.
 ```{r}
-cor.test(mnc[, "letcs"], mnc[, "mgovthelp"])
-cor.test(mnc[, "letcs"], mnc[, "marketsize"])
-cor.test(mnc[, "letcs"], mnc[, "growthrate"])
-cor.test(mnc[, "letcs"], mnc[, "gdp2003"])
+cor.test(mnc[, "revenue"], mnc[, "mgovthelp"])
+cor.test(mnc[, "revenue"], mnc[, "marketsize"])
+cor.test(mnc[, "revenue"], mnc[, "growthrate"])
+cor.test(mnc[, "revenue"], mnc[, "gdp2003"])
 
 ```
 
-Based on the correlation test, it could be observed that salary has a relatively strong positive relationship with age, programming ability, experience, and the big mac index. The big mac index has the highest correlation with salary, which indicates that the salary level is strongly positive related to the consumption level of one area. Furthermore, the working experience demonstrates high positive correlation with salary as well. This shows that working experience has a huge impact on the salary level.
+Based on the correlation test, it could be observed that the total business income of one company has a relative strong positive correlation with both the market size and GDP. However, its correlation with government help (positive) and growth rate (negative) is very weak.
 
 ## Single Variable Linear Regression Test with "salary_midpoint" as the dependent variable
 ```{r}
