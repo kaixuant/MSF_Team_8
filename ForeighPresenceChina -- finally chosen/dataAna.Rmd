@@ -285,9 +285,13 @@ ggplot(data = mnc, aes(x = lceopay+marketsize+lceopay+lgdpper2003, y = revenue))
  
 From the regression model we get an adjusted R-squared equal to 0.316, which means that 31.6 % of the revenue variable is described in this model. All the dependent variables are significant at the 1% level, exepct for lgdpper2003 which is significant at the 5% level.
 
-We can say that 3.95 is the unconditional expected mean of log of write. Therefore the exponentiated value is exp(3.948347) = 51.85. This is the geometric mean of write.
-
 The intercept of -1.38 tells us what the log of revenue will be if all our independent variables are zero. This number is negative and does not give us any valuable information without combining it with more variables. 
 
 If we look at the relationship variable we can see that by increasing the number of relationships by one, revenue will increase by 13.6 %. The estimate of marketsize tells us that 1% change in marketsize will result in 0.33% change in revenue. By looking at the lceopay we can see that 1% change in the CEO pay will result in 0.76 % change in revenue. The estimate of lgdpper2003 tells us that an increase in GDP per capita of 1 % will decrease revenue by 0.08 %. 
 
+<<<<<<< HEAD
+=======
+# 5. Discussion and Conclusion
+
+
+>>>>>>> b7cb0298d175ee14919bf1d64f729cc5575df4db
