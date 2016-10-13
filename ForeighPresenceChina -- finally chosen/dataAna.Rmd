@@ -192,7 +192,7 @@ cor.test(mnc[, "revenue"], mnc[, "interaction"])
 
 Based on the correlation tests, it could be observed that the total business income of one company has a quite weak connection with the factors relative to the government, containing even negative correlation with some of the factors.
 In this case, the theory mentioned previously could not be proved since we hardly observe any strong positive or negative correlation among governmental factors with the performance of a company.
-In this case, the factors tested above may not be used as the independent variables for the linear regression model with the revenue as the dependent variables.
+Furthermore, the factors tested above may not be used as the independent variables for the linear regression model with the revenue as the dependent variables.
 
 #### Correlation test with non-government relative factors
 Based on the above tests, government relative factors have very weak impacts on the revenue of the company. In this case, many other non-government relative factors should be examined for better interpretation of the dataset and smothier linear regression test.
@@ -217,30 +217,46 @@ Based on the correlation tests, it could be observed that the total business inc
 
 ## 4.2. Linear Regression
 ### Single Variable Linear Regression Test with revenue as the dependent variable
-
 ```{r}
-rev_rel <- lm(revenue ~ relationship, data = mnc)
+rev_rel <- lm(revenue ~ lgdpper2003, data = mnc)
 summary(rev_rel)
+library(ggplot2)
+ggplot(data = mnc, aes(x = lgdpper2003, y = revenue)) + geom_point() + geom_smooth(method='lm',formula = y~x)
 ```
-Relationship has a positive inpact on revenue. By increasing the number of relationships by one, revenue will increase by 19.5 %. The p-value is less than 0.05 and it is significant on a 5 % level, and the revenue variable is described by 7.5 % in this model. 
+The log of GDP per capita in 2003 (lgdpper2003) has a positive inpact on revenue. By increasing the GDP per capita with 1 %, revenue will increase by 1 %. The p-value is less than 0.05 and is significant on a 5% level, and the revenue variable is described by 5.6 % in this model.
 
 ```{r}
 rev_rel <- lm(revenue ~ marketsize, data = mnc)
 summary(rev_rel)
+ggplot(data = mnc, aes(x = marketsize, y = revenue)) + geom_point() + geom_smooth(method='lm',formula = y~x)
 ```
 Marketsize has a positive inpact on revenue. The estimate of marketsize tells us that 1 % change in marketsize will result in 0.46 % change in revenue. The p-value is less than 0.05 and it is significant on a 5 % level, and the revenue variable is described by 9.4 % in this model.
 
 ```{r}
+rev_rel <- lm(revenue ~ relationship, data = mnc)
+summary(rev_rel)
+ggplot(data = mnc, aes(x = relationship, y = revenue)) + geom_point() + geom_smooth(method='lm',formula = y~x)
+
+```
+Relationship has a positive inpact on revenue. By increasing the number of relationships by one, revenue will increase by 19.5 %. The p-value is less than 0.05 and it is significant on a 5 % level, and the revenue variable is described by 7.5 % in this model. 
+
+```{r}
+rev_rel <- lm(revenue ~ licenses, data = mnc)
+summary(rev_rel)
+ggplot(data = mnc, aes(x = licenses, y = revenue)) + geom_point() + geom_smooth(method='lm',formula = y~x)
+
+```
+Licenses has a positive inpact on revenue. The estimate of licenses tells us that 1 % change in marketsize will result in 0.36 % change in revenue. The p-value is less than 0.05 and it is significant on a 5 % level. However, the revenue variable is described by only 1.6 % in this model. In this case, we would not include this factor when doing the multiple linear regression test.
+
+```{r}
 rev_rel <- lm(revenue ~ lceopay, data = mnc)
 summary(rev_rel)
+ggplot(data = mnc, aes(x = lceopay, y = revenue)) + geom_point() + geom_smooth(method='lm',formula = y~x)
+
 ```
 The CEO pay (lceopay) has a positive inpact on revenue. The estimate of lceopay tells us that 1 % change in the CEO pay will result in 0.9 % change in revenue. The p-value is less than 0.05 and is significant on a 5 % level, and the revenue variable is described by 24.3 % in this model.
 
-```{r}
-rev_rel <- lm(revenue ~ lgdpper2003, data = mnc)
-summary(rev_rel)
-```
-The log of GDP per capita in 2003 (lgdpper2003) has a positive inpact on revenue. By increasing the GDP per capita with 1 %, revenue will increase by 1 %. The p-value is less than 0.05 and is significant on a 5% level, and the revenue variable is described by 5.6 % in this model.
+
 
 ### Multiple Linear Regression Test with revenue as the dependent variable
 
