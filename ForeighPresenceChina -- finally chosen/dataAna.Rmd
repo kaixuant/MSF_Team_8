@@ -222,23 +222,23 @@ Based on the correlation tests, it could be observed that the total business inc
 rev_rel <- lm(revenue ~ relationship, data = mnc)
 summary(rev_rel)
 ```
-Relationship has a positive inpact on revenue. By increasing the number of relationships by one, revenue will increase by 19.5 %. The p-value is less than 0.05 and it is significant on a 5 % level, and the revenue variable is described by 7.5 % in this model. 
+The relationship variable has a positive inpact on revenue. By increasing the number of relationships by one, revenue will increase by 19.5 %. The p-value is less than 0.05 and it is significant on a 5 % level, and the revenue variable is described by 7.5 % in this model. 
 
 ```{r}
-rev_rel <- lm(revenue ~ marketsize, data = mnc)
-summary(rev_rel)
+rev_mark <- lm(revenue ~ marketsize, data = mnc)
+summary(rev_mark)
 ```
-Marketsize has a positive inpact on revenue. The estimate of marketsize tells us that 1 % change in marketsize will result in 0.46 % change in revenue. The p-value is less than 0.05 and it is significant on a 5 % level, and the revenue variable is described by 9.4 % in this model.
+The marketsize variable has a positive inpact on revenue. The estimate of marketsize tells us that 1 % change in marketsize will result in 0.46 % change in revenue. The p-value is less than 0.05 and it is significant on a 5 % level, and the revenue variable is described by 9.4 % in this model.
 
 ```{r}
-rev_rel <- lm(revenue ~ lceopay, data = mnc)
-summary(rev_rel)
+rev_ceo <- lm(revenue ~ lceopay, data = mnc)
+summary(rev_ceo)
 ```
 The CEO pay (lceopay) has a positive inpact on revenue. The estimate of lceopay tells us that 1 % change in the CEO pay will result in 0.9 % change in revenue. The p-value is less than 0.05 and is significant on a 5 % level, and the revenue variable is described by 24.3 % in this model.
 
 ```{r}
-rev_rel <- lm(revenue ~ lgdpper2003, data = mnc)
-summary(rev_rel)
+rev_gdp <- lm(revenue ~ lgdpper2003, data = mnc)
+summary(rev_gdp)
 ```
 The log of GDP per capita in 2003 (lgdpper2003) has a positive inpact on revenue. By increasing the GDP per capita with 1 %, revenue will increase by 1 %. The p-value is less than 0.05 and is significant on a 5% level, and the revenue variable is described by 5.6 % in this model.
 
