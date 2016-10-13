@@ -355,3 +355,6 @@ The intercept of -1.38 tells us what the log of revenue will be if all our indep
 # 5. Discussion and Conclusion
 
 # References
+Hlavac, M. (2015). *stargazer: Well-Formatted Regression and Summary Statistics Tables*. R package version 5.2. http://CRAN.R-project.org/package=stargazer
+You, J. & Du, G. (2012). Are Political Connections a Blessing or a Curse? Evidence from CEO Turnover in China, *Corporate Governance: An International Review*, 20(2). Accessed through: EBSCOHost.
+Zhu, B. (2016). *Replication Data for: MNCs, Rents, and Corruption: Evidence from China*, doi:10.7910/DVN/VT4KJA, Harvard Dataverse, V1 [UNF:6:LTJM6CHylp/JU5AfkjBK8Q==]
