@@ -40,6 +40,7 @@ View(summary(mnc))
 ```
 
 The dataset contains 40 variables and 11360 observations. The data covered 11360 different companies observed across 30 provinces in China out of a total of 276,474 companies recorded in 2004 by National Bureau of Statistics of China (2014). The variables are divided into three groups, i.e. firm-level variables, industry-level variables and province-level variables. Firm-level variables consist of the properties of each firm, which include the type of ownership, revenue, number of employees and several variables that highlight the relationship between a firm and the government of China in 2004. Industry-level variables illustrate the scale of the industry and the market share of different groups of companies, including foreign firms and the industry leaders. Also, They also try highlight the amount of govenrment influence by measuring the linear combination of the amount of help received by government officials as well as the median of tax rate incurred by each firm in the industry. Lastly, province-level variables indicate the macroeconomic information regarding a province, such as its GDP per capita and the level of MNC activities in the region (e.g. foreign direct investments and trades). Below are the details of each variable analysed in this report.
+
 #### Firm-Level Variables
 |Variable|Description|
 |:------------|:------------------------------------------------|
@@ -171,7 +172,6 @@ $$lgdpper2003 = 8.27 - 0.44*lwdist + 0.49*MNC $$
 
 #### 3.3.1.5 Description of the firms ownership 
 ```{r, echo = FALSE}
->>>>>>> 0c390a1189b7393a14efaaa730ff0048c6c0007e
 mnc[,"ownership"] <- NA
 for (j in 1:nrow(mnc)){
   if (mnc[j,"soe"] == 1) mnc[j,"ownership"] <- "state"
@@ -192,6 +192,7 @@ mean(mnc[mnc[,"ownership"]=="foreign_HMT", "revenue"])
 mean(mnc[mnc[,"ownership"]=="foreign_NonHMT", "revenue"])
 
 ggplot(data=mnc) + geom_boxplot(aes(ownership, revenue, col = ownership))
+
 ```
 
 As we can see of the barplot there is a lot of companies in the bar with "mixed" ownership compared to the other categories. Therefore it might be difficult to do any valuable analysis on this data. If we look at the boxplot we can see that it looks like the distribution of revenue might be different between the different kind of ownership.
