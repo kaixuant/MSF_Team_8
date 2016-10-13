@@ -122,11 +122,25 @@ cor.test(mnc.prov[,"lwdist"], mnc.prov[,"lgdpper2003"])
 
 So we can get that there is no strong relationship between the weighted geographic distance and capital GDP. From the correlation test result, we found that the p value is 0.3297, which is much larger than 0.05, so we can not reject the Null Hypothesis at a 95% confindence level. There is no strong correlation between these two variables. But these two variables are positive correlated, which means the larger the weighted geographic distance, the more capital GDP of the province.
 
-### 2.1.4 The proportion of 
-```{r pressure, echo=FALSE}
-plot(pressure)
+### 2.1.4 The variance of captal GDP and total GDP of differene provinces. 
+```{r}
+var.test(data.prov[,"gdp2003"], data.prov[,"lgdpper2003"],alternative = "two.sided")
 
 ```
+We can conclude that  the p value is 0.04, which is smaller than 0.05, so we can reject the None Hypothesis, and accept the alternative hypothesis: the variance of capital gdp and total gdp is not identital.
+
+### 2.1.5 what kind of province-level variables influence province's total GDP?
+
+```{r}
+pairs(gdp2003 ~ lgdpper2003 + lwdist + lpop2003 + MNC, data = data.prov)
+#linear regression 
+lm_gdp2003 <- lm(gdp2003 ~ lgdpper2003 + lwdist + lpop2003 , data = data.prov)
+summary(lm_gdp2003)
+```
+
+We can find out that the Adjusted R-squared is 0.7781, and we got the linear regression model function that:
+$$gdp2003 = -4.87 + 0.38*lgdpper2003 + 0.22*lwdist + 0.29*lpop2003 $$
+
 
 ### 2.1.5 Description of the firms ownership 
 ```{r}
