@@ -265,6 +265,8 @@ As a result of our correlation analysis and single regression models we would li
 ```{r}
 rev_reg <- lm(revenue ~ relationship + marketsize + lceopay + lgdpper2003, data = mnc)
 summary(rev_reg)
+ggplot(data = mnc, aes(x = lceopay+marketsize+lceopay+lgdpper2003, y = revenue)) + geom_point() + geom_smooth(method='lm',formula = y~x)
+
 ```
  
 From the regression model we get an adjusted R-squared equal to 0.316, which means that 31.6 % of the revenue variable is described in this model. All the dependent variables are significant at the 1% level, exepct for lgdpper2003 which is significant at the 5% level.
