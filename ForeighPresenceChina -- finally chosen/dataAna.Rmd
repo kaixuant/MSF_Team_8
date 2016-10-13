@@ -289,9 +289,5 @@ The intercept of -1.38 tells us what the log of revenue will be if all our indep
 
 If we look at the relationship variable we can see that by increasing the number of relationships by one, revenue will increase by 13.6 %. The estimate of marketsize tells us that 1% change in marketsize will result in 0.33% change in revenue. By looking at the lceopay we can see that 1% change in the CEO pay will result in 0.76 % change in revenue. The estimate of lgdpper2003 tells us that an increase in GDP per capita of 1 % will decrease revenue by 0.08 %. 
 
-<<<<<<< HEAD
-=======
 # 5. Discussion and Conclusion
 
-
->>>>>>> b7cb0298d175ee14919bf1d64f729cc5575df4db
