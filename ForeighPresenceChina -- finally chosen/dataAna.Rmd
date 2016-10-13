@@ -89,7 +89,7 @@ This dataset represent the ties between firms and the government of China. Given
 
 However, the dataset possess some limitations. Although industry ID numbers are provided, the sector was not clearly specified in the dataset or in previous publications. Moreover, the same industry in different provinces were coded differently, thus, the impact of a specific industry could not be measured. 
 
-## 3.3. Statistics description of the dataset 
+## 3.3 Statistics description of the dataset 
 ### 3.3.1 About the province
 #### 3.3.1.1 Explore the provinces
 ```{r}
@@ -134,7 +134,6 @@ var.test(data.prov[,"gdp2003"], data.prov[,"lgdpper2003"],alternative = "two.sid
 We can conclude that  the p value is 0.04, which is smaller than 0.05, so we can reject the None Hypothesis, and accept the alternative hypothesis: the variance of capital gdp and total gdp is not identital.
 
 #### 3.3.1.5 what kind of province-level variables influence province's total GDP?
-
 ```{r}
 pairs(gdp2003 ~ lgdpper2003 + lwdist + lpop2003 + MNC, data = data.prov)
 #linear regression 
@@ -174,6 +173,8 @@ ggplot(data=mnc) + geom_boxplot(aes(ownership, revenue))
 ```
 
 As we can see of the barplot there is a lot of companies in the bar with "mixed" ownership compared to the other categories. Therefore it might be difficult to do any valuable analysis on this data. If we look at the boxplot we can see that it looks like the distribution of revenue might be different between the different kind of ownership. To investigate this further we need a t-test.
+
+### 3.3.2 About the revenue
 
 # 4. Analysis
 ## 4.1 Correlation Analysis
