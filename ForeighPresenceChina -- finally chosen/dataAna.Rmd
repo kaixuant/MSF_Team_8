@@ -85,6 +85,7 @@ However, the dataset possess some limitations. Although industry ID numbers are 
 
 
 
+
 ## 2. Statistics description of the dataset 
 ### 2.1 About the province
 #### 2.1.1 Explore the provinces
@@ -172,27 +173,32 @@ ggplot(data=mnc) + geom_boxplot(aes(ownership, revenue))
 As we can see of the barplot there is a lot of companies in the bar with "mixed" ownership compared to the other categories. Therefore it might be difficult to do any valuable analysis on this data. If we look at the boxplot we can see that it looks like the distribution of revenue might be different between the different kind of ownership. To investigate this further we need a t-test.
 
 # 3. Correlation Analysis
-
 ## Correlation test among different variables with "revenue (log of total business income)"
-According to the dataset provided, we would like to examine the correlation of market size, output growth rate, help from government and GDP with the total business income.
+### Correlation test with government relative factors
+According to the dataset provided, we would like to examine the correlation of all factors relative to the government with the revenue of the company.
+In this case, we analysis the factors: help from the government, proportion of sales to the government and the interaction with the government.
 ```{r}
 cor.test(mnc[, "revenue"], mnc[, "mgovthelp"])
-cor.test(mnc[, "revenue"], mnc[, "marketsize"])
-cor.test(mnc[, "revenue"], mnc[, "growthrate"])
-cor.test(mnc[, "revenue"], mnc[, "gdp2003"])
-
+cor.test(mnc[, "revenue"], mnc[, "govtsales"])
+cor.test(mnc[, "revenue"], mnc[, "interaction"])
 
 ```
-cor.test(mnc[, "revenue"], mnc[, "govtsales"])
+
+Based on the correlation tests, it could be observed that the total business income of one company has a quite weak connection with the factors relative to the government, containing even negative correlation with some of the factors.
+In this case, the factors tested above may not be used as the independent variables for the linear regression model with the revenue as the dependent variables.
+
+### Correlation test with non-government relative factors
+Based on the above tests, government relative factors have very weak impacts on the revenue of the company. In this case, many other non-government relative factors should be examined for better interpretation of the datase
+```{r}
+cor.test(mnc[, "revenue"], mnc[, "gdp2003"])
+cor.test(mnc[, "revenue"], mnc[, "marketsize"])
+cor.test(mnc[, "revenue"], mnc[, "growthrate"])
 cor.test(mnc[, "revenue"], mnc[, "relationship"])
 cor.test(mnc[, "revenue"], mnc[, "licenses"])
 cor.test(mnc[, "revenue"], mnc[, "lceopay"])
-cor.test(mnc[, "revenue"], mnc[, "interaction"])
-
 
 ```
 
-Based on the correlation test, it could be observed that the total business income of one company has a relative strong positive correlation with both the market size and GDP. However, its correlation with government help (positive) and growth rate (negative) is very weak.
 
 # 4. Linear Regression
 ## Single Variable Linear Regression Test with "revenue" as the dependent variable
