@@ -158,8 +158,6 @@ ggplot(data=mnc) + geom_boxplot(aes(ownership, revenue))
 As we can see of the barplot there is a lot of companies in the bar with "mixed" ownership compared to the other categories. Therefore it might be difficult to do any valuable analysis on this data. If we look at the boxplot we can see that it looks like the distribution of revenue might be different between the different kind of ownership. To investigate this further we need a t-test.
 
 # 3. Correlation Analysis
-## Correlation test on different variables with "salary_midpoint":
-The dataset only include 3202 women, compared to 51388 men. This might interfere with our results. The boxplot looks almost the same for both gender, and after running a t-test we cannot say that there is a significant difference in the two means.
 
 ## Correlation test among different variables with "revenue (log of total business income)"
 According to the dataset provided, we would like to examine the correlation of market size, output growth rate, help from government and GDP with the total business income.
@@ -182,6 +180,12 @@ Based on the correlation test, it could be observed that the total business inco
 
 Based on the above analysis, it could be observed that these four variables all have certain linear relationship with salary, which could contribute to the further investigation on multi-variables linear relationship with salary.
 Also, it could be observed from the graphs that there is not much difference between male and female in general. However, as the increase of the independent variable, female will usually earn smaller amount of salary than male.
+
+## Multiple Linear Regression Test with Revenue
+```{r}
+lm2 <- lm(revenue ~ relationship + marketsize + lceopay + gdp2003, data = mnc)
+summary(lm2)
+```
 
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
