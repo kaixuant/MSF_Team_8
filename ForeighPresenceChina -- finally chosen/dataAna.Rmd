@@ -204,12 +204,15 @@ Furthermore, the factors tested above may not be used as the independent variabl
 #### 4.1.1.2 Correlation test with non-government relative factors
 Based on the above tests, government relative factors have very weak impacts on the revenue of the company. In this case, many other non-government relative factors should be examined for better interpretation of the dataset and smothier linear regression test.
 The factors are to be analyzed are:
-######1. GDP per capita in 2003: due to the fact that the GDP of one country may have big impact on the performance of companies in that country, this factor is added for correlation test.
-######2. Market size: the revenue of one company may fluctuate according to the market size, thus this factor is examined.
-######3. Output growth rate: we add this factor because we think the change of the output growth rate may affect the revenue as there exists some direct relationship between them.
-######4. Relationship with clients and suppliers: since a good and long existing relationship with the clients and suppliers could help with the increase of the revenue, we would like to test this factor and see its correlation with the revenue.
-######5. Licenses: we think this factor has some correlation with the revenue as more licenses one company holds, it would be possible for that company to generate more revenue.
-######6. CEO annual income: we think the performance of the company's CEO largely affect the revenue that company earns. Thus, we examined this factor to observe the correlation.
+---
+title: |
+|1. GDP per capita in 2003: due to the fact that the GDP of one country may have big impact on the performance of companies in that country, this factor is added for correlation test.
+|2. Market size: the revenue of one company may fluctuate according to the market size, thus this factor is examined.
+|3. Output growth rate: we add this factor because we think the change of the output growth rate may affect the revenue as there exists some direct relationship between them.
+|4. Relationship with clients and suppliers: since a good and long existing relationship with the clients and suppliers could help with the increase of the revenue, we would like to test this factor and see its correlation with the revenue.
+|5. Licenses: we think this factor has some correlation with the revenue as more licenses one company holds, it would be possible for that company to generate more revenue.
+|6. CEO annual income: we think the performance of the company's CEO largely affect the revenue that company earns. Thus, we examined this factor to observe the correlation.
+---
 ```{r, echo = FALSE}
 cor.test(mnc[, "revenue"], mnc[, "lgdpper2003"])
 cor.test(mnc[, "revenue"], mnc[, "marketsize"])
