@@ -1,5 +1,5 @@
 ---
-title: "Foreign Presence & ETCs"
+title: "Group 8 Maths and Stats Project"
 output: html_document
 ---
 
@@ -21,24 +21,25 @@ Companies with strong relationship with the government benefit from easier acces
 
 
 # 3. Methods
-
-```{r library we need}
+The analysis is conducted using several statistical tools in R, i.e. statistical test and linear modelling. Some libraries such as `ggplot2` and `stargazer` are loaded to the console to visualise the data.
+```{r library, results='hide'}
 library(ggplot2)
 library(scales)
 library(stargazer)
+
 library(plyr)
 ```
 
 ## 3.1. Description
-```{r}
-load("C:/Users/Kaixuan/Documents/MSF_Team_8/ForeighPresenceChina -- finally chosen/ForeignPresence&ETCs.RData")
+```{r, results='hide'}
+load("./ForeighPresenceChina -- finally chosen/ForeignPresence&ETCs.RData")
+
 mnc <- as.data.frame(x)
 ls.str(mnc)
 View(summary(mnc))
 ```
 
 The dataset contains 40 variables and 11360 observations. The data covered 11360 different companies observed across 30 provinces in China out of a total of 276,474 companies recorded in 2004 by National Bureau of Statistics of China (2014). The variables are divided into three groups, i.e. firm-level variables, industry-level variables and province-level variables. Firm-level variables consist of the properties of each firm, which include the type of ownership, revenue, number of employees and several variables that highlight the relationship between a firm and the government of China in 2004. Industry-level variables illustrate the scale of the industry and the market share of different groups of companies, including foreign firms and the industry leaders. Also, They also try highlight the amount of govenrment influence by measuring the linear combination of the amount of help received by government officials as well as the median of tax rate incurred by each firm in the industry. Lastly, province-level variables indicate the macroeconomic information regarding a province, such as its GDP per capita and the level of MNC activities in the region (e.g. foreign direct investments and trades). Below are the details of each variable analysed in this report.
-
 #### Firm-Level Variables
 |Variable|Description|
 |:------------|:------------------------------------------------|
@@ -79,8 +80,8 @@ The dataset contains 40 variables and 11360 observations. The data covered 11360
 
 #### Province-Level Variables
 |Variable|Description|
-|:--------------|:------------------------------------------------|
-|`MNC`|Principal factor analysis of FDI inflow and MNC trades in a province|
+|:------------ |:------------------------------------------------|
+|`MNC`|Principal factor analysis of FDI inflow and MNC trades in a province.|
 |`lwdist`|Geographic distance|
 |`lgdpper2003`|Log of GDP per capita of the province in 2003|
 |`gdp2003`|GDP in 2003|
@@ -139,7 +140,22 @@ We can conclude that  the p value is 0.04, which is smaller than 0.05, so we can
 
 #### 3.3.1.5 what kind of province-level variables influence province's GDP per capita?
 ```{r}
+
 pairs(lgdpper2003 ~ lwdist + lpop2003 + MNC, data = mnc.prov)
+
+panel.cor <- function(x, y, digits = 2, prefix = "", cex.cor, ...)
+{
+    usr <- par("usr"); on.exit(par(usr))
+    par(usr = c(0, 1, 0, 1))
+    r <- abs(cor(x, y))
+    txt <- format(c(r, 0.123456789), digits = digits)[1]
+    txt <- paste0(prefix, txt)
+    if(missing(cex.cor)) cex.cor <- 0.8/strwidth(txt)
+    text(0.5, 0.5, txt, cex = cex.cor * r)
+}
+pairs(gdp2003 ~ lgdpper2003 + lwdist + lpop2003 + MNC, data = mnc.prov, lower.panel = panel.smooth, upper.panel = panel.cor)
+
+
 #linear regression 
 lm_gdp2003 <- lm(lgdpper2003 ~ lwdist + MNC , data = mnc.prov)
 summary(lm_gdp2003)
@@ -149,8 +165,13 @@ We can find out that the Adjusted R-squared is 0.6831, and we got the linear reg
 $$lgdpper2003 = 8.27 - 0.44*lwdist + 0.49*MNC $$
 
 
+
 #### 3.3.1.6 Description of the firms ownership 
 ```{r}
+
+#### 3.3.1.5 Description of the firms ownership 
+```{r, echo = FALSE}
+>>>>>>> 0c390a1189b7393a14efaaa730ff0048c6c0007e
 mnc[,"ownership"] <- NA
 for (j in 1:nrow(mnc)){
   if (mnc[j,"soe"] == 1) mnc[j,"ownership"] <- "state"
@@ -161,11 +182,9 @@ for (j in 1:nrow(mnc)){
   if (mnc[j,"mixedown"] == 1) mnc[j,"ownership"] <- "mixed"
 }
 
-count(mnc[,"ownership"])
-
 ggplot(data=mnc) + geom_bar(aes(ownership))
 
-#Average revenue of each ownership
+# Average revenue of each ownership
 mean(mnc[mnc[,"ownership"]=="state", "revenue"])
 mean(mnc[mnc[,"ownership"]=="collective", "revenue"])
 mean(mnc[mnc[,"ownership"]=="private", "revenue"])
@@ -173,7 +192,6 @@ mean(mnc[mnc[,"ownership"]=="foreign_HMT", "revenue"])
 mean(mnc[mnc[,"ownership"]=="foreign_NonHMT", "revenue"])
 
 ggplot(data=mnc) + geom_boxplot(aes(ownership, revenue, col = ownership))
-
 ```
 
 As we can see of the barplot there is a lot of companies in the bar with "mixed" ownership compared to the other categories. Therefore it might be difficult to do any valuable analysis on this data. If we look at the boxplot we can see that it looks like the distribution of revenue might be different between the different kind of ownership.
@@ -233,7 +251,7 @@ In this case, we analysis the factors:
 
 3. Interaction with the government: we add this factor because with more time working on the government assignments and communications, it would be easier for the company to know news and policies from the goverment and act accordingly and timely.
 
-```{r, echo = FALSE}
+```{r, results='hide'}
 cor.test(mnc[, "revenue"], mnc[, "mgovthelp"])
 cor.test(mnc[, "revenue"], mnc[, "govtsales"])
 cor.test(mnc[, "revenue"], mnc[, "interaction"])
@@ -259,7 +277,7 @@ The factors are to be analyzed are:
 5. Licenses: we think this factor has some correlation with the revenue as more licenses one company holds, it would be possible for that company to generate more revenue.
 
 6. CEO annual income: we think the performance of the company's CEO largely affect the revenue that company earns. Thus, we examined this factor to observe the correlation.
-```{r, echo = FALSE}
+```{r, tidy = TRUE, results='hide'}
 cor.test(mnc[, "revenue"], mnc[, "lgdpper2003"])
 cor.test(mnc[, "revenue"], mnc[, "marketsize"])
 cor.test(mnc[, "revenue"], mnc[, "growthrate"])
@@ -276,7 +294,7 @@ Based on the correlation tests, it could be observed that the total business inc
 
 Based on our correlation analysis we want to look deeper into the variables which had the highest correlation with revenue. 
 #### 4.2.1.1 GDP per capita in 2003 as the independent variable
-```{r}
+```{r, echo=FALSE}
 rev_gdp <- lm(revenue ~ lgdpper2003, data = mnc)
 summary(rev_gdp)
 ggplot(data = mnc, aes(x = lgdpper2003, y = revenue)) + geom_point() + geom_smooth(method='lm',formula = y~x)
@@ -325,16 +343,21 @@ The CEO pay (lceopay) has a positive inpact on revenue. The estimate of lceopay 
 
 As a result of our correlation analysis and single regression models we would like to look further into the revenue variable by adding relationship, marketsize, CEO pay and GDP per capita in 2003 as independent variables.  
 
-```{r}
-rev_reg <- lm(revenue ~ relationship + marketsize + lceopay + lgdpper2003, data = mnc)
+```{r, tidy = TRUE}
+rev_reg1 <- lm(revenue ~ lceopay + relationship + marketsize + lgdpper2003, data = mnc)
 summary(rev_reg)
+rev_reg2 <- lm(revenue ~ lceopay + relationship + marketsize + lgdpper2003 + interaction + letcs + soesales + mgovthelp, data = mnc)
+summary(rev_reg2)
 ggplot(data = mnc, aes(x = lceopay+marketsize+lceopay+lgdpper2003, y = revenue)) + geom_point() + geom_smooth(method='lm',formula = y~x)
 
 ```
- 
+```{r, results = 'asis', tidy = TRUE}
+stargazer(list(rev_ceo, rev_reg1, rev_reg2), digits = 2, no.space = TRUE, type = 'html', title = 'Regression Analysis')
+```
+
 From the regression model we get an adjusted R-squared equal to 0.316, which means that 31.6 % of the revenue variable is described in this model. All the dependent variables are significant at the 1% level, exepct for lgdpper2003 which is significant at the 5% level.
 
-<<<<<<< HEAD
+
 The intercept of -1.38 tells us what the log of revenue will be if all our independent variables are zero. This number is negative and does not give us any valuable information without combining it with more variables. 
 
 If we look at the relationship variable we can see that by increasing the number of relationships by one, revenue will increase by 13.6 %. The estimate of marketsize tells us that 1% change in marketsize will result in 0.33% change in revenue. By looking at the lceopay we can see that 1% change in the CEO pay will result in 0.76 % change in revenue. The estimate of lgdpper2003 tells us that an increase in GDP per capita of 1 % will decrease revenue by 0.08 %. 
@@ -343,3 +366,4 @@ The intercept of -1.38 tells us what the log of revenue will be if all our indep
 
 # 5. Discussion and Conclusion
 
+# References
