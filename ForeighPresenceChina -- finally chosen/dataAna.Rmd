@@ -26,41 +26,42 @@ mode(data[,"province"])
 #### 2.1.1 Explore the provinces
 ```{r}
 summary(as.factor(data[,"province"]))
+
 # plot the numbers of sample of different provinces
 ggplot(data) + geom_bar(aes(x = as.factor(province)))+ theme(axis.text.x = element_text(angle = 45,colour = "black",size=13,hjust=1))
+
 #get the data for province
 data.prov <- as.data.frame(data[!duplicated(x[,"province"]),])
-#plot the gdp of different provinces
+
+#plot the GDP of different provinces
 ggplot(data.prov) + geom_bar(aes(x = as.factor(province), y = gdp2003),stat = "identity", position = "dodge") + theme(axis.text.x = element_text(angle = 45,colour = "black",size=13,hjust=1))
-
-
 
 ```
 
 From the barchart, we can know that The first highest three GDP provinces are Guangdong, Jiangsu and Shandong. The last three GDP provinces are Qinghai, Ningxia and Hainan.
 
 ### 2.1.2 Describe the relationship between the total population and capital GDP for different provinces.
-
 ```{r}
 ggplot(data.prov) + geom_line(aes(x = lpop2003, y = lgdpper2003))
 cor.test(data.prov[,"lpop2003"], data.prov[,"lgdpper2003"])
+
 ```
 
 So we can get that there is no strong relationship between the population and capital. From the correlation test result, we found that the p value is 0.4043, which is much larger than 0.05, so we can not reject the Null Hypothesis at a 95% confindence level. There is no strong correlation between these two variables.
 
 ### 2.1.3 Describe the relationship between the weighted geographic distance and capital GDP for different provinces.
-
 ```{r}
 ggplot(data.prov) + geom_point(aes(x = lwdist, y = lgdpper2003))
 cor.test(data.prov[,"lwdist"], data.prov[,"lgdpper2003"])
+
 ```
 
 So we can get that there is no strong relationship between the weighted geographic distance and capital GDP. From the correlation test result, we found that the p value is 0.3297, which is much larger than 0.05, so we can not reject the Null Hypothesis at a 95% confindence level. There is no strong correlation between these two variables. But these two variables are positive correlated, which means the larger the weighted geographic distance, the more capital GDP of the province.
 
 ### 2.1.4 The proportion of 
-
 ```{r pressure, echo=FALSE}
 plot(pressure)
+
 ```
 
 ### 2.1.5 Description of the firms ownership 
@@ -78,6 +79,7 @@ for (j in 1:nrow(x)){
 count(x[,"ownership"])
 
 ggplot(data=x) + geom_bar(aes(ownership))
+
 ```
 
 
