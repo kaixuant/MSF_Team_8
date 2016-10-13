@@ -220,49 +220,31 @@ Based on the correlation tests, it could be observed that the total business inc
 ```{r}
 rev_rel <- lm(revenue ~ lgdpper2003, data = mnc)
 summary(rev_rel)
-library(ggplot2)
 ggplot(data = mnc, aes(x = lgdpper2003, y = revenue)) + geom_point() + geom_smooth(method='lm',formula = y~x)
 ```
-<<<<<<< HEAD
 The log of GDP per capita in 2003 (lgdpper2003) has a positive inpact on revenue. By increasing the GDP per capita with 1 %, revenue will increase by 1 %. The p-value is less than 0.05 and is significant on a 5% level, and the revenue variable is described by 5.6 % in this model.
 
 ```{r}
 rev_rel <- lm(revenue ~ marketsize, data = mnc)
 summary(rev_rel)
 ggplot(data = mnc, aes(x = marketsize, y = revenue)) + geom_point() + geom_smooth(method='lm',formula = y~x)
-=======
-The relationship variable has a positive inpact on revenue. By increasing the number of relationships by one, revenue will increase by 19.5 %. The p-value is less than 0.05 and it is significant on a 5 % level, and the revenue variable is described by 7.5 % in this model. 
 
-```{r}
-rev_mark <- lm(revenue ~ marketsize, data = mnc)
-summary(rev_mark)
->>>>>>> 4ad3fff085115dcee189c32c1841e78d9a04a2b8
 ```
 The marketsize variable has a positive inpact on revenue. The estimate of marketsize tells us that 1 % change in marketsize will result in 0.46 % change in revenue. The p-value is less than 0.05 and it is significant on a 5 % level, and the revenue variable is described by 9.4 % in this model.
 
 ```{r}
-<<<<<<< HEAD
 rev_rel <- lm(revenue ~ relationship, data = mnc)
 summary(rev_rel)
 ggplot(data = mnc, aes(x = relationship, y = revenue)) + geom_point() + geom_smooth(method='lm',formula = y~x)
 
-=======
-rev_ceo <- lm(revenue ~ lceopay, data = mnc)
-summary(rev_ceo)
->>>>>>> 4ad3fff085115dcee189c32c1841e78d9a04a2b8
 ```
-Relationship has a positive inpact on revenue. By increasing the number of relationships by one, revenue will increase by 19.5 %. The p-value is less than 0.05 and it is significant on a 5 % level, and the revenue variable is described by 7.5 % in this model. 
+Relationship has a positive inpact on revenue. By increasing the number of relationships by one, revenue will increase by 19.5 %. The p-value is less than 0.05 and it is significant on a 5 % level, and the revenue variable is described by 7.5 % in this model.
 
 ```{r}
-<<<<<<< HEAD
 rev_rel <- lm(revenue ~ licenses, data = mnc)
 summary(rev_rel)
 ggplot(data = mnc, aes(x = licenses, y = revenue)) + geom_point() + geom_smooth(method='lm',formula = y~x)
 
-=======
-rev_gdp <- lm(revenue ~ lgdpper2003, data = mnc)
-summary(rev_gdp)
->>>>>>> 4ad3fff085115dcee189c32c1841e78d9a04a2b8
 ```
 Licenses has a positive inpact on revenue. The estimate of licenses tells us that 1 % change in marketsize will result in 0.36 % change in revenue. The p-value is less than 0.05 and it is significant on a 5 % level. However, the revenue variable is described by only 1.6 % in this model. In this case, we would not include this factor when doing the multiple linear regression test.
 
