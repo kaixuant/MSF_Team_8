@@ -167,6 +167,15 @@ cor.test(mnc[, "revenue"], mnc[, "marketsize"])
 cor.test(mnc[, "revenue"], mnc[, "growthrate"])
 cor.test(mnc[, "revenue"], mnc[, "gdp2003"])
 
+
+```
+cor.test(mnc[, "revenue"], mnc[, "govtsales"])
+cor.test(mnc[, "revenue"], mnc[, "relationship"])
+cor.test(mnc[, "revenue"], mnc[, "licenses"])
+cor.test(mnc[, "revenue"], mnc[, "lceopay"])
+cor.test(mnc[, "revenue"], mnc[, "interaction"])
+
+
 ```
 
 Based on the correlation test, it could be observed that the total business income of one company has a relative strong positive correlation with both the market size and GDP. However, its correlation with government help (positive) and growth rate (negative) is very weak.
