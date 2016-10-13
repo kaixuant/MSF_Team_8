@@ -130,21 +130,32 @@ plot(pressure)
 
 ### 2.1.5 Description of the firms ownership 
 ```{r}
-x[,"ownership"] <- NA
-for (j in 1:nrow(x)){
-  if (x[j,"soe"] == 1) x[j,"ownership"] <- "state"
-  if (x[j,"collective"] == 1) x[j,"ownership"] <- "collective"
-  if (x[j,"private"] == 1) x[j,"ownership"] <- "private"
-  if (x[j,"foreign_HMT"] == 1) x[j,"ownership"] <- "foreign_HMT"
-  if (x[j,"foreign_NonHMT"] == 1) x[j,"ownership"] <- "foreign_NonHMT"
-  if (x[j,"mixedown"] == 1) x[j,"ownership"] <- "mixed"
+mnc[,"ownership"] <- NA
+for (j in 1:nrow(mnc)){
+  if (mnc[j,"soe"] == 1) mnc[j,"ownership"] <- "state"
+  if (mnc[j,"collective"] == 1) mnc[j,"ownership"] <- "collective"
+  if (mnc[j,"private"] == 1) mnc[j,"ownership"] <- "private"
+  if (mnc[j,"foreign_HMT"] == 1) mnc[j,"ownership"] <- "foreign_HMT"
+  if (mnc[j,"foreign_NonHMT"] == 1) mnc[j,"ownership"] <- "foreign_NonHMT"
+  if (mnc[j,"mixedown"] == 1) mnc[j,"ownership"] <- "mixed"
 }
 
-count(x[,"ownership"])
+count(mnc[,"ownership"])
 
-ggplot(data=x) + geom_bar(aes(ownership))
+ggplot(data=mnc) + geom_bar(aes(ownership))
+
+#Average revenue of each ownership
+mean(mnc[mnc[,"ownership"]=="state", "revenue"])
+mean(mnc[mnc[,"ownership"]=="collective", "revenue"])
+mean(mnc[mnc[,"ownership"]=="private", "revenue"])
+mean(mnc[mnc[,"ownership"]=="foreign_HMT", "revenue"])
+mean(mnc[mnc[,"ownership"]=="foreign_NonHMT", "revenue"])
+
+ggplot(data=mnc) + geom_boxplot(aes(ownership, revenue))
 
 ```
+
+As we can see of the barplot there is a lot of companies in the bar with "mixed" ownership compared to the other categories. Therefore it might be difficult to do any valuable analysis on this data. If we look at the boxplot we can see that it looks like the distribution of revenue might be different between the different kind of ownership. To investigate this further we need a t-test.
 
 # 3. Correlation Analysis
 ## Correlation test on different variables with "salary_midpoint":
