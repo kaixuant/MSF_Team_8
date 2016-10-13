@@ -218,22 +218,27 @@ cor.test(mnc[, "revenue"], mnc[, "lceopay"])
 Based on the correlation tests, it could be observed that the total business income of one company has a positive connection with all the factors mentioned above except the output growth rate. The correlation with revenue in descending order is: CEO annual income, market size, relationship with clients and suppliers, GDP per capita in 2003 and licenses.
 
 ## 4.2 Linear Regression
-### 4.2.1 Single Variable Linear Regression Test with revenue as the dependent variable
+### 4.2.1 Single Variable Linear Regression Test with Revenue as the dependent variable
+
+Based on our correlation analysis we want to look deeper into the variables which had the highest correlation with revenue. 
+#### GDP per capita in 2003 as the independent variable
 ```{r}
-rev_rel <- lm(revenue ~ lgdpper2003, data = mnc)
-summary(rev_rel)
+rev_gdp <- lm(revenue ~ lgdpper2003, data = mnc)
+summary(rev_gdp)
 ggplot(data = mnc, aes(x = lgdpper2003, y = revenue)) + geom_point() + geom_smooth(method='lm',formula = y~x)
 ```
 The log of GDP per capita in 2003 (lgdpper2003) has a positive inpact on revenue. By increasing the GDP per capita with 1 %, revenue will increase by 1 %. The p-value is less than 0.05 and is significant on a 5% level, and the revenue variable is described by 5.6 % in this model.
 
+#### Marketsize as the independent variable
 ```{r}
-rev_rel <- lm(revenue ~ marketsize, data = mnc)
-summary(rev_rel)
+rev_mark <- lm(revenue ~ marketsize, data = mnc)
+summary(rev_mark)
 ggplot(data = mnc, aes(x = marketsize, y = revenue)) + geom_point() + geom_smooth(method='lm',formula = y~x)
 
 ```
 The marketsize variable has a positive inpact on revenue. The estimate of marketsize tells us that 1 % change in marketsize will result in 0.46 % change in revenue. The p-value is less than 0.05 and it is significant on a 5 % level, and the revenue variable is described by 9.4 % in this model.
 
+#### Relationship with clients and suppliers as the independent variable
 ```{r}
 rev_rel <- lm(revenue ~ relationship, data = mnc)
 summary(rev_rel)
@@ -242,17 +247,19 @@ ggplot(data = mnc, aes(x = relationship, y = revenue)) + geom_point() + geom_smo
 ```
 Relationship has a positive inpact on revenue. By increasing the number of relationships by one, revenue will increase by 19.5 %. The p-value is less than 0.05 and it is significant on a 5 % level, and the revenue variable is described by 7.5 % in this model.
 
+#### Licenses as the independent variable
 ```{r}
-rev_rel <- lm(revenue ~ licenses, data = mnc)
-summary(rev_rel)
+rev_lic <- lm(revenue ~ licenses, data = mnc)
+summary(rev_lic)
 ggplot(data = mnc, aes(x = licenses, y = revenue)) + geom_point() + geom_smooth(method='lm',formula = y~x)
 
 ```
 Licenses has a positive inpact on revenue. The estimate of licenses tells us that 1 % change in marketsize will result in 0.36 % change in revenue. The p-value is less than 0.05 and it is significant on a 5 % level. However, the revenue variable is described by only 1.6 % in this model. In this case, we would not include this factor when doing the multiple linear regression test.
 
+#### Log of the CEO pay as the independent variable
 ```{r}
-rev_rel <- lm(revenue ~ lceopay, data = mnc)
-summary(rev_rel)
+rev_ceo <- lm(revenue ~ lceopay, data = mnc)
+summary(rev_ceo)
 ggplot(data = mnc, aes(x = lceopay, y = revenue)) + geom_point() + geom_smooth(method='lm',formula = y~x)
 
 ```
