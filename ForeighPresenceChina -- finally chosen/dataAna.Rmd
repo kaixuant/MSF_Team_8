@@ -76,11 +76,11 @@ The dataset contains 40 variables and 11360 observations. The data covered 11360
 |`provinceID`|Province ID|
 
 
-** I'm trying to explain the stregth and limitations here **
+**I'm trying to explain the stregth and limitations here**
 
-This dataset represent the ties between firms and the government of China. Given the unique feature of Chinese industry that most of big firms in China are state-owned **(needs citation)**, this dataset..
+This dataset represent the ties between firms and the government of China. Given the unique feature of Chinese industry that most of big firms in China are state-owned, as of 98 companies in 2014 Fortune 500, 76 of them are state-owned (Cendrowski, 2015), this dataset would highlight how strong the relationship with the goverment affect the CEO salary of a company or the company revenue. 
 
-However, the dataset possess some limitations...
+However, the dataset possess some limitations. Although industry ID numbers are provided, the sector was not clearly specified in the dataset or in previous publications. Moreover, the same industry in different provinces were coded differently, thus, the impact of a specific industry could not be measured. 
 
 
 
