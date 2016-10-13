@@ -26,12 +26,12 @@ Companies with strong relationship with the government benefit from easier acces
 library(ggplot2)
 library(scales)
 library(stargazer)
-
+library(plyr)
 ```
 
 ## 3.1. Description
 ```{r}
-load("./ForeighPresenceChina -- finally chosen/ForeignPresence&ETCs.RData")
+load("C:/Users/Kaixuan/Documents/MSF_Team_8/ForeighPresenceChina -- finally chosen/ForeignPresence&ETCs.RData")
 mnc <- as.data.frame(x)
 ls.str(mnc)
 View(summary(mnc))
@@ -137,19 +137,19 @@ var.test(mnc.prov[,"gdp2003"], mnc.prov[,"lgdpper2003"],alternative = "two.sided
 ```
 We can conclude that  the p value is 0.04, which is smaller than 0.05, so we can reject the None Hypothesis, and accept the alternative hypothesis: the variance of capital gdp and total gdp is not identital.
 
-#### 3.3.1.5 what kind of province-level variables influence province's total GDP?
+#### 3.3.1.5 what kind of province-level variables influence province's GDP per capita?
 ```{r}
-pairs(gdp2003 ~ lgdpper2003 + lwdist + lpop2003 + MNC, data = mnc.prov)
+pairs(lgdpper2003 ~ lwdist + lpop2003 + MNC, data = mnc.prov)
 #linear regression 
-lm_gdp2003 <- lm(gdp2003 ~ lgdpper2003 + lwdist + lpop2003 , data = mnc.prov)
+lm_gdp2003 <- lm(lgdpper2003 ~ lwdist + MNC , data = mnc.prov)
 summary(lm_gdp2003)
 ```
 
-We can find out that the Adjusted R-squared is 0.7781, and we got the linear regression model function that:
-$$gdp2003 = -4.87 + 0.38*lgdpper2003 + 0.22*lwdist + 0.29*lpop2003 $$
+We can find out that the Adjusted R-squared is 0.6831, and we got the linear regression model function that:
+$$lgdpper2003 = 8.27 - 0.44*lwdist + 0.49*MNC $$
 
 
-#### 3.3.1.5 Description of the firms ownership 
+#### 3.3.1.6 Description of the firms ownership 
 ```{r}
 mnc[,"ownership"] <- NA
 for (j in 1:nrow(mnc)){
@@ -179,6 +179,46 @@ ggplot(data=mnc) + geom_boxplot(aes(ownership, revenue, col = ownership))
 As we can see of the barplot there is a lot of companies in the bar with "mixed" ownership compared to the other categories. Therefore it might be difficult to do any valuable analysis on this data. If we look at the boxplot we can see that it looks like the distribution of revenue might be different between the different kind of ownership.
 
 ### 3.3.2 About the revenue
+
+#### 3.3.2.1 The firm's revenue in difference province
+```{r}
+ggplot(data=mnc) + geom_boxplot(aes(as.factor(province), revenue)) + theme(axis.text.x = element_text(angle = 45,colour = "black",size=13,hjust=1))
+```
+
+It can be concluded that the Shanghai firms' revenues have the largest interval and Jiangxi has the smallest revenues interval. The median revenues in Shanghai is highest and that in Qinghai is the lowest.
+
+#### 3.3.2.2 The influcene of firm's total employees
+```{r}
+ggplot(mnc) + geom_point(aes(lemp,revenue))   # to total revenue
+cor.test(mnc[,"lemp"],mnc[,"revenue"])
+ggplot(mnc) + geom_point(aes(lemp,lceopay))   # to ceo pay
+cor.test(mnc[,"lemp"],mnc[,"lceopay"])
+ggplot(mnc) + geom_point(aes(lemp,letcs)) # to the entertainment expenditure
+cor.test(mnc[,"lemp"],mnc[,"letcs"])
+```
+From the scatter diagram, we can find that the with the increasement of the firm's total employees, the total income and CEO payment will increase. But the log of firm expenditure on entertainment and travel cost as % of total revenue will seem decrease when firm's total employees increases. From the correlation test, we get that the correlation between lemp and revenue, lceopay and letcs are 0.79, 0.34, and -0.10.
+
+#### 3.3.2.3 t test of revenue for Beijing and Shanghai
+```{r}
+t.test(mnc[mnc[,"province"] == "Beijing","revenue"],mnc[mnc[,"province"] == "Shanghai","revenue"], alternative = "two.sided")
+```
+
+The p value is 0.1419, which is larger than 0.05, so we can not reject the Hone Hypothesis. The difference in mean is not equal to 0.
+
+#### 3.3.2.4 The influcene of market size
+```{r}
+ggplot(mnc) + geom_point(aes(marketsize,last_intensity))   # to fixed assets per employee
+cor.test(mnc[,"marketsize"],mnc[,"last_intensity"])
+summary(lm(last_intensity ~ marketsize,data = mnc))
+ggplot(mnc,aes(x = marketsize,y = last_intensity)) + geom_point() + geom_smooth(method = "lm", formula = y~x)
+
+ggplot(mnc) + geom_point(aes(marketsize,lscale)) # to the average size of the larger firms that account for 50% of total output in the industry
+cor.test(mnc[,"marketsize"],mnc[,"lscale"])
+summary(lm(lscale ~ marketsize,data = mnc))
+ggplot(mnc,aes(x = marketsize,y = lscale)) + geom_point() + geom_smooth(method = "lm", formula = y~x)
+```
+
+We can get that marketsize and fixed assets per employee are positive correlated and marketsize and larger company fraction are also positive correlated.
 
 # 4. Analysis
 ## 4.1 Correlation Analysis
