@@ -82,7 +82,6 @@ The dataset contains 40 variables and 11360 observations. The data covered 11360
 
 
 ## 3.2. Strength and Limitations
-
 This dataset represent the ties between firms and the government of China. Given the unique feature of Chinese industry that most of big firms in China are state-owned, as of 98 companies in 2014 Fortune 500, 76 of them are state-owned (Cendrowski, 2015), this dataset would highlight how strong the relationship with the goverment affect the CEO salary of a company or the company revenue. 
 
 However, the dataset possess some limitations. Although industry ID numbers are provided, the sector was not clearly specified in the dataset or in previous publications. Moreover, the same industry in different provinces were coded differently, thus, the impact of a specific industry could not be measured. 
@@ -192,6 +191,7 @@ cor.test(mnc[, "revenue"], mnc[, "interaction"])
 ```
 
 Based on the correlation tests, it could be observed that the total business income of one company has a quite weak connection with the factors relative to the government, containing even negative correlation with some of the factors.
+In this case, the theory mentioned previously could not be proved since we hardly observe any strong positive or negative correlation among governmental factors with the performance of a company.
 In this case, the factors tested above may not be used as the independent variables for the linear regression model with the revenue as the dependent variables.
 
 #### Correlation test with non-government relative factors
