@@ -1,5 +1,5 @@
 ---
-title: "Foreign Presence & ETCs"
+title: "Group 8 Maths and Stats Project"
 output: html_document
 ---
 
@@ -21,7 +21,7 @@ Companies with strong relationship with the government benefit from easier acces
 
 
 # 3. Methods
-
+The analysis is conducted using several statistical tools in R, i.e. statistical test and linear modelling. Some libraries such as `ggplot2` and `stargazer` are loaded to the console to visualise the data.
 ```{r library we need}
 library(ggplot2)
 library(scales)
@@ -139,7 +139,18 @@ We can conclude that  the p value is 0.04, which is smaller than 0.05, so we can
 
 #### 3.3.1.5 what kind of province-level variables influence province's total GDP?
 ```{r}
-pairs(gdp2003 ~ lgdpper2003 + lwdist + lpop2003 + MNC, data = mnc.prov)
+panel.cor <- function(x, y, digits = 2, prefix = "", cex.cor, ...)
+{
+    usr <- par("usr"); on.exit(par(usr))
+    par(usr = c(0, 1, 0, 1))
+    r <- abs(cor(x, y))
+    txt <- format(c(r, 0.123456789), digits = digits)[1]
+    txt <- paste0(prefix, txt)
+    if(missing(cex.cor)) cex.cor <- 0.8/strwidth(txt)
+    text(0.5, 0.5, txt, cex = cex.cor * r)
+}
+pairs(gdp2003 ~ lgdpper2003 + lwdist + lpop2003 + MNC, data = mnc.prov, lower.panel = panel.smooth, upper.panel = panel.cor)
+
 #linear regression 
 lm_gdp2003 <- lm(gdp2003 ~ lgdpper2003 + lwdist + lpop2003 , data = mnc.prov)
 summary(lm_gdp2003)
@@ -303,3 +314,4 @@ The intercept of -1.38 tells us what the log of revenue will be if all our indep
 
 # 5. Discussion and Conclusion
 
+# References
