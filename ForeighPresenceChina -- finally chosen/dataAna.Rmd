@@ -186,9 +186,12 @@ As we can see of the barplot there is a lot of companies in the bar with "mixed"
 #### 4.1.1.1 Correlation test with government relative factors
 According to the dataset provided, we would like to examine the correlation of all factors relative to the government with the revenue of the company.
 In this case, we analysis the factors:
-|1. Help from the government: based on the condition in China, we think with more help from the government, one company may perform better and gain more revenue.
-|2. Proportion of sales to the government: we think this factor could help to increase the revenue as sales to Chinese government meaning stable sales with only low risk
-|3. Interaction with the government: we add this factor because with more time working on the government assignments and communications, it would be easier for the company to know news and policies from the goverment and act accordingly and timely.
+
+1. Help from the government: based on the condition in China, we think with more help from the government, one company may perform better and gain more revenue.
+
+2. Proportion of sales to the government: we think this factor could help to increase the revenue as sales to Chinese government meaning stable sales with only low risk
+
+3. Interaction with the government: we add this factor because with more time working on the government assignments and communications, it would be easier for the company to know news and policies from the goverment and act accordingly and timely.
 
 ```{r, echo = FALSE}
 cor.test(mnc[, "revenue"], mnc[, "mgovthelp"])
@@ -204,15 +207,18 @@ Furthermore, the factors tested above may not be used as the independent variabl
 #### 4.1.1.2 Correlation test with non-government relative factors
 Based on the above tests, government relative factors have very weak impacts on the revenue of the company. In this case, many other non-government relative factors should be examined for better interpretation of the dataset and smothier linear regression test.
 The factors are to be analyzed are:
----
-title: |
-|1. GDP per capita in 2003: due to the fact that the GDP of one country may have big impact on the performance of companies in that country, this factor is added for correlation test.
-|2. Market size: the revenue of one company may fluctuate according to the market size, thus this factor is examined.
-|3. Output growth rate: we add this factor because we think the change of the output growth rate may affect the revenue as there exists some direct relationship between them.
-|4. Relationship with clients and suppliers: since a good and long existing relationship with the clients and suppliers could help with the increase of the revenue, we would like to test this factor and see its correlation with the revenue.
-|5. Licenses: we think this factor has some correlation with the revenue as more licenses one company holds, it would be possible for that company to generate more revenue.
-|6. CEO annual income: we think the performance of the company's CEO largely affect the revenue that company earns. Thus, we examined this factor to observe the correlation.
----
+
+1. GDP per capita in 2003: due to the fact that the GDP of one country may have big impact on the performance of companies in that country, this factor is added for correlation test.
+
+2. Market size: the revenue of one company may fluctuate according to the market size, thus this factor is examined.
+
+3. Output growth rate: we add this factor because we think the change of the output growth rate may affect the revenue as there exists some direct relationship between them.
+
+4. Relationship with clients and suppliers: since a good and long existing relationship with the clients and suppliers could help with the increase of the revenue, we would like to test this factor and see its correlation with the revenue.
+
+5. Licenses: we think this factor has some correlation with the revenue as more licenses one company holds, it would be possible for that company to generate more revenue.
+
+6. CEO annual income: we think the performance of the company's CEO largely affect the revenue that company earns. Thus, we examined this factor to observe the correlation.
 ```{r, echo = FALSE}
 cor.test(mnc[, "revenue"], mnc[, "lgdpper2003"])
 cor.test(mnc[, "revenue"], mnc[, "marketsize"])
