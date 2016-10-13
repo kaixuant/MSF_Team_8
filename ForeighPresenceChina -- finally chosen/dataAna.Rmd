@@ -186,9 +186,9 @@ As we can see of the barplot there is a lot of companies in the bar with "mixed"
 #### 4.1.1.1 Correlation test with government relative factors
 According to the dataset provided, we would like to examine the correlation of all factors relative to the government with the revenue of the company.
 In this case, we analysis the factors:
-######1. Help from the government: based on the condition in China, we think with more help from the government, one company may perform better and gain more revenue.
-######2. Proportion of sales to the government: we think this factor could help to increase the revenue as sales to Chinese government meaning stable sales with only low risk
-######3. Interaction with the government: we add this factor because with more time working on the government assignments and communications, it would be easier for the company to know news and policies from the goverment and act accordingly and timely.
+|1. Help from the government: based on the condition in China, we think with more help from the government, one company may perform better and gain more revenue.
+|2. Proportion of sales to the government: we think this factor could help to increase the revenue as sales to Chinese government meaning stable sales with only low risk
+|3. Interaction with the government: we add this factor because with more time working on the government assignments and communications, it would be easier for the company to know news and policies from the goverment and act accordingly and timely.
 
 ```{r, echo = FALSE}
 cor.test(mnc[, "revenue"], mnc[, "mgovthelp"])
@@ -289,7 +289,5 @@ We can say that 3.95 is the unconditional expected mean of log of write. Therefo
 
 The intercept of -1.38 tells us what the log of revenue will be if all our independent variables are zero. This number is negative and does not give us any valuable information without combining it with more variables. 
 
-If we look at the relationship variable we can see that by increasing the number of relationships by one, revenue will increase by 13.6 %. The estimate of marketsize tells us that 1% change in marketsize will result in 0.33% change in revenue. By looking at the lceopay we can see that 1% change in the CEO pay will result in 0.76 % change in revenue. The estimate of lgdpper2003 tells us that an increase in GDP per capita of 1 % will decrease revenue by 0.08 %.   
+If we look at the relationship variable we can see that by increasing the number of relationships by one, revenue will increase by 13.6 %. The estimate of marketsize tells us that 1% change in marketsize will result in 0.33% change in revenue. By looking at the lceopay we can see that 1% change in the CEO pay will result in 0.76 % change in revenue. The estimate of lgdpper2003 tells us that an increase in GDP per capita of 1 % will decrease revenue by 0.08 %. 
 
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
