@@ -176,7 +176,11 @@ As we can see of the barplot there is a lot of companies in the bar with "mixed"
 ## Correlation test among different variables with "revenue (log of total business income)"
 ### Correlation test with government relative factors
 According to the dataset provided, we would like to examine the correlation of all factors relative to the government with the revenue of the company.
-In this case, we analysis the factors: help from the government, proportion of sales to the government and the interaction with the government.
+In this case, we analysis the factors:
+1. Help from the government: based on the condition in China, we think with more help from the government, one company may perform better and gain more revenue.
+2. Proportion of sales to the government: we think this factor could help to increase the revenue as sales to Chinese government meaning stable sales with only low risk
+3. Interaction with the government: we add this factor because with more time working on the government assignments and communications, it would be easier for the company to know news and policies from the goverment and act accordingly and timely.
+
 ```{r}
 cor.test(mnc[, "revenue"], mnc[, "mgovthelp"])
 cor.test(mnc[, "revenue"], mnc[, "govtsales"])
