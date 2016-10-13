@@ -210,7 +210,7 @@ As a result of our correlation analysis we would like to look further into the r
 rev_reg <- lm(revenue ~ relationship + marketsize + lceopay + gdp2003, data = mnc)
 summary(rev_reg)
 ```
-
+ 
 From the regression model we get an adjusted R-squared equal to 0.316, which means that 31.6 % of the revenue variable is described in this model. All the dependent variables are significant at the 1% level.
 
 The intercept tells us what the log of revenue (???) will be if all our independent variables are zero. This number is negative and does not give us any valuable information without combining it with more variables. If we look at the relationship variable we can see that by increasing the number of relationships by one, revenue will increase by 13.6 %.  The estimate of marketsize tells us that 1% change in marketsize will result in 0.33% change in revenue.
