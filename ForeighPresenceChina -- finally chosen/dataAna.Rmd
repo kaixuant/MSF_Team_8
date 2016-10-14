@@ -16,9 +16,6 @@ A stronger connection with the government may benefit the company with easy acce
 
 Based on the above information and analysis, it may be interpreted that the relationship between the company-related factors and the government-related factors of one state-owned company should be stronger than that of other kinds of companies.
 
-
-----------**add more stuff here**-----------
-
 This report analyse replication dataset provided by Zhu (2016) that consisted of information about different companies in 30 provinces in China. The relationship between variables that affect company revenue will be investigated using correlation test and other different statistical testing. Then, we will examine the significant variables using linear regression to calculate their impact to the log of company revenue.
 
 # 2. Theory
