@@ -30,13 +30,14 @@ The analysis is conducted using several statistical tools in R, i.e. statistical
 ```{r library, results='hide'}
 library(ggplot2)
 library(scales)
+library(stargazer)
 library(plyr)
 ```
 
 ## 3.1 Description
 
 ```{r, results='hide'}
-load("/Users/XINWEI_LI/Desktop/Math & Statistics Foundations/MSF_Team_8/ForeighPresenceChina -- finally chosen/ForeignPresence&ETCs.RData")
+load("./ForeighPresenceChina -- finally chosen/ForeignPresence&ETCs.RData")
 mnc <- as.data.frame(x)
 ls.str(mnc)
 summary(mnc)
@@ -314,7 +315,7 @@ The CEO pay (lceopay) has a positive inpact on revenue. The estimate of lceopay 
 
 ### 4.3.3 Multiple Linear Regression Test with `Revenue` as the Dependent Variable
 
-As a result of our correlation analysis and single regression models we would like to look further into the revenue variable by adding relationship, marketsize, CEO pay, number of employees and GDP per capita in 2003 as independent variables.  
+As a result of our correlation analysis and single regression models we would like to look further into the revenue variable by adding relationship, marketsize, CEO pay, number of employees, firm expenditure on entertainment and GDP per capita in 2003 as independent variables.  
 
 ```{r, tidy = TRUE, results='hide'}
 rev_reg1 <- lm(revenue ~ lceopay + relationship + marketsize + lgdpper2003 + lemp + letcs, data = mnc)
@@ -324,16 +325,15 @@ ggplot(data = mnc, aes(x = lceopay+relationship+marketsize+lgdpper2003+lemp+letc
 ```
 
 ```{r, results = 'asis', tidy = TRUE}
-
+stargazer(list(rev_ceo, rev_reg1, rev_reg2), digits = 2, no.space = TRUE, type = 'html', title = 'Regression Analysis')
 ```
 
-From this regression model we get an adjusted R-squared equal to 0.72, which means that 72% of the revenue variable is described in this model. All the dependent variables are significant at the 1% level, except for lgdpper2003 which is significant at the 5 % level. 
+From this regression model we get an adjusted R-squared equal to 0.72, which means that 72% of the revenue variable is described in this model. All the independent variables are significant at the 1% level.
 
-The intercept of -0.30 tells us what the log of revenue will be if all our independent variables are zero. This number is negative and does not give us any valuable information without combining it with more variables. 
+The intercept of -0.75 tells us what the log of revenue will be if all our independent variables are zero. This number is negative and does not give us any valuable information without combining it with more variables. 
 
-If we look at the relationship variable we can see that by increasing the number of relationships by one, revenue will increase by 13.6 %. The estimate of marketsize tells us that 1 % change in marketsize will result in 0.31 % change in revenue. By looking at the lceopay we can see that 1 % change in the CEO pay will result in 0.76 % change in revenue. The estimate of lgdpper2003 tells us that an increase in GDP per capita of 1 % will decrease revenue by 0.08 %. 
+By looking at the lceopay estimate we can see that 1 % change in the CEO pay will result in 0.4 % change in revenue. If we look at the relationship variable we can see that by increasing the number of relationships by one, revenue will increase by 2.1 %. The estimate of marketsize tells us that 1 % change in marketsize will result in 0.12 % change in revenue. The estimate of lgdpper2003 tells us that an increase in GDP per capita of 1 % will increase revenue by 0.13 %. By looking at the lemp estimate we see that 1 % increase in employees results in 0.92 % change in revenue. The negative relation between letcs and revenue is described by 1 % increase in firms expenditure on entertainment will result in 0.17 % decrease in revenue. 
 
-# REMEMBER!!! --- An
 
 ### 4.3.1. Multiple Linear Regression with `lgdpper2003` (GDP per capita in 2003 (log)) as Dependent Variable
 
