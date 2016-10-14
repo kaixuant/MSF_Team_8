@@ -328,9 +328,7 @@ ggplot(data = mnc, aes(x = lceopay+relationship+marketsize+lgdpper2003+lemp+letc
 stargazer(list(rev_ceo, rev_reg1, rev_reg2), digits = 2, no.space = TRUE, type = 'html', title = 'Regression Analysis')
 ```
 
-From this regression model we get an adjusted R-squared equal to 0.72, which means that 72% of the revenue variable is described in this model. All the independent variables are significant at the 1% level.
-
-The intercept of -0.75 tells us what the log of revenue will be if all our independent variables are zero. This number is negative and does not give us any valuable information without combining it with more variables. 
+From this regression model we get an adjusted R-squared equal to 0.72, which means that 72% of the revenue variable is described in this model. All the independent variables are significant at the 1% level. The intercept of -0.75 tells us what the log of revenue will be if all our independent variables are zero. This number is negative and does not give us any valuable information without combining it with more variables. 
 
 By looking at the lceopay estimate we can see that 1 % change in the CEO pay will result in 0.4 % change in revenue. If we look at the relationship variable we can see that by increasing the number of relationships by one, revenue will increase by 2.1 %. The estimate of marketsize tells us that 1 % change in marketsize will result in 0.12 % change in revenue. The estimate of lgdpper2003 tells us that an increase in GDP per capita of 1 % will increase revenue by 0.13 %. By looking at the lemp estimate we see that 1 % increase in employees results in 0.92 % change in revenue. The negative relation between letcs and revenue is described by 1 % increase in firms expenditure on entertainment will result in 0.17 % decrease in revenue. 
 
@@ -364,20 +362,20 @@ $$lgdpper2003 = 8.27 - 0.44*lwdist + 0.49*MNC $$
 
 # 5. Discussion and Conclusion
 ## 5.1 Discussion
-Based on the past reports, the performance of one company is believed to have strong relationship with its connection to the government. Since Chinese government has a strong interception on its country's economy, and many companies in China are state-owned, we wanted to check whether the revenue of one company is correlated with the governmental factors.
+Based on past reports, the performance of a company is believed to have strong relationship with its connection to the government. Since the Chinese government has a strong interception on its country's economy, and many companies in China are state-owned, we wanted to check whether the revenue of one company is correlated with the governmental factors.
 
 However, in our correlation analysis about the dataset, we could not find any strong correlation between the company's revenue and governmental factors. Therefore, we went further to search for other factors that might have influence on the performance of the company. Beyond this, we found some interesting variables in the dataset that have strong correlation with the company's revenue.
 
-Factors like the payment for CEO, the number of relationship with clients and suppliers, the market size, the GDP per capita, the number of employee and the expenses on the entertainment have an obvious impact on the performance of the company with a high explanation (72%) of the varibility of the revenue change. We also found that different type of ownership resulted in a mixed impact on the revenue change. Being owned by the state did not immdediately give a company significant advantage.
+Factors like the payment to the CEO, the number of relationship with clients and suppliers, the market size, the GDP per capita, the number of employee and the expenses on the entertainment have an obvious impact on the performance of the company with a high explanation (72%) of the varibility of the revenue change. We also found that different types of ownership resulted in a mixed impact on the revenue change. Being owned by the state did not immdediately give a company significant advantage.
 
 Moreover, there was a negative correlation between entertainment expenditures and revenue. The variable that Zhu (2015) believed to be an indicator of political relationship and potential corrupt practices does not necessarily improve financial performance. The limitation could be, high entertainment expenditures in a particular year is a process of relationship building. The implication could take time. Moreover, there is no records of entertainment expenditures from previous years in this dataset, which could possibly illustrate the connection better.
 
 
-Other things we discovered in this analysis are:
+Other things we discovered in this analysis were:
 
-The MNC activity and GDP per capita has a high positive correlation, which indicates that FDI (foreign direct investment) could stimulate the economy of China.
+The MNC activity and GDP per capita had a high positive correlation, which indicates that FDI (foreign direct investment) could stimulate the economy of China.
 
-Around 73.8 per cent of companies in the sample is owned by a mix of foreign investors, private and government. None of them held more than 50 per cent of the shares. The number of private owned companies are surprisingly very small and their average revenue is lower than the other firms.
+Around 73.8 per cent of the companies in the sample is owned by a mix of foreign investors, private and government. None of them held more than 50 per cent of the shares. The number of private owned companies are surprisingly very small and their average revenue is lower than the other firms.
 
 
 
