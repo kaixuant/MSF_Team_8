@@ -252,10 +252,10 @@ cor.test(mnc[, "revenue"], mnc[, "lceopay"])
 
 ```
 
-Based on the correlation tests, it could be observed that the total business income of one company has a positive connection with all the factors mentioned above except the output growth rate. The correlation with revenue in descending order is: CEO annual income, market size, relationship with clients and suppliers, GDP per capita in 2003 and licenses.
+Based on the correlation tests, it could be observed that the total business income of one company has a positive connection with all the factors mentioned above except the output growth rate (with -0.053 correlation with revenue). The correlation with revenue in descending order is: CEO annual income (0.493), market size (0.306), relationship with clients and suppliers (0.275), GDP per capita in 2003 (0.237) and licenses (0.128).
 
 ## 4.3 Linear Regression
-### 4.3.1. Multiple Linear Regression with Log GDP per Capita as dependet variable
+### 4.3.1. Multiple Linear Regression with Log GDP per Capita as dependent variable
 
 ```{r, echo=FALSE} 
 panel.cor <- function(x, y, digits = 2, prefix = "", cex.cor, ...)
