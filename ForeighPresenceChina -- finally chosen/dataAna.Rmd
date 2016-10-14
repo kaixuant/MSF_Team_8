@@ -207,7 +207,7 @@ In this case, we analysis the factors:
 
 3. Interaction with the government: we add this factor because with more time working on the government assignments and communications, it would be easier for the company to know news and policies from the goverment and act accordingly and timely.
 
-```{r, results='hide'}
+```{r, tidy = TRUE}
 cor.test(mnc[, "revenue"], mnc[, "mgovthelp"])
 
 cor.test(mnc[, "revenue"], mnc[, "govtsales"])
@@ -237,11 +237,10 @@ The factors are to be analyzed are:
 # REMEBER!!!
 7. letcs:
 
-```{r, tidy = TRUE, results='hide'}
+```{r, tidy = TRUE}
 cor.test(mnc[, "revenue"], mnc[, "lgdpper2003"])
 
 cor.test(mnc[, "revenue"], mnc[, "marketsize"])
-ggplot(data = mnc, aes(x = marketsize, y = revenue)) + geom_point()
 
 cor.test(mnc[, "revenue"], mnc[, "growthrate"])
 
@@ -320,7 +319,7 @@ As a result of our correlation analysis and single regression models we would li
 ```{r, tidy = TRUE, results='hide'}
 rev_reg1 <- lm(revenue ~ lceopay + relationship + marketsize + lgdpper2003 + lemp + letcs, data = mnc)
 summary(rev_reg1)
-ggplot(data = mnc, aes(x = lceopay+relationship+marketsize+lgdpper2003, y = revenue)) + geom_point(na.rm = TRUE) + geom_smooth(method='lm',formula = y~x, na.rm = TRUE)
+ggplot(data = mnc, aes(x = lceopay+relationship+marketsize+lgdpper2003+lemp+letcs, y = revenue)) + geom_point(na.rm = TRUE) + geom_smooth(method='lm',formula = y~x, na.rm = TRUE)
 
 ```
 
