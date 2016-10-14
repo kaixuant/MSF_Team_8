@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 # 1. Introduction
 Business environment in China is unique. Multinational companies (MNC) often find it difficult to compete with local companies.
 
-**add more stuff here**
+----------**add more stuff here**-----------
 
 This report analyse replication dataset provided by Zhu (2016) that consisted of information about different companies in 30 provinces in China. The relationship between variables that affect company revenue will be investigated using correlation test and other different statistical testing. Then, we will examine the significant variables using linear regression to calculate their impact to the log of company revenue.
 
@@ -282,9 +282,11 @@ summary(lm_gdp2003)
 
 We can find out that the Adjusted R-squared is 0.6831, and we got the linear regression model function that:
 $$lgdpper2003 = 8.27 - 0.44*lwdist + 0.49*MNC $$
+
 ### 4.3.2. Single Variable Linear Regression Test with Revenue as the dependent variable
 
 Based on our correlation analysis we want to look deeper into the variables which had the highest correlation with revenue. 
+
 #### 4.3.2.1 GDP per capita in 2003 as the independent variable
 ```{r, echo=FALSE}
 rev_gdp <- lm(revenue ~ lgdpper2003, data = mnc)
@@ -326,10 +328,11 @@ rev_ceo <- lm(revenue ~ lceopay, data = mnc)
 summary(rev_ceo)
 ggplot(data = mnc, aes(x = lceopay, y = revenue)) + geom_point() + geom_smooth(method='lm',formula = y~x)
 
+# for different ownership structure
+ggplot(data = mnc, aes(x = lceopay, y = revenue)) + geom_point(alpha = 1/2) + theme_minimal() + geom_smooth(aes(col = ownership), method = 'lm')
+
 ```
 The CEO pay (lceopay) has a positive inpact on revenue. The estimate of lceopay tells us that 1 % change in the CEO pay will result in 0.9 % change in revenue. The p-value is less than 0.05 and is significant on a 5 % level, and the revenue variable is described by 24.3 % in this model.
-
-
 
 ### 4.3.3 Multiple Linear Regression Test with revenue as the dependent variable
 
@@ -355,5 +358,16 @@ If we look at the relationship variable we can see that by increasing the number
 
 
 # 5. Discussion and Conclusion
+~---- *some bullet points to give you ideas* -----~
+- One idea that I have, the MNC activity and GDP per capita has a high positive correlation. Thus, FDI stimulates the economy of China in 2004
+- Around 73.8 per cent of companies in the sample is owned by a mix of foreign investors, private and government. None of them held more than 50 per cent of the shares. The number of private owned companies are surprisingly very small and their average revenue is lower than the other firms.
+- CEO pay has significant impact on estimating revenue. The higher the salary of CEO, the more likely a company generates more sales.
+- Different type of ownership result in a mixed impact on revenue change. Thus, being owned by the state do not immediately give a company significant advantage.
+- There is a negative correlation between entertainment expenditures and revenue. The variable that Zhu (2015) believed to be an indicator of political relationship and potential corrupt practices does not necessarily improve financial performance. The limitation could be, high entertainment expenditures in a particular year is a process of relationship building. The implication could take time. Moreover, there is no records of entertainment expenditures from previous years in this dataset, which could possibly illustrate the connection better.
+
+
 
 # References
+Hlavac, M. (2015). *stargazer: Well-Formatted Regression and Summary Statistics Tables*. R package version 5.2. http://CRAN.R-project.org/package=stargazer  
+You, J. & Du, G. (2012). Are Political Connections a Blessing or a Curse? Evidence from CEO Turnover in China, *Corporate Governance: An International Review*, 20(2). Accessed through: EBSCOHost.  
+Zhu, B. (2016). *Replication Data for: MNCs, Rents, and Corruption: Evidence from China*, doi:10.7910/DVN/VT4KJA, Harvard Dataverse, V1 [UNF:6:LTJM6CHylp/JU5AfkjBK8Q==]  
