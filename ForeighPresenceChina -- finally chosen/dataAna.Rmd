@@ -10,6 +10,8 @@ knitr::opts_chunk$set(echo = TRUE)
 # 1. Introduction
 Business environment in China is unique. Multinational companies (MNC) often find it difficult to compete with local companies.
 
+
+
 ----------**add more stuff here**-----------
 
 This report analyse replication dataset provided by Zhu (2016) that consisted of information about different companies in 30 provinces in China. The relationship between variables that affect company revenue will be investigated using correlation test and other different statistical testing. Then, we will examine the significant variables using linear regression to calculate their impact to the log of company revenue.
@@ -220,8 +222,14 @@ In this case, we analysis the factors:
 
 ```{r, results='hide'}
 cor.test(mnc[, "revenue"], mnc[, "mgovthelp"])
+ggplot(data = mnc, aes(x = mgovthelp, y = revenue)) + geom_point()
+
 cor.test(mnc[, "revenue"], mnc[, "govtsales"])
+ggplot(data = mnc, aes(x = govtsales, y = revenue)) + geom_point()
+
 cor.test(mnc[, "revenue"], mnc[, "interaction"])
+ggplot(data = mnc, aes(x = interaction, y = revenue)) + geom_point()
+
 ```
 
 Based on the correlation tests, it could be observed that the total business income of one company has a quite weak connection with the factors relative to the government, containing even negative correlation with some of the factors. In this case, the theory mentioned previously could not be proved since we hardly observe any strong positive or negative correlation among governmental factors with the performance of a company. Furthermore, the factors tested above may not be used as the independent variables for the linear regression model with the revenue as the dependent variables.
@@ -244,11 +252,22 @@ The factors are to be analyzed are:
 
 ```{r, tidy = TRUE, results='hide'}
 cor.test(mnc[, "revenue"], mnc[, "lgdpper2003"])
+ggplot(data = mnc, aes(x = lgdpper2003, y = revenue)) + geom_point()
+
 cor.test(mnc[, "revenue"], mnc[, "marketsize"])
+ggplot(data = mnc, aes(x = marketsize, y = revenue)) + geom_point()
+
 cor.test(mnc[, "revenue"], mnc[, "growthrate"])
+ggplot(data = mnc, aes(x = growthrate, y = revenue)) + geom_point()
+
 cor.test(mnc[, "revenue"], mnc[, "relationship"])
+ggplot(data = mnc, aes(x = relationship, y = revenue)) + geom_point()
+
 cor.test(mnc[, "revenue"], mnc[, "licenses"])
+ggplot(data = mnc, aes(x = licenses, y = revenue)) + geom_point()
+
 cor.test(mnc[, "revenue"], mnc[, "lceopay"])
+ggplot(data = mnc, aes(x = lceopay, y = revenue)) + geom_point()
 
 ```
 
@@ -274,6 +293,7 @@ pairs(lgdpper2003 ~ lwdist + lpop2003 + MNC, data = mnc.prov, lower.panel = pane
 #linear regression 
 lm_gdp2003 <- lm(lgdpper2003 ~ lwdist + MNC , data = mnc.prov)
 summary(lm_gdp2003)
+
 ```
 
 We can find out that the Adjusted R-squared is 0.6831, and we got the linear regression model function that:
@@ -288,6 +308,7 @@ Based on our correlation analysis we want to look deeper into the variables whic
 rev_gdp <- lm(revenue ~ lgdpper2003, data = mnc)
 summary(rev_gdp)
 ggplot(data = mnc, aes(x = lgdpper2003, y = revenue)) + geom_point() + geom_smooth(method='lm',formula = y~x)
+
 ```
 The log of GDP per capita in 2003 (lgdpper2003) has a positive inpact on revenue. By increasing the GDP per capita with 1 %, revenue will increase by approximately 1 %. The p-value is less than 0.05 and is significant on a 5% level, and the revenue variable is described by 5.6 % in this model.
 
