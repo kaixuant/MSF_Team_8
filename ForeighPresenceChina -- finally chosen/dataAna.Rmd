@@ -8,7 +8,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # 1. Introduction
-Business environment in China is unique. Multinational companies (MNC) often find it difficult to compete with local companies.
+Business environment in China is unique. Multinational companies (MNC) often find it difficult to compete with local companies.  
 
 China is a country where the government has a relatively strong interception and interference on its economy. Thus, state-owned companies in China may have a stronger relationship with the government and be affected more by the government compared with other kinds of companies.
 
