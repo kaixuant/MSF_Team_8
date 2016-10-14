@@ -140,16 +140,12 @@ var.test(mnc.prov[,"gdp2003"], mnc.prov[,"lgdpper2003"],alternative = "two.sided
 We can conclude that the p value is 0.04, which is smaller than 0.05, so we can reject the Null Hypothesis, and accept the alternative hypothesis: the variance of capital gdp and total gdp is not identical.
 
 
-### 4.1.2 Exploring firm-level and industry-level variables
-
-#### 3.3.2.1 The firm's revenue in difference province
 ```{r}
 ggplot(data=mnc) + geom_boxplot(aes(as.factor(province), revenue)) + theme(axis.text.x = element_text(angle = 45,colour = "black",size=13,hjust=1))
 ```
 
 It can be concluded that the Shanghai firms' revenues have the largest interval and Jiangxi has the smallest revenues interval. The median revenues in Shanghai is highest and that in Qinghai is the lowest.
 
-#### 3.3.2.2 The influcene of firm's total employees
 ```{r, message=FALSE}
 ggplot(mnc) + geom_point(aes(lemp,revenue))   # to total revenue
 cor.test(mnc[,"lemp"],mnc[,"revenue"])
@@ -165,7 +161,7 @@ From the scatter diagram, we can find that the with the increasement of the firm
 t.test(mnc[mnc[,"province"] == "Beijing","revenue"],mnc[mnc[,"province"] == "Shanghai","revenue"], alternative = "two.sided")
 ```
 
-The p value is 0.1419, which is larger than 0.05, so we can not reject the Null Hypothesis on a 95 % confidence level. We can not find a significant difference in the two means.
+We conducted T-test of revenue for Beijing and Shanghai, two biggest cities in China. The p value is 0.1419, which is larger than 0.05, so we can not reject the Null Hypothesis on a 95 % confidence level. We can not find a significant difference in the two means.
 
 #### 3.3.2.4 The influcene of market size
 ```{r}
@@ -261,7 +257,7 @@ Based on the correlation tests, it could be observed that the total business inc
 ## 4.3 Linear Regression
 ### 4.3.1. Multiple Linear Regression with Log GDP per Capita as dependet variable
 
-```{r}
+```{r, echo=FALSE} 
 panel.cor <- function(x, y, digits = 2, prefix = "", cex.cor, ...)
 {
     usr <- par("usr"); on.exit(par(usr))
@@ -296,7 +292,7 @@ ggplot(data = mnc, aes(x = lgdpper2003, y = revenue)) + geom_point() + geom_smoo
 The log of GDP per capita in 2003 (lgdpper2003) has a positive inpact on revenue. By increasing the GDP per capita with 1 %, revenue will increase by approximately 1 %. The p-value is less than 0.05 and is significant on a 5% level, and the revenue variable is described by 5.6 % in this model.
 
 #### 4.3.2.2. Market size as the independent variable
-```{r}
+```{r, echo=FALSE}
 rev_mark <- lm(revenue ~ marketsize, data = mnc)
 summary(rev_mark)
 ggplot(data = mnc, aes(x = marketsize, y = revenue)) + geom_point() + geom_smooth(method='lm',formula = y~x)
@@ -305,7 +301,7 @@ ggplot(data = mnc, aes(x = marketsize, y = revenue)) + geom_point() + geom_smoot
 The market size variable has a positive inpact on revenue. The estimate of market size tells us that 1 % change in market size will result in 0.46 % change in revenue. The p-value is less than 0.05 and is significant on a 5 % level, and the revenue variable is described by 9.4 % in this model.
 
 #### 4.3.2.3 Relationship with clients and suppliers as the independent variable
-```{r}
+```{r, echo=FALSE}
 rev_rel <- lm(revenue ~ relationship, data = mnc)
 summary(rev_rel)
 ggplot(data = mnc, aes(x = relationship, y = revenue)) + geom_point() + geom_smooth(method='lm',formula = y~x)
@@ -326,10 +322,10 @@ Licenses has a positive inpact on revenue. The estimate of licenses tells us tha
 ```{r}
 rev_ceo <- lm(revenue ~ lceopay, data = mnc)
 summary(rev_ceo)
-ggplot(data = mnc, aes(x = lceopay, y = revenue)) + geom_point() + geom_smooth(method='lm',formula = y~x)
+ggplot(data = mnc, aes(x = lceopay, y = revenue)) + geom_point(na.rm = TRUE) + geom_smooth(method='lm',formula = y~x, na.rm = TRUE)
 
 # for different ownership structure
-ggplot(data = mnc, aes(x = lceopay, y = revenue)) + geom_point(alpha = 1/2) + theme_minimal() + geom_smooth(aes(col = ownership), method = 'lm')
+ggplot(data = mnc, aes(x = lceopay, y = revenue)) + geom_point(alpha = 1/2, na.rm = TRUE) + theme_minimal() + geom_smooth(aes(col = ownership), method = 'lm')
 
 ```
 The CEO pay (lceopay) has a positive inpact on revenue. The estimate of lceopay tells us that 1 % change in the CEO pay will result in 0.9 % change in revenue. The p-value is less than 0.05 and is significant on a 5 % level, and the revenue variable is described by 24.3 % in this model.
@@ -338,7 +334,7 @@ The CEO pay (lceopay) has a positive inpact on revenue. The estimate of lceopay 
 
 As a result of our correlation analysis and single regression models we would like to look further into the revenue variable by adding relationship, marketsize, CEO pay and GDP per capita in 2003 as independent variables.  
 
-```{r, tidy = TRUE, result=FALSE}
+```{r, tidy = TRUE, results='hide'}
 rev_reg1 <- lm(revenue ~ lceopay + relationship + marketsize + lgdpper2003, data = mnc)
 summary(rev_reg1)
 
