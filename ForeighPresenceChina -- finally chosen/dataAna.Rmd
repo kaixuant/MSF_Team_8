@@ -197,8 +197,10 @@ for (j in 1:nrow(mnc)){
 }
 
 ggplot(data=mnc) + geom_bar(aes(ownership))
+```
 
-# Average revenue of each ownership
+#### Average revenue of each ownership
+```{r}
 mean(mnc[mnc[,"ownership"]=="state", "revenue"])
 mean(mnc[mnc[,"ownership"]=="collective", "revenue"])
 mean(mnc[mnc[,"ownership"]=="private", "revenue"])
