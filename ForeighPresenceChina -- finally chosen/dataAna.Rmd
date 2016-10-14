@@ -363,15 +363,21 @@ $$lgdpper2003 = 8.27 - 0.44*lwdist + 0.49*MNC $$
 # REMEMBER!!! --- Kaixuan, more comment before and after the code
 
 # 5. Discussion and Conclusion
-~---- *some bullet points to give you ideas* -----~
+## 5.1 Discussion
+Based on the past reports, the performance of one company is believed to have strong relationship with its connection to the government. Since Chinese government has a strong interception on its country's economy, and many companies in China are state-owned, we wanted to check whether the revenue of one company is correlated with the governmental factors.
+
+However, in our correlation analysis about the dataset, we could not find any strong correlation between the company's revenue and governmental factors. Therefore, we went further to search for other factors that might have influence on the performance of the company. Beyond this, we found some interesting variables in the dataset that have strong correlation with the company's revenue.
+
+Factors like the payment for CEO, the number of relationship with clients and suppliers, the market size, the GDP per capita, the number of employee and the expenses on the entertainment have an obvious impact on the performance of the company with a high explanation (72%) of the varibility of the revenue change. We also found that different type of ownership resulted in a mixed impact on the revenue change. Being owned by the state did not immdediately give a company significant advantage.
+
+Moreover, there was a negative correlation between entertainment expenditures and revenue. The variable that Zhu (2015) believed to be an indicator of political relationship and potential corrupt practices does not necessarily improve financial performance. The limitation could be, high entertainment expenditures in a particular year is a process of relationship building. The implication could take time. Moreover, there is no records of entertainment expenditures from previous years in this dataset, which could possibly illustrate the connection better.
 
 
+Other things we discovered in this analysis are:
 
-- One idea that I have, the MNC activity and GDP per capita has a high positive correlation. Thus, FDI stimulates the economy of China in 2004
-- Around 73.8 per cent of companies in the sample is owned by a mix of foreign investors, private and government. None of them held more than 50 per cent of the shares. The number of private owned companies are surprisingly very small and their average revenue is lower than the other firms.
-- CEO pay has significant impact on estimating revenue. The higher the salary of CEO, the more likely a company generates more sales.
-- Different type of ownership result in a mixed impact on revenue change. Thus, being owned by the state do not immediately give a company significant advantage.
-- There is a negative correlation between entertainment expenditures and revenue. The variable that Zhu (2015) believed to be an indicator of political relationship and potential corrupt practices does not necessarily improve financial performance. The limitation could be, high entertainment expenditures in a particular year is a process of relationship building. The implication could take time. Moreover, there is no records of entertainment expenditures from previous years in this dataset, which could possibly illustrate the connection better.
+The MNC activity and GDP per capita has a high positive correlation, which indicates that FDI (foreign direct investment) could stimulate the economy of China.
+
+Around 73.8 per cent of companies in the sample is owned by a mix of foreign investors, private and government. None of them held more than 50 per cent of the shares. The number of private owned companies are surprisingly very small and their average revenue is lower than the other firms.
 
 
 
