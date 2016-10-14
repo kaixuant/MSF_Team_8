@@ -328,6 +328,9 @@ ggplot(data = mnc, aes(x = lceopay+relationship+marketsize+lgdpper2003+lemp+letc
 stargazer(list(rev_ceo, rev_reg1, rev_reg2), digits = 2, no.space = TRUE, type = 'html', title = 'Regression Analysis')
 ```
 
+The linear regression model function:
+$$revenue = -0.75 + 0.40*lceopay + 0.02*relationship + 0.12*marketsize + 0.13*lgdpper2003 + 0.92*lemp - 0.17*letcs $$
+
 From this regression model we get an adjusted R-squared equal to 0.72, which means that 72% of the revenue variable is described in this model. All the independent variables are significant at the 1% level. The intercept of -0.75 tells us what the log of revenue will be if all our independent variables are zero. This number is negative and does not give us any valuable information without combining it with more variables. 
 
 By looking at the lceopay estimate we can see that 1 % change in the CEO pay will result in 0.4 % change in revenue. If we look at the relationship variable we can see that by increasing the number of relationships by one, revenue will increase by 2.1 %. The estimate of marketsize tells us that 1 % change in marketsize will result in 0.12 % change in revenue. The estimate of lgdpper2003 tells us that an increase in GDP per capita of 1 % will increase revenue by 0.13 %. By looking at the lemp estimate we see that 1 % increase in employees results in 0.92 % change in revenue. The negative relation between letcs and revenue is described by 1 % increase in firms expenditure on entertainment will result in 0.17 % decrease in revenue. 
