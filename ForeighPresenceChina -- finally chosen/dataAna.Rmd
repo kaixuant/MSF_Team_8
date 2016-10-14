@@ -30,13 +30,13 @@ The analysis is conducted using several statistical tools in R, i.e. statistical
 ```{r library, results='hide'}
 library(ggplot2)
 library(scales)
-library(stargazer)
 library(plyr)
 ```
 
-## 3.1. Description
+## 3.1 Description
+
 ```{r, results='hide'}
-load("./ForeighPresenceChina -- finally chosen/ForeignPresence&ETCs.RData")
+load("/Users/XINWEI_LI/Desktop/Math & Statistics Foundations/MSF_Team_8/ForeighPresenceChina -- finally chosen/ForeignPresence&ETCs.RData")
 mnc <- as.data.frame(x)
 ls.str(mnc)
 summary(mnc)
@@ -44,7 +44,7 @@ summary(mnc)
 
 The dataset contains 40 variables and 11360 observations. The data covered 11360 different companies observed across 30 provinces in China out of a total of 276,474 companies recorded in 2004 by National Bureau of Statistics of China (2014). The variables are divided into three groups, i.e. firm-level variables, industry-level variables and province-level variables. Firm-level variables consist of the properties of each firm, which include the type of ownership, revenue, number of employees and several variables that highlight the relationship between a firm and the government of China in 2004. Industry-level variables illustrate the scale of the industry and the market share of different groups of companies, including foreign firms and the industry leaders. They also try to highlight the amount of government influence by measuring the linear combination of the amount of help received by government officials, as well as the median of tax rate incurred by each firm in the industry. Lastly, province-level variables indicate the macroeconomic information regarding a province, such as its GDP per capita and the level of MNC activities in the region (e.g. foreign direct investments and trades). Below are the details of each variable analysed in this report.
 
-#### Firm-Level Variables
+### 3.1.1 Firm-Level Variables
 |Variable|Description|
 |:------------|:------------------------------------------------|
 |`idstd`|Company ID|
@@ -66,7 +66,7 @@ The dataset contains 40 variables and 11360 observations. The data covered 11360
 |`interaction`|Number of days of interactions with the government|
 |`gm_govt`|Whether the general manager is appointed by the government. (1 = Yes, 0 = No)|
 
-#### Industry-Level Variables
+### 3.1.2 Industry-Level Variables
 |Variable|Description|
 |:------------|:------------------------------------------------|
 |`foreign_output`|The share of output by foreign-owned firms|
@@ -82,7 +82,7 @@ The dataset contains 40 variables and 11360 observations. The data covered 11360
 |`mtaxrate`|Median of firms tax paid divided by total revenue|
 |`prov_ind`|Industry ID by Province|
 
-#### Province-Level Variables
+### 3.1.3 Province-Level Variables
 |Variable|Description|
 |:------------ |:------------------------------------------------|
 |`MNC`|Principal factor analysis of FDI inflow and MNC trades in a province.|
@@ -99,8 +99,8 @@ This dataset represent the ties between firms and the government of China. Given
 However, the dataset possess some limitations. Although industry ID numbers are provided, the sector was not clearly specified in the dataset or in previous publications. Moreover, the same industry in different provinces were coded differently, thus, the impact of a specific industry could not be measured. 
 
 # 4. Analysis
-## 4.1 Statistics description of the dataset 
-### 4.1.1 Exploring province-level variables
+## 4.1 Statistics Description of the Dataset 
+### 4.1.1 Exploring Province-level Variables
 
 Provinces variable were separated from the datasets. Before the data was plotted, `province` variable needed to be converted to factor. The summary showed the sample of each province ranges between 85 (Xinjiang) and 846 (Shangdong).
 
@@ -108,41 +108,17 @@ Provinces variable were separated from the datasets. Before the data was plotted
 mnc$province <- as.factor(mnc$province)
 summary(as.factor(mnc$province))
 
-# plot the numbers of sample of different provinces
+# Plot the numbers of samples of different provinces
 ggplot(mnc) + geom_bar(aes(x = as.factor(province)))+ theme(axis.text.x = element_text(angle = 45,colour = "black",size=13,hjust=1))
 
-#get the data for province
+#Get the data for province
 mnc.prov <- as.data.frame(mnc[!duplicated(x[,"province"]),])
 
-#plot the GDP of different provinces
+#Plot the GDP of different provinces
 ggplot(mnc.prov) + geom_bar(aes(x = as.factor(province), y = gdp2003),stat = "identity", position = "dodge") + theme(axis.text.x = element_text(angle = 45,colour = "black",size=13,hjust=1))
 ```
 
 The GDP in 2003 were plotted in a barchart. The first highest three GDP provinces are Guangdong, Jiangsu and Shandong. The lowest three GDP provinces are Qinghai, Ningxia and Hainan. Then, we visualised the relationship between provinces' number of population (log) and their log of GDP per capita.
-
-```{r, message = FALSE}
-ggplot(mnc.prov) + geom_point(aes(x = lpop2003, y = lgdpper2003))
-cor.test(mnc.prov[,"lpop2003"], mnc.prov[,"lgdpper2003"])
-
-```
-
-There is no strong relationship between the population and capital. From the correlation test result, we found that the p-value is 0.4043, which is much larger than 0.05, so we cannot reject the Null Hypothesis at a 95% confindence level. Therefore, there is no strong correlation between these two variables. The next part explore the link between provinces' size and their GDP per Capita.
-
-```{r}
-ggplot(mnc.prov) + geom_point(aes(x = lwdist, y = lgdpper2003))
-cor.test(mnc.prov[,"lwdist"], mnc.prov[,"lgdpper2003"])
-```
-
-The weighted geographic distance and GDP per Capita do not show any significant relationship. The p value is 0.3297, which is much larger than 0.05, thus, the Null Hypothesis cannot be rejected. Although there is no strong correlation, these two variables are positive correlated, which means large province enjoyed slightly more GDP per Capita.
-
-# ~~~ I dont know if we can use it or not since GDP and GDP per capita is the same thing ~~~
-#### 4.1.1.3 The variance of captal GDP and total GDP of differene provinces. 
-```{r}
-var.test(mnc.prov[,"gdp2003"], mnc.prov[,"lgdpper2003"],alternative = "two.sided")
-
-```
-We can conclude that the p value is 0.04, which is smaller than 0.05, so we can reject the Null Hypothesis, and accept the alternative hypothesis: the variance of capital gdp and total gdp is not identical.
-
 
 ```{r}
 ggplot(data=mnc) + geom_boxplot(aes(as.factor(province), revenue)) + theme(axis.text.x = element_text(angle = 45,colour = "black",size=13,hjust=1))
@@ -150,39 +126,32 @@ ggplot(data=mnc) + geom_boxplot(aes(as.factor(province), revenue)) + theme(axis.
 
 It can be concluded that the Shanghai firms' revenues have the largest interval and Jiangxi has the smallest revenues interval. The median revenues in Shanghai is highest and that in Qinghai is the lowest.
 
-```{r, message=FALSE}
-ggplot(mnc) + geom_point(aes(lemp,revenue))   # to total revenue
-cor.test(mnc[,"lemp"],mnc[,"revenue"])
-ggplot(mnc) + geom_point(aes(lemp,lceopay))   # to ceo pay
-cor.test(mnc[,"lemp"],mnc[,"lceopay"])
-ggplot(mnc) + geom_point(aes(lemp,letcs)) # to the entertainment expenditure
-cor.test(mnc[,"lemp"],mnc[,"letcs"])
-```
-From the scatter diagram, we can find that the with the increasement of the firm's total employees, the total income and CEO payment will increase. But the log of firm expenditure on entertainment and travel cost as % of total revenue will seem to decrease when firm's total employees increases. From the correlation test, we get that the correlation between lemp and revenue, lceopay and letcs are 0.79, 0.34, and -0.10.
+# MORE CONCLUSION
 
-#### 3.3.2.3 T-test of revenue for Beijing and Shanghai
+### 4.1.2 Exploring GDP-related Variables
+
+```{r, message = FALSE}
+cor.test(mnc.prov[,"lpop2003"], mnc.prov[,"lgdpper2003"])
+
+```
+
+There is no strong relationship between the population and capital. From the correlation test result, we found that the p-value is 0.4043, which is much larger than 0.05, so we cannot reject the Null Hypothesis at a 95% confindence level. Therefore, there is no strong correlation between these two variables. The next part explore the link between provinces' size and their GDP per Capita.
+
+```{r}
+cor.test(mnc.prov[,"lwdist"], mnc.prov[,"lgdpper2003"])
+
+```
+
+The weighted geographic distance and GDP per Capita do not show any significant relationship. The p value is 0.3297, which is much larger than 0.05, thus, the Null Hypothesis cannot be rejected. Although there is no strong correlation, these two variables are positive correlated, which means large province enjoyed slightly more GDP per Capita.
+
+### 4.1.3 T-test of Company Revenue for Beijing and Shanghai
 ```{r}
 t.test(mnc[mnc[,"province"] == "Beijing","revenue"],mnc[mnc[,"province"] == "Shanghai","revenue"], alternative = "two.sided")
 ```
 
 We conducted T-test of revenue for Beijing and Shanghai, two biggest cities in China. The p value is 0.1419, which is larger than 0.05, so we can not reject the Null Hypothesis on a 95 % confidence level. We can not find a significant difference in the two means.
 
-#### 3.3.2.4 The influcene of market size
-```{r}
-ggplot(mnc) + geom_point(aes(marketsize,last_intensity))   # to fixed assets per employee
-cor.test(mnc[,"marketsize"],mnc[,"last_intensity"])
-summary(lm(last_intensity ~ marketsize,data = mnc))
-ggplot(mnc,aes(x = marketsize,y = last_intensity)) + geom_point() + geom_smooth(method = "lm", formula = y~x)
-
-ggplot(mnc) + geom_point(aes(marketsize,lscale)) # to the average size of the larger firms that account for 50% of total output in the industry
-cor.test(mnc[,"marketsize"],mnc[,"lscale"])
-summary(lm(lscale ~ marketsize,data = mnc))
-ggplot(mnc,aes(x = marketsize,y = lscale)) + geom_point() + geom_smooth(method = "lm", formula = y~x)
-```
-
-We can see that marketsize and fixed assets per employee are positive correlated, and marketsize and larger company fraction are also positive correlated.
-
-### 4.1.3. Description of the firms ownership 
+### 4.1.4. Description of the Firms Ownership 
 
 ```{r, echo = FALSE}
 # Making a new column including all the different ownerships
@@ -197,8 +166,10 @@ for (j in 1:nrow(mnc)){
 }
 
 ggplot(data=mnc) + geom_bar(aes(ownership))
+```
 
-# Average revenue of each ownership
+#### Average Revenue of Each Ownership
+```{r}
 mean(mnc[mnc[,"ownership"]=="state", "revenue"])
 mean(mnc[mnc[,"ownership"]=="collective", "revenue"])
 mean(mnc[mnc[,"ownership"]=="private", "revenue"])
@@ -211,8 +182,22 @@ ggplot(data=mnc) + geom_boxplot(aes(ownership, revenue, fill = ownership))
 As we can see of the barplot there is a lot of companies in the bar with "mixed" ownership compared to the other categories. Therefore it might be difficult to do any valuable analysis on this data. If we look at the boxplot we can see that it looks like the distribution of revenue might be different between the different kind of ownership.
 
 ## 4.2 Correlation Analysis
-### 4.2.1 Correlation test among different variables with "revenue (log of total business income)"
-#### 4.2.1.1 Correlation test with government relative factors
+
+### 4.2.1 Correlation Test among Different Variables with "`lemp` (log of total employees in 2004)"
+
+```{r, message=FALSE}
+ggplot(mnc) + geom_point(aes(lemp,revenue))
+cor.test(mnc[,"lemp"],mnc[,"revenue"])
+
+cor.test(mnc[,"lemp"],mnc[,"lceopay"])
+
+cor.test(mnc[,"lemp"],mnc[,"letcs"])
+```
+
+From the scatter diagram, we can find that the with the increasement of the firm's total employees, the total income and CEO payment will increase. But the log of firm expenditure on entertainment and travel cost as % of total revenue will seem to decrease when firm's total employees increases. From the correlation test, we get that the correlation between lemp and revenue, lceopay and letcs are 0.79, 0.34, and -0.10.
+
+### 4.2.2 Correlation Test among Different Variables with "`Revenue` (log of total business income)"
+#### 4.2.2.1 Correlation Test with Government Relative Factors
 According to the dataset provided, we would like to examine the correlation of all factors relative to the government with the revenue of the company.
 In this case, we analysis the factors:
 
@@ -224,19 +209,16 @@ In this case, we analysis the factors:
 
 ```{r, results='hide'}
 cor.test(mnc[, "revenue"], mnc[, "mgovthelp"])
-ggplot(data = mnc, aes(x = mgovthelp, y = revenue)) + geom_point()
 
 cor.test(mnc[, "revenue"], mnc[, "govtsales"])
-ggplot(data = mnc, aes(x = govtsales, y = revenue)) + geom_point()
 
 cor.test(mnc[, "revenue"], mnc[, "interaction"])
-ggplot(data = mnc, aes(x = interaction, y = revenue)) + geom_point()
 
 ```
 
 Based on the correlation tests, it could be observed that the total business income of one company has a quite weak connection with the factors relative to the government, containing even negative correlation with some of the factors. In this case, the theory mentioned previously could not be proved since we hardly observe any strong positive or negative correlation among governmental factors with the performance of a company. Furthermore, the factors tested above may not be used as the independent variables for the linear regression model with the revenue as the dependent variables.
 
-#### 4.2.1.2 Correlation test with non-government relative factors
+#### 4.2.2.2 Correlation Test with Non-government Relative Factors
 Based on the above tests, government relative factors have very weak impacts on the revenue of the company. In this case, many other non-government relative factors should be examined for better interpretation of the dataset and smothier linear regression test.
 The factors are to be analyzed are:
 
@@ -252,31 +234,109 @@ The factors are to be analyzed are:
 
 6. CEO annual income: we think the performance of the company's CEO largely affect the revenue that company earns. Thus, we examined this factor to observe the correlation.
 
+# REMEBER!!!
+7. letcs:
+
 ```{r, tidy = TRUE, results='hide'}
 cor.test(mnc[, "revenue"], mnc[, "lgdpper2003"])
-ggplot(data = mnc, aes(x = lgdpper2003, y = revenue)) + geom_point()
 
 cor.test(mnc[, "revenue"], mnc[, "marketsize"])
 ggplot(data = mnc, aes(x = marketsize, y = revenue)) + geom_point()
 
 cor.test(mnc[, "revenue"], mnc[, "growthrate"])
-ggplot(data = mnc, aes(x = growthrate, y = revenue)) + geom_point()
 
 cor.test(mnc[, "revenue"], mnc[, "relationship"])
-ggplot(data = mnc, aes(x = relationship, y = revenue)) + geom_point()
 
 cor.test(mnc[, "revenue"], mnc[, "licenses"])
-ggplot(data = mnc, aes(x = licenses, y = revenue)) + geom_point()
 
 cor.test(mnc[, "revenue"], mnc[, "lceopay"])
 ggplot(data = mnc, aes(x = lceopay, y = revenue)) + geom_point()
 
+cor.test(mnc[, "revenue"], mnc[, "letcs"])
+ggplot(data = mnc, aes(x = letcs, y = revenue)) + geom_point()
 ```
 
-Based on the correlation tests, it could be observed that the total business income of one company has a positive connection with all the factors mentioned above except the output growth rate (with -0.053 correlation with revenue). The correlation with revenue in descending order is: CEO annual income (0.493), market size (0.306), relationship with clients and suppliers (0.275), GDP per capita in 2003 (0.237) and licenses (0.128).
+Based on the correlation tests, it could be observed that the total business income of one company has a positive connection with all the factors mentioned above except the output growth rate (with -0.053 correlation with revenue). The correlation with revenue in descending order is: CEO annual income (0.493), market size (0.306), relationship with clients and suppliers (0.275), GDP per capita in 2003 (0.237) and licenses (0.128). blablabla
 
 ## 4.3 Linear Regression
-### 4.3.1. Multiple Linear Regression with Log GDP per Capita as dependent variable
+### 4.3.2. Single Variable Linear Regression Test with `Revenue` as the Dependent Variable
+
+Based on our correlation analysis we want to look deeper into the variables which had the highest correlation with revenue. 
+
+#### 4.3.2.1 `lgdpper2003` (GDP per capita in 2003 (log)) as the Independent Variable
+```{r, echo=FALSE}
+rev_gdp <- lm(revenue ~ lgdpper2003, data = mnc)
+summary(rev_gdp)
+
+```
+The log of GDP per capita in 2003 (lgdpper2003) has a positive inpact on revenue. By increasing the GDP per capita with 1 %, revenue will increase by approximately 1 %. The p-value is less than 0.05 and is significant on a 5% level, and the revenue variable is described by 5.6 % in this model.
+
+#### 4.3.2.2. `marketsize` (Market size) as the Independent Variable
+```{r, echo=FALSE}
+rev_mark <- lm(revenue ~ marketsize, data = mnc)
+summary(rev_mark)
+ggplot(data = mnc, aes(x = marketsize, y = revenue)) + geom_point() + geom_smooth(method='lm',formula = y~x)
+
+```
+The market size variable has a positive inpact on revenue. The estimate of market size tells us that 1 % change in market size will result in 0.46 % change in revenue. The p-value is less than 0.05 and is significant on a 5 % level, and the revenue variable is described by 9.4 % in this model.
+
+#### 4.3.2.3 `relationship` (Relationship with clients and suppliers) as the Independent Variable
+```{r, echo=FALSE}
+rev_rel <- lm(revenue ~ relationship, data = mnc)
+summary(rev_rel)
+
+```
+Relationship has a positive inpact on revenue. By increasing the number of relationships by one, revenue will increase by 19.5 %, holding all other variables constant. The p-value is less than 0.05 and it is significant on a 5 % level, and the revenue variable is described by 7.5 % in this model.
+
+#### 4.3.2.4 `licenses` (Licenses) as the Independent Variable
+```{r}
+rev_lic <- lm(revenue ~ licenses, data = mnc)
+summary(rev_lic)
+
+```
+Licenses has a positive inpact on revenue. The estimate of licenses tells us that 1 % change in licenses will result in 0.36 % change in revenue. The p-value is less than 0.05 and it is significant on a 5 % level. However, the revenue variable is described by only 1.6 % in this model. In this case, we would not include this factor when doing the multiple linear regression test.
+
+#### 4.3.2.5 `lceopay` (Log of the CEO pay) as the Independent Variable
+```{r}
+rev_ceo <- lm(revenue ~ lceopay, data = mnc)
+summary(rev_ceo)
+ggplot(data = mnc, aes(x = lceopay, y = revenue)) + geom_point(na.rm = TRUE) + geom_smooth(method='lm',formula = y~x, na.rm = TRUE)
+
+```
+
+#### 4.3.2.6 `lceopay` (Log of the CEO pay) as the Independent Variable with Different Ownership Structure
+```{r}
+library(ggplot2)
+ggplot(data = mnc, aes(x = lceopay, y = revenue)) + geom_point(alpha = 1/2, na.rm = TRUE) + theme_minimal() + geom_smooth(aes(col = ownership), method = 'lm')
+
+```
+
+The CEO pay (lceopay) has a positive inpact on revenue. The estimate of lceopay tells us that 1 % change in the CEO pay will result in 0.9 % change in revenue. The p-value is less than 0.05 and is significant on a 5 % level, and the revenue variable is described by 24.3 % in this model.
+
+### 4.3.3 Multiple Linear Regression Test with `Revenue` as the Dependent Variable
+
+As a result of our correlation analysis and single regression models we would like to look further into the revenue variable by adding relationship, marketsize, CEO pay, number of employees and GDP per capita in 2003 as independent variables.  
+
+```{r, tidy = TRUE, results='hide'}
+rev_reg1 <- lm(revenue ~ lceopay + relationship + marketsize + lgdpper2003 + lemp + letcs, data = mnc)
+summary(rev_reg1)
+ggplot(data = mnc, aes(x = lceopay+relationship+marketsize+lgdpper2003, y = revenue)) + geom_point(na.rm = TRUE) + geom_smooth(method='lm',formula = y~x, na.rm = TRUE)
+
+```
+
+```{r, results = 'asis', tidy = TRUE}
+
+```
+
+From this regression model we get an adjusted R-squared equal to 0.72, which means that 72% of the revenue variable is described in this model. All the dependent variables are significant at the 1% level, except for lgdpper2003 which is significant at the 5 % level. 
+
+The intercept of -0.30 tells us what the log of revenue will be if all our independent variables are zero. This number is negative and does not give us any valuable information without combining it with more variables. 
+
+If we look at the relationship variable we can see that by increasing the number of relationships by one, revenue will increase by 13.6 %. The estimate of marketsize tells us that 1 % change in marketsize will result in 0.31 % change in revenue. By looking at the lceopay we can see that 1 % change in the CEO pay will result in 0.76 % change in revenue. The estimate of lgdpper2003 tells us that an increase in GDP per capita of 1 % will decrease revenue by 0.08 %. 
+
+# REMEMBER!!! --- An
+
+### 4.3.1. Multiple Linear Regression with `lgdpper2003` (GDP per capita in 2003 (log)) as Dependent Variable
 
 ```{r, echo=FALSE} 
 panel.cor <- function(x, y, digits = 2, prefix = "", cex.cor, ...)
@@ -300,84 +360,6 @@ summary(lm_gdp2003)
 
 We can find out that the Adjusted R-squared is 0.6831, and we got the linear regression model function that:
 $$lgdpper2003 = 8.27 - 0.44*lwdist + 0.49*MNC $$
-
-### 4.3.2. Single Variable Linear Regression Test with Revenue as the dependent variable
-
-Based on our correlation analysis we want to look deeper into the variables which had the highest correlation with revenue. 
-
-#### 4.3.2.1 GDP per capita in 2003 as the independent variable
-```{r, echo=FALSE}
-rev_gdp <- lm(revenue ~ lgdpper2003, data = mnc)
-summary(rev_gdp)
-ggplot(data = mnc, aes(x = lgdpper2003, y = revenue)) + geom_point() + geom_smooth(method='lm',formula = y~x)
-
-```
-The log of GDP per capita in 2003 (lgdpper2003) has a positive inpact on revenue. By increasing the GDP per capita with 1 %, revenue will increase by approximately 1 %. The p-value is less than 0.05 and is significant on a 5% level, and the revenue variable is described by 5.6 % in this model.
-
-#### 4.3.2.2. Market size as the independent variable
-```{r, echo=FALSE}
-rev_mark <- lm(revenue ~ marketsize, data = mnc)
-summary(rev_mark)
-ggplot(data = mnc, aes(x = marketsize, y = revenue)) + geom_point() + geom_smooth(method='lm',formula = y~x)
-
-```
-The market size variable has a positive inpact on revenue. The estimate of market size tells us that 1 % change in market size will result in 0.46 % change in revenue. The p-value is less than 0.05 and is significant on a 5 % level, and the revenue variable is described by 9.4 % in this model.
-
-#### 4.3.2.3 Relationship with clients and suppliers as the independent variable
-```{r, echo=FALSE}
-rev_rel <- lm(revenue ~ relationship, data = mnc)
-summary(rev_rel)
-ggplot(data = mnc, aes(x = relationship, y = revenue)) + geom_point() + geom_smooth(method='lm',formula = y~x)
-
-```
-Relationship has a positive inpact on revenue. By increasing the number of relationships by one, revenue will increase by 19.5 %, holding all other variables constant. The p-value is less than 0.05 and it is significant on a 5 % level, and the revenue variable is described by 7.5 % in this model.
-
-#### 4.3.2.4 Licenses as the independent variable
-```{r}
-rev_lic <- lm(revenue ~ licenses, data = mnc)
-summary(rev_lic)
-ggplot(data = mnc, aes(x = licenses, y = revenue)) + geom_point() + geom_smooth(method='lm',formula = y~x)
-
-```
-Licenses has a positive inpact on revenue. The estimate of licenses tells us that 1 % change in licenses will result in 0.36 % change in revenue. The p-value is less than 0.05 and it is significant on a 5 % level. However, the revenue variable is described by only 1.6 % in this model. In this case, we would not include this factor when doing the multiple linear regression test.
-
-#### 4.3.2.5 Log of the CEO pay as the independent variable
-```{r}
-rev_ceo <- lm(revenue ~ lceopay, data = mnc)
-summary(rev_ceo)
-ggplot(data = mnc, aes(x = lceopay, y = revenue)) + geom_point(na.rm = TRUE) + geom_smooth(method='lm',formula = y~x, na.rm = TRUE)
-
-# for different ownership structure
-library(ggplot2)
-ggplot(data = mnc, aes(x = lceopay, y = revenue)) + geom_point(alpha = 1/2, na.rm = TRUE) + theme_minimal() + geom_smooth(aes(col = ownership), method = 'lm')
-
-```
-The CEO pay (lceopay) has a positive inpact on revenue. The estimate of lceopay tells us that 1 % change in the CEO pay will result in 0.9 % change in revenue. The p-value is less than 0.05 and is significant on a 5 % level, and the revenue variable is described by 24.3 % in this model.
-
-### 4.3.3 Multiple Linear Regression Test with revenue as the dependent variable
-
-As a result of our correlation analysis and single regression models we would like to look further into the revenue variable by adding relationship, marketsize, CEO pay and GDP per capita in 2003 as independent variables.  
-
-```{r, tidy = TRUE, results='hide'}
-rev_reg1 <- lm(revenue ~ lceopay + relationship + marketsize + lgdpper2003, data = mnc)
-summary(rev_reg1)
-ggplot(data = mnc, aes(x = lceopay+relationship+marketsize+lgdpper2003, y = revenue)) + geom_point(na.rm = TRUE) + geom_smooth(method='lm',formula = y~x, na.rm = TRUE)
-
-rev_reg2 <- lm(revenue ~ lceopay + relationship + marketsize + lgdpper2003 + interaction + letcs + soesales + mgovthelp, data = mnc)
-summary(rev_reg2)
-ggplot(data = mnc, aes(x = lceopay+relationship+marketsize+lgdpper2003+interaction+letcs+soesales+mgovthelp, y = revenue)) + geom_point(na.rm = TRUE) + geom_smooth(method='lm',formula = y~x, na.rm = TRUE)
-
-```
-
-```{r, results = 'asis', tidy = TRUE}
-stargazer(list(rev_ceo, rev_reg1, rev_reg2), digits = 2, no.space = TRUE, type = 'html', title = 'Regression Analysis')
-```
-
-From the first regression model we get an adjusted R-squared equal to 0.316, which means that 31.6 % of the revenue variable is described in this model. All the dependent variables are significant at the 1% level, except for lgdpper2003 which is significant at the 5 % level. 
-
-The intercept of -0.30 tells us what the log of revenue will be if all our independent variables are zero. This number is negative and does not give us any valuable information without combining it with more variables. 
-
-If we look at the relationship variable we can see that by increasing the number of relationships by one, revenue will increase by 13.6 %. The estimate of marketsize tells us that 1 % change in marketsize will result in 0.31 % change in revenue. By looking at the lceopay we can see that 1 % change in the CEO pay will result in 0.76 % change in revenue. The estimate of lgdpper2003 tells us that an increase in GDP per capita of 1 % will decrease revenue by 0.08 %. 
 
 
 # 5. Discussion and Conclusion
