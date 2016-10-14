@@ -325,6 +325,7 @@ summary(rev_ceo)
 ggplot(data = mnc, aes(x = lceopay, y = revenue)) + geom_point(na.rm = TRUE) + geom_smooth(method='lm',formula = y~x, na.rm = TRUE)
 
 # for different ownership structure
+library(ggplot2)
 ggplot(data = mnc, aes(x = lceopay, y = revenue)) + geom_point(alpha = 1/2, na.rm = TRUE) + theme_minimal() + geom_smooth(aes(col = ownership), method = 'lm')
 
 ```
@@ -337,9 +338,12 @@ As a result of our correlation analysis and single regression models we would li
 ```{r, tidy = TRUE, results='hide'}
 rev_reg1 <- lm(revenue ~ lceopay + relationship + marketsize + lgdpper2003, data = mnc)
 summary(rev_reg1)
+ggplot(data = mnc, aes(x = lceopay+relationship+marketsize+lgdpper2003, y = revenue)) + geom_point(na.rm = TRUE) + geom_smooth(method='lm',formula = y~x, na.rm = TRUE)
 
 rev_reg2 <- lm(revenue ~ lceopay + relationship + marketsize + lgdpper2003 + interaction + letcs + soesales + mgovthelp, data = mnc)
 summary(rev_reg2)
+ggplot(data = mnc, aes(x = lceopay+relationship+marketsize+lgdpper2003+interaction+letcs+soesales+mgovthelp, y = revenue)) + geom_point(na.rm = TRUE) + geom_smooth(method='lm',formula = y~x, na.rm = TRUE)
+
 ```
 
 ```{r, results = 'asis', tidy = TRUE}
