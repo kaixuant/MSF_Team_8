@@ -10,6 +10,11 @@ knitr::opts_chunk$set(echo = TRUE)
 # 1. Introduction
 Business environment in China is unique. Multinational companies (MNC) often find it difficult to compete with local companies.
 
+China is a country where the government has a relatively strong interception and interference on its economy. Thus, state-owned companies in China may have a stronger relationship with the government and be affected more by the government compared with other kinds of companies.
+
+A stronger connection with the government may benefit the company with easy access to important information, such as big news or change of policies. It could benefit the company with prior gain of resources as well, such as controlled materials. Moreover, one state-owned company could operate more easily with relatively low risk of bankruptcy due to the help offered by the government.
+
+Based on the above information and analysis, it may be interpreted that the relationship between the company-related factors and the government-related factors of one state-owned company should be stronger than that of other kinds of companies.
 
 
 ----------**add more stuff here**-----------
