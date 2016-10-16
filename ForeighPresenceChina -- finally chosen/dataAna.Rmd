@@ -1,4 +1,5 @@
 ---
+<<<<<<< HEAD
 title: "Math and Statistics Foundations Project"
 output: 
   pdf_document: 
@@ -7,6 +8,11 @@ output:
 
 date: 16th Oct, 2016
 group: No.8
+=======
+title: "Maths and Stats Project"
+author: "Group 8"
+output: pdf_document
+>>>>>>> b64d1b3340b1a4e7207faa72361ecce037e10b29
 ---
 
 ```{r setup, include=FALSE}
@@ -14,7 +20,11 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # 1. Introduction
+<<<<<<< HEAD
 In China's transition to a market economy, the entire process is strongly intercepted and crontolled by the central government (Broadhurst, 2011). Different forms of companies in China have relatively strong or weak relationship with the government under the central government's polices on the economy. In this case, state-owned companies in China may have a stronger relationship with the government and be affected more by the government compared with other kinds of companies. Such relationship makes thoes state-owned companies more competitive and lead multinational compaines (MNC) harder to survive in the current market of China.
+=======
+Business environment in China is unique. Multinational companies (MNC) often find it difficult to compete with local companies. In China's transition to a market economy, the entire process is strongly intercepted and crontolled by the central government (Broadhurst, 2011). Thus, state-owned companies in China may have a stronger relationship with the government and be affected more by the government compared with other kinds of companies.
+>>>>>>> b64d1b3340b1a4e7207faa72361ecce037e10b29
 
 A stronger connection with the government may benefit the company with easy access to important information, such as big news or change of policies. It could benefit the company with prior gain of resources as well, such as controlled materials. Moreover, one state-owned company could operate more easily with relatively low risk of bankruptcy due to the help offered by the government.
 
@@ -102,7 +112,7 @@ The dataset contains 40 variables and 11360 observations. The data covered 11360
 |`provinceID`|Province ID|
 
 ## 3.2. Strength and Limitations
-This dataset represent the ties between firms and the government of China. Given the unique feature of Chinese industry that most of big firms in China are state-owned, as of 98 companies in 2014 Fortune 500, 76 of them are state-owned (Cendrowski, 2015), this dataset would highlight how strong the relationship with the goverment affect the CEO salary of a company or the company revenue. 
+This dataset represent the ties between firms and the government of China. Given the unique feature of Chinese industry, this dataset would highlight how strong the relationship with the goverment affect the CEO salary of a company or the company revenue in 2004. This data also contain different companies from different regions whose character and geographical features could affect the firms.  
 
 However, the dataset possess some limitations. Although industry ID numbers are provided, the sector was not clearly specified in the dataset or in previous publications. Moreover, the same industry in different provinces were coded differently, thus, the impact of a specific industry could not be measured. 
 
@@ -351,6 +361,9 @@ ggplot(data = mnc, aes(x = lceopay, y = revenue)) +
 
 The CEO pay (lceopay) has a positive inpact on revenue. The estimate of lceopay tells us that 1 % change in the CEO pay will result in 0.9 % change in revenue. The p-value is less than 0.05 and is significant on a 5 % level, and the revenue variable is described by 24.3 % in this model.
 
+It is interesting to see the relationship between `lceopay` and `revenue` for each ownership type. Generally, the trend are positive for all type but private owned companies have more mixed relationship. Moreover, the relationship seems stronger for the state-owned companies and mixed-owned companies as shown by the steeper linear trendline. However, we need to examine the structure of mixed-owned companies, which are not covered in the original dataset, in order to further validate this relationship. 
+
+
 ### 4.3.3 Multiple Linear Regression Test with `Revenue` as the Dependent Variable
 
 As a result of our correlation analysis and single regression models we would like to look further into the revenue variable by adding relationship, marketsize, CEO pay, number of employees, firm expenditure on entertainment and GDP per capita in 2003 as independent variables.  
@@ -381,10 +394,7 @@ Factors like the payment to the CEO, the number of relationship with clients and
 
 Moreover, there was a negative correlation between entertainment expenditures and revenue. The variable that Zhu (2015) believed to be an indicator of political relationship and potential corrupt practices does not necessarily improve financial performance. The limitation could be, high entertainment expenditures in a particular year is a process of relationship building. The implication could take time. Moreover, there is no records of entertainment expenditures from previous years in this dataset, which could possibly illustrate the connection better.
 
-
-Other things we discovered in this analysis were:
-
-The MNC activity and GDP per capita had a high positive correlation, which indicates that FDI (foreign direct investment) could stimulate the economy of China.
+Other things we discovered in this analysis were the MNC activity and GDP per capita had a high positive correlation, which indicates that FDI (foreign direct investment) could stimulate the economy of China.
 
 Around 73.8 per cent of the companies in the sample is owned by a mix of foreign investors, private and government. None of them held more than 50 per cent of the shares. The number of private owned companies are surprisingly very small and their average revenue is lower than the other firms.
 
