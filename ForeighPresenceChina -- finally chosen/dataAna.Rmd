@@ -7,6 +7,8 @@ output:
     toc_depth: 2
 
 date: 16th Oct, 2016
+
+link for the Github repository: https://github.com/kaixuant/MSF_Team_8
 ---
 
 ```{r setup, include=FALSE}
