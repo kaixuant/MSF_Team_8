@@ -7,10 +7,8 @@ output:
     toc_depth: 2
 
 date: 16th Oct, 2016
-
-link for the Github repository: https://github.com/kaixuant/MSF_Team_8
 ---
-
+[Github link for our project](https://github.com/kaixuant/MSF_Team_8)
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
@@ -123,7 +121,6 @@ However, the dataset possesses some limitations. Although industry ID numbers ar
 Provinces variable were separated from the datasets. Before the data was plotted, `province` variable needed to be converted to factor. The summary showed the sample of each province ranges between 85 (Xinjiang) and 846 (Shangdong).
 
 ```{r, tidy=TRUE}
-library(ggplot2)
 mnc$province <- as.factor(mnc$province)
 summary(as.factor(mnc$province))
 
@@ -142,6 +139,7 @@ The GDP in 2003 were plotted in a barchart. The first highest three GDP province
 
 ```{r}
 ggplot(data=mnc) + geom_boxplot(aes(as.factor(province), revenue)) + theme(axis.text.x = element_text(angle = 45,colour = "black",size=13,hjust=1))
+
 ```
 
 It can be concluded that the Shanghai firms' revenues have the largest interval and Jiangxi has the smallest revenues interval. The median revenues in Shanghai is highest and that in Qinghai is the lowest.
@@ -194,7 +192,6 @@ ggplot(data=mnc) + geom_bar(aes(ownership))
 #### Average Revenue of Each Ownership
 
 ```{r}
-
 mean(mnc[mnc[,"ownership"]=="state", "revenue"])
 mean(mnc[mnc[,"ownership"]=="collective", "revenue"])
 mean(mnc[mnc[,"ownership"]=="private", "revenue"])
@@ -217,10 +214,12 @@ In this session, we would like to test the correlation between the number of emp
 pander(cor.test(mnc[,"lemp"],mnc[,"revenue"]))
 pander(cor.test(mnc[,"lemp"],mnc[,"lceopay"]))
 pander(cor.test(mnc[,"lemp"],mnc[,"letcs"]))
+
 ```
 
 ```{r, echo=FALSE}
 ggplot(data = mnc) + geom_point(aes(lemp,revenue)) + geom_smooth(method = 'lm')
+
 ```
 
 From the scatter diagram, we can find that with the increase of the firm's total employees, the total income and CEO payment will increase. But the log of firm expenditure on entertainment and travel cost as % of total revenue will seem to decrease when firm's total employees increases. From the correlation test, we get that the correlation between lemp and revenue, lceopay and letcs are 0.79, 0.34, and -0.10.
@@ -308,6 +307,7 @@ pairs(lgdpper2003 ~ lwdist + lpop2003 + MNC, data = mnc.prov, lower.panel = pane
 #linear regression 
 lm_gdp2003 <- lm(lgdpper2003 ~ lwdist + MNC , data = mnc.prov)
 pander(lm_gdp2003)
+
 ```
 
 We can find out that the Adjusted R-squared is 0.6831, and we got the linear regression model function that:
@@ -342,6 +342,7 @@ The market size variable has a positive impact on revenue. The estimate of marke
 ```{r, echo=FALSE}
 rev_rel <- lm(revenue ~ relationship, data = mnc)
 pander(rev_rel)
+
 ```
 
 Relationship has a positive impact on revenue. By increasing the number of relationships by one, revenue will increase by 19.5 %, holding all other variables constant. The p-value is less than 0.05 and it is significant on a 5 % level, and the revenue variable is described by 7.5 % in this model.
@@ -350,6 +351,7 @@ Relationship has a positive impact on revenue. By increasing the number of relat
 ```{r, echo = FALSE}
 rev_lic <- lm(revenue ~ licenses, data = mnc)
 pander(rev_lic)
+
 ```
 
 Licenses has a positive impact on revenue. The estimate of licenses tells us that 1 % change in licenses will result in 0.36 % change in revenue. The p-value is less than 0.05 and it is significant on a 5 % level. However, the revenue variable is described by only 1.6 % in this model. In this case, we would not include this factor when doing the multiple linear regression test.
@@ -384,10 +386,12 @@ As a result of our correlation analysis and single regression models we would li
 ```{r, tidy = TRUE, results='hide'}
 rev_reg1 <- lm(revenue ~ lceopay + relationship + marketsize + lgdpper2003 + lemp + letcs, data = mnc)
 summary(rev_reg1)
+
 ```
 
 ```{r, results = 'asis', tidy = TRUE, echo=FALSE}
 stargazer(list(rev_ceo, rev_reg1), digits = 2, no.space = TRUE, type = 'latex', title = 'Regression Analysis')
+
 ```
 
 The linear regression model function:
@@ -413,9 +417,10 @@ We also discovered several interesting points in the analysis:
 
 2. In the dataset we were investigating, 73.8% companies are in a mixed structure owned by foreign investors, private and government. Whereas private-owned companies only occupied a tiny proportion and the average revenue is lower than firms with other types. This phenomenon is reconsile with the current situation in China, where private-owned companies are too weak to compete with other large firms with support from either the government or the foreign investors. It also aligns with the policy in China to motivate the development of private-owned companies by providing more support to them.
 
-In conclusion, we could not find support for previous theory about the correlation between a firm´s value and governmental factors in our data. However, from our analysis we can conclude that the payment to the CEO, the number of relationship with clients and suppliers, the market size, the GDP per capita, the number of employee and the expenses on the entertainment have an obvious impact on the performance of a company in China with a high explanation (72%). 
+In conclusion, we could not find support for previous theory about the correlation between a firm´s value and governmental factors in our data. However, from our analysis we can conclude that the payment to the CEO, the number of relationship with clients and suppliers, the market size, the GDP per capita, the number of employee and the expenses on the entertainment have an obvious impact on the performance of a company in China with a high explanation (72%) of the variation of revenue. 
 
 If we would go further with this analysis, we would like to have more recent data. It would also be interesting to see how this analysis can be applied to other countries than China. Will there be some similarities in other developing countries, or is this findings something that can be applied more globally?  
+
 
 \pagebreak
 
