@@ -398,7 +398,6 @@ From this regression model we get an adjusted R-squared equal to 0.72, which mea
 By looking at the lceopay estimate we can see that 1 % change in the CEO pay will result in 0.4 % change in revenue. If we look at the relationship variable we can see that by increasing the number of relationships by one, revenue will increase by 2.1 %. The estimate of marketsize tells us that 1 % change in marketsize will result in 0.12 % change in revenue. The estimate of lgdpper2003 tells us that an increase in GDP per capita of 1 % will increase revenue by 0.13 %. By looking at the lemp estimate we see that 1 % increase in employees results in 0.92 % change in revenue. The negative relation between letcs and revenue is described by 1 % increase in firms expenditure on entertainment will result in 0.17 % decrease in revenue. 
 
 # 5. Discussion and Conclusion
-## 5.1 Discussion
 
 Based on past reports, the performance of a company is believed to have strong relationship with its connection to the government. Since the Chinese government has a strong interception on its country's economy, and many companies in China are state-owned, we wanted to check whether the revenue of one company is correlated with the governmental factors.
 
@@ -413,6 +412,10 @@ We also discovered several interesting points in the analysis:
 1. The MNC activity had a strong positive correlation with the GDP per capita, which may indicate that FDI (foreign direct investment) to the multinational companies could stimulate the economy of China. This is quite close to the current situation with China's market economy: with the gradually increase of foreign investment, those multinational companies are more attractive to local economy and thus more competitive when compared with state-owned companies.
 
 2. In the dataset we were investigating, 73.8% companies are in a mixed structure owned by foreign investors, private and government. Whereas private-owned companies only occupied a tiny proportion and the average revenue is lower than firms with other types. This phenomenon is reconsile with the current situation in China, where private-owned companies are too weak to compete with other large firms with support from either the government or the foreign investors. It also aligns with the policy in China to motivate the development of private-owned companies by providing more support to them.
+
+In conclusion, we could not find support for previous theory about the correlation between a firm´s value and governmental factors in our data. However, from our analysis we can conclude that the payment to the CEO, the number of relationship with clients and suppliers, the market size, the GDP per capita, the number of employee and the expenses on the entertainment have an obvious impact on the performance of a company in China with a high explanation (72%). 
+
+If we would go further with this analysis, we would like to have more recent data. It would also be interesting to see how this analysis can be applied to other countries than China. Will there be some similarities in other developing countries, or is this findings something that can be applied more globally?  
 
 \pagebreak
 
