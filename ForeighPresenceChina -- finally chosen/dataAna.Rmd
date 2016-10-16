@@ -26,18 +26,19 @@ Companies with a strong relationship to the government benefit from easier acces
 One of the theories on this topic is from Pfeiffer and Salancik (1978), they developed a theory stating that political connections will increase a firms value. Another theory, published by Jensen and Meckling (1976), argue that a firm which have a CEO with strong government connections might utilize this benefit in his own interests rather than the business' interest. We found these theories quite interesting and wanted to see if we could find any support for them in our data.
 
 # 3. Methods
-The analysis is conducted using several statistical tools in R, i.e. statistical test and linear modelling. Some libraries such as `ggplot2`, `scales` and `stargazer` are loaded to the console to visualise the data.
+The analysis is conducted using several statistical tools in R, i.e. statistical test and linear modelling. Some libraries such as `ggplot2` and `scales` are loaded to the console to visualise the data, as well as `pander` and `stargazer` for the numerical reporting.
+
 ```{r library, results='hide'}
 library(ggplot2)
 library(scales)
 library(stargazer)
 library(plyr)
-
+library(pander)
 ```
 
 ## 3.1 Description
 
-```{r, results='hide'}
+```{r, results='hide', tidy=TRUE}
 load("./ForeighPresenceChina -- finally chosen/ForeignPresence&ETCs.RData")
 #load("C:/Users/Kaixuan/Documents/MSF_Team_8/ForeighPresenceChina -- finally chosen/ForeignPresence&ETCs.RData")
 mnc <- as.data.frame(x)
@@ -136,23 +137,23 @@ From the above analysis, we may derive the observation that companies located in
 
 ### 4.1.2 Exploring GDP-related Variables
 
-```{r, message = FALSE}
-cor.test(mnc.prov[,"lpop2003"], mnc.prov[,"lgdpper2003"])
+```{r, echo=FALSE, message = FALSE}
+pander(cor.test(mnc.prov[,"lpop2003"], mnc.prov[,"lgdpper2003"]))
 
 ```
 
 There is no strong relationship between the population and capital. From the correlation test result, we found that the p-value is 0.4043, which is much larger than 0.05, so we cannot reject the Null Hypothesis at a 95% confindence level. Therefore, there is no strong correlation between these two variables. The next part explore the link between provinces' size and their GDP per Capita.
 
-```{r}
-cor.test(mnc.prov[,"lwdist"], mnc.prov[,"lgdpper2003"])
+```{r, echo=FALSE}
+pander(cor.test(mnc.prov[,"lwdist"], mnc.prov[,"lgdpper2003"]))
 
 ```
 
 The weighted geographic distance and GDP per Capita do not show any significant relationship. The p value is 0.3297, which is much larger than 0.05, thus, the Null Hypothesis cannot be rejected. Although there is no strong correlation, these two variables are positive correlated, which means large province enjoyed slightly more GDP per Capita.
 
 ### 4.1.3 T-test of Company Revenue for Beijing and Shanghai
-```{r}
-t.test(mnc[mnc[,"province"] == "Beijing","revenue"],mnc[mnc[,"province"] == "Shanghai","revenue"], alternative = "two.sided")
+```{r, echo = FALSE}
+pander(t.test(mnc[mnc[,"province"] == "Beijing","revenue"],mnc[mnc[,"province"] == "Shanghai","revenue"], alternative = "two.sided"))
 
 ```
 
@@ -178,6 +179,7 @@ ggplot(data=mnc) + geom_bar(aes(ownership))
 
 #### Average Revenue of Each Ownership
 ```{r}
+
 mean(mnc[mnc[,"ownership"]=="state", "revenue"])
 mean(mnc[mnc[,"ownership"]=="collective", "revenue"])
 mean(mnc[mnc[,"ownership"]=="private", "revenue"])
@@ -194,13 +196,11 @@ As we can see of the barplot there is a lot of companies in the bar with "mixed"
 
 ### 4.2.1 Correlation Test among Different Variables with `lemp` (log of total employees in 2004)
 
-```{r, message=FALSE}
+```{r, message=FALSE, echo=FALSE}
 ggplot(mnc) + geom_point(aes(lemp,revenue))
-cor.test(mnc[,"lemp"],mnc[,"revenue"])
-
-cor.test(mnc[,"lemp"],mnc[,"lceopay"])
-
-cor.test(mnc[,"lemp"],mnc[,"letcs"])
+pander(cor.test(mnc[,"lemp"],mnc[,"revenue"]))
+pander(cor.test(mnc[,"lemp"],mnc[,"lceopay"]))
+pander(cor.test(mnc[,"lemp"],mnc[,"letcs"]))
 
 ```
 
@@ -217,12 +217,12 @@ In this case, we analysis the factors:
 |`govtsales`|sales to Chinese government meaning stable sales with only low risk|
 |`interaction`|with more time working on the government assignments and communications, it would be easier for the company to know news and policies from the goverment and act accordingly and timely|
 
-```{r, tidy = TRUE}
-cor.test(mnc[, "revenue"], mnc[, "mgovthelp"])
+```{r, tidy = TRUE, echo=FALSE}
+pander(cor.test(mnc[, "revenue"], mnc[, "mgovthelp"]))
 
-cor.test(mnc[, "revenue"], mnc[, "govtsales"])
+pander(cor.test(mnc[, "revenue"], mnc[, "govtsales"]))
 
-cor.test(mnc[, "revenue"], mnc[, "interaction"])
+pander(cor.test(mnc[, "revenue"], mnc[, "interaction"]))
 
 ```
 
@@ -242,16 +242,16 @@ The factors are to be analyzed are:
 |`lceopay`|the performance of the company's CEO largely affect the revenue that company earns|
 |`letcs`|the expenditure on entertainment and travel cost directly reflect on the revenue of the company
 
-```{r, tidy = TRUE}
-cor.test(mnc[, "revenue"], mnc[, "lgdpper2003"])
+```{r, tidy = TRUE, echo=FALSE}
+pander(cor.test(mnc[, "revenue"], mnc[, "lgdpper2003"]))
 
-cor.test(mnc[, "revenue"], mnc[, "marketsize"])
+pander(cor.test(mnc[, "revenue"], mnc[, "marketsize"]))
 
-cor.test(mnc[, "revenue"], mnc[, "growthrate"])
+pander(cor.test(mnc[, "revenue"], mnc[, "growthrate"]))
 
-cor.test(mnc[, "revenue"], mnc[, "relationship"])
+pander(cor.test(mnc[, "revenue"], mnc[, "relationship"]))
 
-cor.test(mnc[, "revenue"], mnc[, "licenses"])
+pander(cor.test(mnc[, "revenue"], mnc[, "licenses"]))
 
 ggplot(data = mnc, aes(x = lceopay, y = revenue)) + geom_point()
 cor.test(mnc[, "revenue"], mnc[, "lceopay"])
@@ -261,7 +261,8 @@ cor.test(mnc[, "revenue"], mnc[, "letcs"])
 
 ```
 
-Based on the correlation tests, it could be observed that the total business income of one company has a positive connection with all the factors mentioned above except the output growth rate (with -0.053 correlation with revenue). The correlation with revenue in descending order is: CEO annual income (0.493), market size (0.306), relationship with clients and suppliers (0.275), GDP per capita in 2003 (0.237) and licenses (0.128). blablabla
+Based on the correlation tests, it could be observed that the total business income of one company has a positive connection with all the factors mentioned above except the output growth rate (with -0.053 correlation with revenue). The correlation with revenue in descending order is: CEO annual income (0.493), market size (0.306), relationship with clients and suppliers (0.275), GDP per capita in 2003 (0.237) and licenses (0.128). 
+**~~~ add some more?~~~~**
 
 ## 4.3 Linear Regression
 ### 4.3.2. Single Variable Linear Regression Test with `Revenue` as the Dependent Variable
@@ -390,5 +391,6 @@ Around 73.8 per cent of the companies in the sample is owned by a mix of foreign
 
 # References
 Hlavac, M. (2015). *stargazer: Well-Formatted Regression and Summary Statistics Tables*. R package version 5.2. http://CRAN.R-project.org/package=stargazer  
+National Bureau of Statistics of China (2014). National Data. Available from: http://data.stats.gov.cn/english/easyquery.htm?cn=C01 [Accessed 13 October 2016]  
 You, J. & Du, G. (2012). Are Political Connections a Blessing or a Curse? Evidence from CEO Turnover in China, *Corporate Governance: An International Review*, 20(2). Accessed through: EBSCOHost.  
 Zhu, B. (2016). *Replication Data for: MNCs, Rents, and Corruption: Evidence from China*, doi:10.7910/DVN/VT4KJA, Harvard Dataverse, V1 [UNF:6:LTJM6CHylp/JU5AfkjBK8Q==]  
