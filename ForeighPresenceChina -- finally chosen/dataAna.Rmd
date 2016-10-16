@@ -1,6 +1,6 @@
 ---
 title: "Group 8 Maths and Stats Project"
-output: html_document
+output: pdf_document
 ---
 
 ```{r setup, include=FALSE}
@@ -38,8 +38,8 @@ library(plyr)
 ## 3.1 Description
 
 ```{r, results='hide'}
-#load("./ForeighPresenceChina -- finally chosen/ForeignPresence&ETCs.RData")
-load("C:/Users/Kaixuan/Documents/MSF_Team_8/ForeighPresenceChina -- finally chosen/ForeignPresence&ETCs.RData")
+load("./ForeighPresenceChina -- finally chosen/ForeignPresence&ETCs.RData")
+#load("C:/Users/Kaixuan/Documents/MSF_Team_8/ForeighPresenceChina -- finally chosen/ForeignPresence&ETCs.RData")
 mnc <- as.data.frame(x)
 ls.str(mnc)
 summary(mnc)
