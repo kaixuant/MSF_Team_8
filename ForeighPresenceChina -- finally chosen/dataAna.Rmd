@@ -5,7 +5,7 @@ author: "Group 8"
 output: 
   pdf_document: 
     toc: yes
-    toc_depth: 4
+    toc_depth: 2
 
 date: 16th Oct, 2016
 ---
@@ -394,14 +394,10 @@ Jensen, M.C. & Meckling W. H. (1976) Theory of the firm: Managerial behavior, ag
 
 National Bureau of Statistics of China (2014). National Data. Available from: http://data.stats.gov.cn/english/easyquery.htm?cn=C01 [Accessed 13 October 2016]  
 
-<<<<<<< HEAD
 Pfeffer, J. & Salancik G. R. (1978) *The External Control of Organizations: A Resource Dependence Perspective*. New York, Harper & Row. Available from: http://web.unitn.it/files/download/12425/the_external_control_of_organizations_ch3_pfeffer.pdf [Accessed 15th October 2016] 
 
-You, J. & Du, G. (2012) Are Political Connections a Blessing or a Curse? Evidence from CEO Turnover in China, *Corporate Governance: An International Review*, 20(2). Accessed through: EBSCOHost.  
-=======
 You, J. & Du, G. (2012) Are Political Connections a Blessing or a Curse? Evidence from CEO Turnover in China, *Corporate Governance: An International Review*, 20(2). Accessed through: EBSCOHost.
 
 Zhu, B. (2015) *MNCs, Rents and Corruption: Evidence from China*. Princeton, Princeton University. Available from: https://www.princeton.edu/politics/about/file-repository/public/Zhu_MNCs-and-Corruption-in-China.pdf [Accessed 12 October 2016]
->>>>>>> 44d7b3cde8945cf8e6faede5f5b8a23c86c398c9
 
 Zhu, B. (2016) *Replication Data for: MNCs, Rents, and Corruption: Evidence from China*, doi:10.7910/DVN/VT4KJA, Harvard Dataverse, V1 [UNF:6:LTJM6CHylp/JU5AfkjBK8Q==]  
