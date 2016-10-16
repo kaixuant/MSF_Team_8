@@ -114,8 +114,7 @@ The dataset contains 40 variables and 11,360 observations. The data covered 1136
 
 This dataset represents the ties between firms and the government of China. Given the unique feature of Chinese industry, this dataset would highlight how strong the relationship with the government affect the CEO salary of a company or the company revenue in 2004. This data also contains different companies from different regions whose character and geographical features could affect the firms. 
 
-However, the dataset possesses some limitations. Although industry ID numbers are provided, the sector was not clearly specified in the dataset or in previous publications. Moreover, the same industry in different provinces were coded differently, thus, the impact of a specific industry could not be measured. 
-
+However, the dataset possesses some limitations. Although industry ID numbers are provided, the sector was not clearly specified in the dataset or in previous publications. Moreover, the same industry in different provinces were coded differently, thus, the impact of a specific industry could not be measured. Moreover, there should be more details on ownership, particularly for the mixed-owned firms. The data in ownership highlight the majority shareholders that had more than 50 percent shares in the firm but it did not identify which firm has the government as one of the shareholders. Lastly, `lceopay` is an estimate that might not re
 # 4. Analysis
 ## 4.1 Statistics Description of the Dataset 
 ### 4.1.1 Exploring Province-level Variables
