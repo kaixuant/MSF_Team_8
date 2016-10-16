@@ -49,7 +49,7 @@ summary(mnc)
 
 The dataset contains 40 variables and 11360 observations. The data covered 11360 different companies observed across 30 provinces in China out of a total of 276,474 companies recorded in 2004 by National Bureau of Statistics of China (2014). The variables are divided into three groups, i.e. firm-level variables, industry-level variables and province-level variables. Firm-level variables consist of the properties of each firm, which include the type of ownership, revenue, number of employees and several variables that highlight the relationship between a firm and the government of China in 2004. Industry-level variables illustrate the scale of the industry and the market share of different groups of companies, including foreign firms and the industry leaders. They also try to highlight the amount of government influence by measuring the linear combination of the amount of help received by government officials, as well as the median of tax rate incurred by each firm in the industry. Lastly, province-level variables indicate the macroeconomic information regarding a province, such as its GDP per capita and the level of MNC activities in the region (e.g. foreign direct investments and trades). Below are the details of each variable analysed in this report.
 
-### 3.1.1 Firm-Level Variables
+### Firm-Level Variables
 |Variable|Description|
 |:------------|:------------------------------------------------|
 |`idstd`|Company ID|
@@ -71,7 +71,7 @@ The dataset contains 40 variables and 11360 observations. The data covered 11360
 |`interaction`|Number of days of interactions with the government|
 |`gm_govt`|Whether the general manager is appointed by the government. (1 = Yes, 0 = No)|
 
-### 3.1.2 Industry-Level Variables
+### Industry-Level Variables
 |Variable|Description|
 |:------------|:------------------------------------------------|
 |`foreign_output`|The share of output by foreign-owned firms|
@@ -87,7 +87,7 @@ The dataset contains 40 variables and 11360 observations. The data covered 11360
 |`mtaxrate`|Median of firms tax paid divided by total revenue|
 |`prov_ind`|Industry ID by Province|
 
-### 3.1.3 Province-Level Variables
+### Province-Level Variables
 |Variable|Description|
 |:------------ |:------------------------------------------------|
 |`MNC`|Principal factor analysis of FDI inflow and MNC trades in a province.|
@@ -242,7 +242,7 @@ The factors are to be analyzed are:
 |`lceopay`|the performance of the company's CEO largely affect the revenue that company earns|
 |`letcs`|the expenditure on entertainment and travel cost directly reflect on the revenue of the company
 
-```{r, tidy = TRUE, echo=FALSE}
+```{r, tidy = TRUE, echo=TRUE}
 pander(cor.test(mnc[, "revenue"], mnc[, "lgdpper2003"]))
 
 pander(cor.test(mnc[, "revenue"], mnc[, "marketsize"]))
@@ -254,10 +254,10 @@ pander(cor.test(mnc[, "revenue"], mnc[, "relationship"]))
 pander(cor.test(mnc[, "revenue"], mnc[, "licenses"]))
 
 ggplot(data = mnc, aes(x = lceopay, y = revenue)) + geom_point()
-cor.test(mnc[, "revenue"], mnc[, "lceopay"])
+pander(cor.test(mnc[, "revenue"], mnc[, "lceopay"]))
 
 ggplot(data = mnc, aes(x = letcs, y = revenue)) + geom_point()
-cor.test(mnc[, "revenue"], mnc[, "letcs"])
+pander(cor.test(mnc[, "revenue"], mnc[, "letcs"]))
 
 ```
 
@@ -265,6 +265,35 @@ Based on the correlation tests, it could be observed that the total business inc
 **~~~ add some more?~~~~**
 
 ## 4.3 Linear Regression
+### 4.3.1. Multiple Linear Regression with `lgdpper2003` (GDP per capita in 2003 (log)) as Dependent Variable
+For province-level variables, let's make a regression model to see what kind of variables influence the GDP per capita and how they influence it.
+
+```{r, echo=FALSE, tidy=TRUE}
+
+panel.cor <- function(x, y, digits = 2, prefix = "", cex.cor, ...)
+{
+    usr <- par("usr"); on.exit(par(usr))
+    par(usr = c(0, 1, 0, 1))
+    r <- abs(cor(x, y))
+    txt <- format(c(r, 0.123456789), digits = digits)[1]
+    txt <- paste0(prefix, txt)
+    if(missing(cex.cor)) cex.cor <- 0.8/strwidth(txt)
+    text(0.5, 0.5, txt, cex = cex.cor * r)
+}
+pairs(lgdpper2003 ~ lwdist + lpop2003 + MNC, data = mnc.prov, lower.panel = panel.smooth, upper.panel = panel.cor)
+
+
+#linear regression 
+lm_gdp2003 <- lm(lgdpper2003 ~ lwdist + MNC , data = mnc.prov)
+pander(lm_gdp2003)
+
+```
+
+We can find out that the Adjusted R-squared is 0.6831, and we got the linear regression model function that:
+$$lgdpper2003 = 8.27 - 0.44*lwdist + 0.49*MNC $$
+
+For the linear regression model result, $R^2 =0.6831$ means 68.31% of variance in Log of GDP per capita can be explained by geographic distance and MNC trades in a province. When holding $MNC$ fixed, every extra increase in $lwdist$ can lead to 44% percentage increasement in GDP per capita. When holding Geographic distance fixed, the change in MNC trades in a province can lead to 49% percentage changes in GDP per capita in the province. 
+
 ### 4.3.2. Single Variable Linear Regression Test with `Revenue` as the Dependent Variable
 
 Based on our correlation analysis we want to look deeper into the variables which had the highest correlation with revenue. 
@@ -272,7 +301,7 @@ Based on our correlation analysis we want to look deeper into the variables whic
 #### 4.3.2.1 `lgdpper2003` (GDP per capita in 2003 (log)) as the Independent Variable
 ```{r, echo=FALSE}
 rev_gdp <- lm(revenue ~ lgdpper2003, data = mnc)
-summary(rev_gdp)
+pander(rev_gdp)
 
 ```
 The log of GDP per capita in 2003 (lgdpper2003) has a positive inpact on revenue. By increasing the GDP per capita with 1 %, revenue will increase by approximately 1 %. The p-value is less than 0.05 and is significant on a 5% level, and the revenue variable is described by 5.6 % in this model.
@@ -280,7 +309,7 @@ The log of GDP per capita in 2003 (lgdpper2003) has a positive inpact on revenue
 #### 4.3.2.2. `marketsize` (Market size) as the Independent Variable
 ```{r, echo=FALSE}
 rev_mark <- lm(revenue ~ marketsize, data = mnc)
-summary(rev_mark)
+pander(rev_mark)
 ggplot(data = mnc, aes(x = marketsize, y = revenue)) + geom_point() + geom_smooth(method='lm',formula = y~x)
 
 ```
@@ -289,30 +318,32 @@ The market size variable has a positive inpact on revenue. The estimate of marke
 #### 4.3.2.3 `relationship` (Relationship with clients and suppliers) as the Independent Variable
 ```{r, echo=FALSE}
 rev_rel <- lm(revenue ~ relationship, data = mnc)
-summary(rev_rel)
+pander(rev_rel)
 
 ```
+
 Relationship has a positive inpact on revenue. By increasing the number of relationships by one, revenue will increase by 19.5 %, holding all other variables constant. The p-value is less than 0.05 and it is significant on a 5 % level, and the revenue variable is described by 7.5 % in this model.
 
 #### 4.3.2.4 `licenses` (Licenses) as the Independent Variable
-```{r}
+```{r, echo = FALSE}
 rev_lic <- lm(revenue ~ licenses, data = mnc)
-summary(rev_lic)
+pander(rev_lic)
 
 ```
+
 Licenses has a positive inpact on revenue. The estimate of licenses tells us that 1 % change in licenses will result in 0.36 % change in revenue. The p-value is less than 0.05 and it is significant on a 5 % level. However, the revenue variable is described by only 1.6 % in this model. In this case, we would not include this factor when doing the multiple linear regression test.
 
 #### 4.3.2.5 `lceopay` (Log of the CEO pay) as the Independent Variable
-```{r}
+```{r, echo = FALSE}
 rev_ceo <- lm(revenue ~ lceopay, data = mnc)
-summary(rev_ceo)
+pander(rev_ceo)
 ggplot(data = mnc, aes(x = lceopay, y = revenue)) + geom_point(na.rm = TRUE) + geom_smooth(method='lm',formula = y~x, na.rm = TRUE)
 
 ```
 
 #### 4.3.2.6 `lceopay` (Log of the CEO pay) as the Independent Variable with Different Ownership Structure
-```{r}
-ggplot(data = mnc, aes(x = lceopay, y = revenue)) + geom_point(alpha = 1/2, na.rm = TRUE) + theme_minimal() + geom_smooth(aes(col = ownership), method = 'lm')
+```{r, echo=FALSE}
+ggplot(data = mnc, aes(x = lceopay, y = revenue)) + geom_point(alpha = 1/2, na.rm = TRUE) + theme_minimal() + geom_smooth(na.rm = TRUE, aes(col = ownership), method = 'lm')
 
 ```
 
@@ -330,8 +361,7 @@ ggplot(data = mnc, aes(x = lceopay+relationship+marketsize+lgdpper2003+lemp+letc
 ```
 
 ```{r, results = 'asis', tidy = TRUE}
-stargazer(list(rev_ceo, rev_reg1), digits = 2, no.space = TRUE, type = 'html', title = 'Regression Analysis')
-
+stargazer(list(rev_ceo, rev_reg1), digits = 2, no.space = TRUE, type = 'latex', title = 'Regression Analysis')
 ```
 
 The linear regression model function:
@@ -340,35 +370,6 @@ $$revenue = -0.75 + 0.40*lceopay + 0.02*relationship + 0.12*marketsize + 0.13*lg
 From this regression model we get an adjusted R-squared equal to 0.72, which means that 72% of the revenue variable is described in this model. All the independent variables are significant at the 1% level. The intercept of -0.75 tells us what the log of revenue will be if all our independent variables are zero. This number is negative and does not give us any valuable information without combining it with more variables. 
 
 By looking at the lceopay estimate we can see that 1 % change in the CEO pay will result in 0.4 % change in revenue. If we look at the relationship variable we can see that by increasing the number of relationships by one, revenue will increase by 2.1 %. The estimate of marketsize tells us that 1 % change in marketsize will result in 0.12 % change in revenue. The estimate of lgdpper2003 tells us that an increase in GDP per capita of 1 % will increase revenue by 0.13 %. By looking at the lemp estimate we see that 1 % increase in employees results in 0.92 % change in revenue. The negative relation between letcs and revenue is described by 1 % increase in firms expenditure on entertainment will result in 0.17 % decrease in revenue. 
-
-
-### 4.3.1. Multiple Linear Regression with `lgdpper2003` (GDP per capita in 2003 (log)) as Dependent Variable
-For province-level variables, let's make a regression model to see what kind of variables influence the GDP per capita and how they influence it.
-```{r, echo=FALSE} 
-panel.cor <- function(x, y, digits = 2, prefix = "", cex.cor, ...)
-{
-    usr <- par("usr"); on.exit(par(usr))
-    par(usr = c(0, 1, 0, 1))
-    r <- abs(cor(x, y))
-    txt <- format(c(r, 0.123456789), digits = digits)[1]
-    txt <- paste0(prefix, txt)
-    if(missing(cex.cor)) cex.cor <- 0.8/strwidth(txt)
-    text(0.5, 0.5, txt, cex = cex.cor * r)
-}
-pairs(lgdpper2003 ~ lwdist + lpop2003 + MNC, data = mnc.prov, lower.panel = panel.smooth, upper.panel = panel.cor)
-
-
-#linear regression 
-lm_gdp2003 <- lm(lgdpper2003 ~ lwdist + MNC , data = mnc.prov)
-summary(lm_gdp2003)
-
-```
-
-We can find out that the Adjusted R-squared is 0.6831, and we got the linear regression model function that:
-$$lgdpper2003 = 8.27 - 0.44*lwdist + 0.49*MNC $$
-
-For the linear regression model result, $R^2 =0.6831$ means 68.31% of variance in Log of GDP per capita can be explained by geographic distance and MNC trades in a province. When holding $MNC$ fixed, every extra increase in $lwdist$ can lead to 44% percentage increasement in GDP per capita. When holding Geographic distance fixed, the change in MNC trades in a province can lead to 49% percentage changes in GDP per capita in the province. 
-
 
 # 5. Discussion and Conclusion
 ## 5.1 Discussion
@@ -388,8 +389,8 @@ The MNC activity and GDP per capita had a high positive correlation, which indic
 Around 73.8 per cent of the companies in the sample is owned by a mix of foreign investors, private and government. None of them held more than 50 per cent of the shares. The number of private owned companies are surprisingly very small and their average revenue is lower than the other firms.
 
 
-
 # References
+
 Hlavac, M. (2015). *stargazer: Well-Formatted Regression and Summary Statistics Tables*. R package version 5.2. http://CRAN.R-project.org/package=stargazer  
 National Bureau of Statistics of China (2014). National Data. Available from: http://data.stats.gov.cn/english/easyquery.htm?cn=C01 [Accessed 13 October 2016]  
 You, J. & Du, G. (2012). Are Political Connections a Blessing or a Curse? Evidence from CEO Turnover in China, *Corporate Governance: An International Review*, 20(2). Accessed through: EBSCOHost.  
