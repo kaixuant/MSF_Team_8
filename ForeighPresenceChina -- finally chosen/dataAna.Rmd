@@ -1,20 +1,18 @@
 ---
 title: "Math and Statistics Foundations Project"
-author: "Group 8"
+author: "Group 8 (01292826, 01272252, 01219749, 01229430)"
 output: 
   pdf_document: 
     toc: yes
     toc_depth: 2
-<<<<<<< HEAD
-=======
 
->>>>>>> 34255ab105a15a30cb06ce7ab2e6d5490c0c181b
 date: 16th Oct, 2016
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+\pagebreak
 
 # 1. Introduction
 
@@ -27,12 +25,8 @@ Based on the above information and analysis, it may be interpreted that the rela
 This report analyse replication dataset provided by Zhu (2016) that consisted of information about different companies in 30 provinces in China. The relationship between variables that affect company revenue will be investigated using correlation test and other different statistical testing. Then, we will examine the significant variables using linear regression to calculate their impact to the log of company revenue.
 
 # 2. Theory
-<<<<<<< HEAD
 
-The theory we have based our analysis on is a paper published in 2012 about political connections and how this affects a firm's performance. 
-=======
 The theory we have based our analysis on is a paper published in 2012 about political connections and how this affects a firm's performance (You & Du, 2012). 
->>>>>>> 34255ab105a15a30cb06ce7ab2e6d5490c0c181b
 
 Companies with a strong relationship to the government benefit from easier access to government-related resources and bureaucratic processes, however, research conducted on this relationship with companies' financial performance is varied. In China, 76 out of 98 companies in 2014 Fortune 500 list, are state-owned (Cendrowski, 2015) and it shows the importance of government of China in the development of these companies.
 
@@ -219,10 +213,12 @@ In this session, we would like to test the correlation between the number of emp
 
 ```{r, message=FALSE, echo=FALSE}
 pander(cor.test(mnc[,"lemp"],mnc[,"revenue"]))
-ggplot(data = mnc) + geom_point(aes(lemp,revenue))
 pander(cor.test(mnc[,"lemp"],mnc[,"lceopay"]))
 pander(cor.test(mnc[,"lemp"],mnc[,"letcs"]))
+```
 
+```{r, echo=FALSE}
+ggplot(data = mnc) + geom_point(aes(lemp,revenue)) + geom_smooth(method = 'lm')
 ```
 
 From the scatter diagram, we can find that the with the increasement of the firm's total employees, the total income and CEO payment will increase. But the log of firm expenditure on entertainment and travel cost as % of total revenue will seem to decrease when firm's total employees increases. From the correlation test, we get that the correlation between lemp and revenue, lceopay and letcs are 0.79, 0.34, and -0.10.
@@ -408,12 +404,13 @@ However, in our correlation analysis about the dataset, we could not find any st
 
 Factors like the payment to the CEO, the number of relationship with clients and suppliers, the market size, the GDP per capita, the number of employee and the expenses on the entertainment have an obvious impact on the performance of the company with a high explanation (72%) of the varibility of the revenue change. We also found that different types of ownership resulted in a mixed impact on the revenue change. Being owned by the state did not immdediately give a company significant advantage.
 
-Moreover, there was a negative correlation between entertainment expenditures and revenue. The variable that Zhu (2015) believed to be an indicator of political relationship and potential corrupt practices does not necessarily improve financial performance. The limitation could be, high entertainment expenditures in a particular year is a process of relationship building. The implication could take time. Moreover, there is no records of entertainment expenditures from previous years in this dataset, which could possibly illustrate the connection better.
+Moreover, there was a negative correlation between entertainment expenditures and revenue. The variable that Zhu (2014) believed to be an indicator of political relationship and potential corrupt practices does not necessarily improve financial performance. The limitation could be, high entertainment expenditures in a particular year is a process of relationship building. The implication could take time. Moreover, there is no records of entertainment expenditures from previous years in this dataset, which could possibly illustrate the connection better.
 
 Other things we discovered in this analysis were the MNC activity and GDP per capita had a high positive correlation, which indicates that FDI (foreign direct investment) could stimulate the economy of China.
 
 Around 73.8 per cent of the companies in the sample is owned by a mix of foreign investors, private and government. None of them held more than 50 per cent of the shares. The number of private owned companies are surprisingly very small and their average revenue is lower than the other firms.
 
+\pagebreak
 
 # References
 
