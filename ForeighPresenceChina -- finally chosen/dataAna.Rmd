@@ -56,7 +56,7 @@ summary(mnc)
 
 ```
 
-The dataset contains 40 variables and 11360 observations. The data covered 11360 different companies observed across 30 provinces in China out of a total of 276,474 companies recorded in 2004 by National Bureau of Statistics of China (2014). The variables are divided into three groups, i.e. firm-level variables, industry-level variables and province-level variables. Firm-level variables consist of the properties of each firm, which include the type of ownership, revenue, number of employees and several variables that highlight the relationship between a firm and the government of China in 2004. Industry-level variables illustrate the scale of the industry and the market share of different groups of companies, including foreign firms and the industry leaders. They also try to highlight the amount of government influence by measuring the linear combination of the amount of help received by government officials, as well as the median of tax rate incurred by each firm in the industry. Lastly, province-level variables indicate the macroeconomic information regarding a province, such as its GDP per capita and the level of MNC activities in the region (e.g. foreign direct investments and trades). Below are the details of each variable analysed in this report.
+The dataset contains 40 variables and 11,360 observations. The data covered 11360 different companies observed across 30 provinces in China out of a total of 276,474 companies recorded in 2004 by National Bureau of Statistics of China (2014). The variables are divided into three groups, i.e. firm-level variables, industry-level variables and province-level variables. Firm-level variables consist of the properties of each firm, which include the type of ownership, revenue, number of employees and several variables that highlight the relationship between a firm and the government of China in 2004. Industry-level variables illustrate the scale of the industry and the market share of different groups of companies, including foreign firms and the industry leaders. They also try to highlight the amount of government influence by measuring the linear combination of the amount of help received by government officials, as well as the median of tax rate incurred by each firm in the industry. Lastly, province-level variables indicate the macroeconomic information regarding a province, such as its GDP per capita and the level of MNC activities in the region (e.g. foreign direct investments and trades). Below are the details of each variable analysed in this report.
 
 ### Firm-Level Variables
 
@@ -112,9 +112,9 @@ The dataset contains 40 variables and 11360 observations. The data covered 11360
 
 ## 3.2. Strength and Limitations
 
-This dataset represent the ties between firms and the government of China. Given the unique feature of Chinese industry, this dataset would highlight how strong the relationship with the goverment affect the CEO salary of a company or the company revenue in 2004. This data also contain different companies from different regions whose character and geographical features could affect the firms. 
+This dataset represents the ties between firms and the government of China. Given the unique feature of Chinese industry, this dataset would highlight how strong the relationship with the government affect the CEO salary of a company or the company revenue in 2004. This data also contains different companies from different regions whose character and geographical features could affect the firms. 
 
-However, the dataset possess some limitations. Although industry ID numbers are provided, the sector was not clearly specified in the dataset or in previous publications. Moreover, the same industry in different provinces were coded differently, thus, the impact of a specific industry could not be measured. 
+However, the dataset possesses some limitations. Although industry ID numbers are provided, the sector was not clearly specified in the dataset or in previous publications. Moreover, the same industry in different provinces were coded differently, thus, the impact of a specific industry could not be measured. 
 
 # 4. Analysis
 ## 4.1 Statistics Description of the Dataset 
@@ -155,7 +155,7 @@ pander(cor.test(mnc.prov[,"lpop2003"], mnc.prov[,"lgdpper2003"]))
 
 ```
 
-There is no strong relationship between the population and capital. From the correlation test result, we found that the p-value is 0.4043, which is much larger than 0.05, so we cannot reject the Null Hypothesis at a 95% confindence level. Therefore, there is no strong correlation between these two variables. The next part explore the link between provinces' size and their GDP per Capita.
+There is no strong relationship between the population and capita. From the correlation test result, we found that the p-value is 0.4043, which is much larger than 0.05, so we cannot reject the Null Hypothesis at a 95% confidence level. Therefore, there is no strong correlation between these two variables. The next part explores the link between provinces' size and their GDP per Capita.
 
 ```{r, echo=FALSE}
 pander(cor.test(mnc.prov[,"lwdist"], mnc.prov[,"lgdpper2003"]))
@@ -171,7 +171,7 @@ pander(t.test(mnc[mnc[,"province"] == "Beijing","revenue"],mnc[mnc[,"province"] 
 
 ```
 
-We conducted T-test of revenue for Beijing and Shanghai, two biggest cities in China. The p value is 0.1419, which is larger than 0.05, so we can not reject the Null Hypothesis on a 95 % confidence level. We can not find a significant difference in the two means.
+We conducted T-test of revenue for Beijing and Shanghai, two biggest cities in China. The p value is 0.1419, which is larger than 0.05, so we cannot reject the Null Hypothesis on a 95 % confidence level. We cannot find a significant difference in the two means.
 
 ### 4.1.4. Description of the Firms Ownership
 
@@ -205,7 +205,7 @@ ggplot(data=mnc) + geom_boxplot(aes(ownership, revenue, fill = ownership))
 
 ```
 
-As we can see of the barplot there is a lot of companies in the bar with "mixed" ownership compared to the other categories. Therefore it might be difficult to do any valuable analysis on this data. If we look at the boxplot we can see that it looks like the distribution of revenue might be different between the different kind of ownership.
+As we can see of the barplot there is a lot of companies in the bar with "mixed" ownership compared to the other categories. Therefore, it might be difficult to do any valuable analysis on this data. If we look at the boxplot we can see that it looks like the distribution of revenue might be different between the different kind of ownership.
 
 ## 4.2 Correlation Analysis  
 
@@ -223,7 +223,7 @@ pander(cor.test(mnc[,"lemp"],mnc[,"letcs"]))
 ggplot(data = mnc) + geom_point(aes(lemp,revenue)) + geom_smooth(method = 'lm')
 ```
 
-From the scatter diagram, we can find that the with the increasement of the firm's total employees, the total income and CEO payment will increase. But the log of firm expenditure on entertainment and travel cost as % of total revenue will seem to decrease when firm's total employees increases. From the correlation test, we get that the correlation between lemp and revenue, lceopay and letcs are 0.79, 0.34, and -0.10.
+From the scatter diagram, we can find that with the increase of the firm's total employees, the total income and CEO payment will increase. But the log of firm expenditure on entertainment and travel cost as % of total revenue will seem to decrease when firm's total employees increases. From the correlation test, we get that the correlation between lemp and revenue, lceopay and letcs are 0.79, 0.34, and -0.10.
 
 ### 4.2.2 Correlation Test among Different Variables with `Revenue` (log of total business income)
 #### 4.2.2.1 Correlation Test with Government Relative Factors
@@ -235,7 +235,7 @@ In this case, we analysis the factors:
 |:------------ |:------------------------------------------------|
 |`mgovthelp`|based on the condition in China, with more help from the government, one company may perform better and gain more revenue|
 |`govtsales`|sales to Chinese government meaning stable sales with only low risk|
-|`interaction`|with more time working on the government assignments and communications, it would be easier for the company to know news and policies from the goverment and act accordingly and timely|
+|`interaction`|with more time working on the government assignments and communications, it would be easier for the company to know news and policies from the government and act accordingly and timely|
 
 ```{r, tidy = TRUE, echo=FALSE}
 pander(cor.test(mnc[, "revenue"], mnc[, "mgovthelp"]))
@@ -248,9 +248,9 @@ pander(cor.test(mnc[, "revenue"], mnc[, "interaction"]))
 
 Based on the correlation tests, it could be observed that the total business income of one company has a quite weak connection with the factors relative to the government, containing even negative correlation with some of the factors. In this case, the theory mentioned previously could not be proved since we hardly observe any strong positive or negative correlation among governmental factors with the performance of a company. Furthermore, the factors tested above may not be used as the independent variables for the linear regression model with the revenue as the dependent variables.
 
-#### 4.2.2.2 Correlation Test with Non-government Relative Factors
+#### 4.2.2.2 Correlation Test with Non-Government Relative Factors
 
-Based on the above tests, government relative factors have very weak impacts on the revenue of the company. In this case, many other non-government relative factors should be examined for better interpretation of the dataset and smothier linear regression test.
+Based on the above tests, government relative factors have very weak impacts on the revenue of the company. In this case, many other non-government relative factors should be examined for better interpretation of the dataset and smoothier linear regression test.
 The factors are to be analyzed are:
 
 |Variable|Reason of Analyzing it|
@@ -260,7 +260,7 @@ The factors are to be analyzed are:
 |`growthrate`|the change of the output growth rate may affect the revenue as there exists some direct relationship between them|
 |`relationship`|a good and long existing relationship with the clients and suppliers could help with the increase of the revenue|
 |`licenses`|more licenses one company holds, it would be possible for that company to generate more revenue|
-|`lceopay`|the performance of the company's CEO largely affect the revenue that company earns|
+|`lceopay`|the performance of the company's CEO largely affects the revenue that company earns|
 |`letcs`|the expenditure on entertainment and travel cost directly reflect on the revenue of the company
 
 ```{r, tidy=TRUE, echo=TRUE}
@@ -313,7 +313,7 @@ pander(lm_gdp2003)
 We can find out that the Adjusted R-squared is 0.6831, and we got the linear regression model function that:
 $$lgdpper2003 = 8.27 - 0.44*lwdist + 0.49*MNC $$
 
-For the linear regression model result, $R^2 =0.6831$ means 68.31% of variance in Log of GDP per capita can be explained by geographic distance and MNC trades in a province. When holding $MNC$ fixed, every extra increase in $lwdist$ can lead to 44% percentage increasement in GDP per capita. When holding Geographic distance fixed, the change in MNC trades in a province can lead to 49% percentage changes in GDP per capita in the province. 
+For the linear regression model result, $R^2 =0.6831$ means 68.31% of variance in Log of GDP per capita can be explained by geographic distance and MNC trades in a province. When holding $MNC$ fixed, every extra increase in $lwdist$ can lead to 44% percentage increase in GDP per capita. When holding Geographic distance fixed, the change in MNC trades in a province can lead to 49% percentage changes in GDP per capita in the province. 
 
 ### 4.3.2. Single Variable Linear Regression Test with `revenue` as the Dependent Variable
 
@@ -326,7 +326,7 @@ rev_gdp <- lm(revenue ~ lgdpper2003, data = mnc)
 pander(rev_gdp)
 
 ```
-The log of GDP per capita in 2003 (lgdpper2003) has a positive inpact on revenue. By increasing the GDP per capita with 1 %, revenue will increase by approximately 1 %. The p-value is less than 0.05 and is significant on a 5% level, and the revenue variable is described by 5.6 % in this model.
+The log of GDP per capita in 2003 (lgdpper2003) has a positive impact on revenue. By increasing the GDP per capita with 1 %, revenue will increase by approximately 1 %. The p-value is less than 0.05 and is significant on a 5% level, and the revenue variable is described by 5.6 % in this model.
 
 #### 4.3.2.2. `marketsize` (Market size) as the Independent Variable
 
@@ -336,7 +336,7 @@ pander(rev_mark)
 ggplot(data = mnc, aes(x = marketsize, y = revenue)) + geom_point() + geom_smooth(method='lm',formula = y~x)
 
 ```
-The market size variable has a positive inpact on revenue. The estimate of market size tells us that 1 % change in market size will result in 0.46 % change in revenue. The p-value is less than 0.05 and is significant on a 5 % level, and the revenue variable is described by 9.4 % in this model.
+The market size variable has a positive impact on revenue. The estimate of market size tells us that 1 % change in market size will result in 0.46 % change in revenue. The p-value is less than 0.05 and is significant on a 5 % level, and the revenue variable is described by 9.4 % in this model.
 
 #### 4.3.2.3 `relationship` (Relationship with clients and suppliers) as the Independent Variable
 ```{r, echo=FALSE}
@@ -344,7 +344,7 @@ rev_rel <- lm(revenue ~ relationship, data = mnc)
 pander(rev_rel)
 ```
 
-Relationship has a positive inpact on revenue. By increasing the number of relationships by one, revenue will increase by 19.5 %, holding all other variables constant. The p-value is less than 0.05 and it is significant on a 5 % level, and the revenue variable is described by 7.5 % in this model.
+Relationship has a positive impact on revenue. By increasing the number of relationships by one, revenue will increase by 19.5 %, holding all other variables constant. The p-value is less than 0.05 and it is significant on a 5 % level, and the revenue variable is described by 7.5 % in this model.
 
 #### 4.3.2.4 `licenses` (Licenses) as the Independent Variable
 ```{r, echo = FALSE}
@@ -352,7 +352,7 @@ rev_lic <- lm(revenue ~ licenses, data = mnc)
 pander(rev_lic)
 ```
 
-Licenses has a positive inpact on revenue. The estimate of licenses tells us that 1 % change in licenses will result in 0.36 % change in revenue. The p-value is less than 0.05 and it is significant on a 5 % level. However, the revenue variable is described by only 1.6 % in this model. In this case, we would not include this factor when doing the multiple linear regression test.
+Licenses has a positive impact on revenue. The estimate of licenses tells us that 1 % change in licenses will result in 0.36 % change in revenue. The p-value is less than 0.05 and it is significant on a 5 % level. However, the revenue variable is described by only 1.6 % in this model. In this case, we would not include this factor when doing the multiple linear regression test.
 
 #### 4.3.2.5 `lceopay` (Log of the CEO pay) as the Independent Variable
 
@@ -372,9 +372,9 @@ ggplot(data = mnc, aes(x = lceopay, y = revenue)) +
 
 ```
 
-The CEO pay (lceopay) has a positive inpact on revenue. The estimate of lceopay tells us that 1 % change in the CEO pay will result in 0.9 % change in revenue. The p-value is less than 0.05 and is significant on a 5 % level, and the revenue variable is described by 24.3 % in this model.
+The CEO pay (lceopay) has a positive impact on revenue. The estimate of lceopay tells us that 1 % change in the CEO pay will result in 0.9 % change in revenue. The p-value is less than 0.05 and is significant on a 5 % level, and the revenue variable is described by 24.3 % in this model.
 
-It is interesting to see the relationship between `lceopay` and `revenue` for each ownership type. Generally, the trend are positive for all type but private owned companies have more mixed relationship. Moreover, the relationship seems stronger for the state-owned companies and mixed-owned companies as shown by the steeper linear trendline. However, we need to examine the structure of mixed-owned companies, which are not covered in the original dataset, in order to further validate this relationship. 
+It is interesting to see the relationship between `lceopay` and `revenue` for each ownership type. Generally, the trend is positive for all type but private owned companies have more mixed relationship. Moreover, the relationship seems stronger for the state-owned companies and mixed-owned companies as shown by the steeper linear trend line. However, we need to examine the structure of mixed-owned companies, which are not covered in the original dataset, in order to further validate this relationship. 
 
 
 ### 4.3.3 Multiple Linear Regression Test with `Revenue` as the Dependent Variable
@@ -404,7 +404,7 @@ Based on past reports, the performance of a company is believed to have strong r
 
 However, in our correlation analysis about the dataset, we could not find any strong correlation between the company's revenue and governmental factors. Therefore, we went further to search for other factors that might have influence on the performance of the company. Beyond this, we found some interesting variables in the dataset that have strong correlation with the company's revenue.
 
-Factors like the payment to the CEO, the number of relationship with clients and suppliers, the market size, the GDP per capita, the number of employee and the expenses on the entertainment have an obvious impact on the performance of the company with a high explanation (72%) of the varibility of the revenue change. We also found that different types of ownership resulted in a mixed impact on the revenue change. Being owned by the state did not immdediately give a company significant advantage.
+Factors like the payment to the CEO, the number of relationship with clients and suppliers, the market size, the GDP per capita, the number of employee and the expenses on the entertainment have an obvious impact on the performance of the company with a high explanation (72%) of the variability of the revenue change. We also found that different types of ownership resulted in a mixed impact on the revenue change. Being owned by the state did not immediately give a company significant advantage.
 
 Moreover, there was a negative correlation between entertainment expenditures and revenue. The variable that Zhu (2014) believed to be an indicator of political relationship and potential corrupt practices does not necessarily improve financial performance. The limitation could be, high entertainment expenditures in a particular year is a process of relationship building. The implication could take time. Moreover, there is no records of entertainment expenditures from previous years in this dataset, which could possibly illustrate the connection better.
 
