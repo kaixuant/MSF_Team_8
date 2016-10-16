@@ -18,7 +18,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # 1. Introduction
 
-In China's transition to a market economy, the entire process is strongly intercepted and controlled by the central government (Broadhurst, 2011). Different forms of companies in China have relatively strong or weak relationship with the government under the central government's polices on the economy. In this case, state-owned companies in China may have a stronger relationship with the government and be affected more by the government compared with other kinds of companies. Such relationship makes thoes state-owned companies more competitive and lead multinational compaines (MNC) harder to survive in the current market of China.
+In China's transition to a market economy, the entire process is strongly intercepted and controlled by the central government (Broadhurst, 2011). Different forms of companies in China have relatively strong or weak relationship with the government under the central government's policies on the economy. In this case, state-owned companies in China may have a stronger relationship with the government and be affected more by the government compared with other kinds of companies. Such relationship makes those state-owned companies more competitive and lead multinational compaines (MNC) harder to survive in the current market of China.
 
 A stronger connection with the government may benefit the company with easy access to important information, such as big news or change of policies. It could benefit the company with prior gain of resources as well, such as controlled materials. Moreover, one state-owned company could operate more easily with relatively low risk of bankruptcy due to the help offered by the government.
 
@@ -90,7 +90,7 @@ The dataset contains 40 variables and 11360 observations. The data covered 11360
 |`NonHMT_output`|Percentage output by firms owned by other foreign nationals|
 |`w_con_pdc4`|Market share of four biggest firms in the industry|
 |`w_con_pdc8`|Market share of eight biggest firms in the industry|
-|`marketsize`|The market size of the industry|
+|`marketsize`|The market size of the industry in log form|
 |`growthrate`|Output growth 2001-2003|
 |`last_intensity`|the ratio of fixed asset per number of employees in log form|
 |`lscale`|The mean of the size of firms that has 50% of industry market share in log form|
