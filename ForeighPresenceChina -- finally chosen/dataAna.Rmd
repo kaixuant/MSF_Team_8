@@ -242,7 +242,7 @@ The factors are to be analyzed are:
 |`lceopay`|the performance of the company's CEO largely affect the revenue that company earns|
 |`letcs`|the expenditure on entertainment and travel cost directly reflect on the revenue of the company
 
-```{r, tidy = TRUE, echo=TRUE}
+```{r, tidy=TRUE, echo=TRUE}
 pander(cor.test(mnc[, "revenue"], mnc[, "lgdpper2003"]))
 
 pander(cor.test(mnc[, "revenue"], mnc[, "marketsize"]))
@@ -262,7 +262,7 @@ pander(cor.test(mnc[, "revenue"], mnc[, "letcs"]))
 ```
 
 Based on the correlation tests, it could be observed that the total business income of one company has a positive connection with all the factors mentioned above except the output growth rate (with -0.053 correlation with revenue). The correlation with revenue in descending order is: CEO annual income (0.493), market size (0.306), relationship with clients and suppliers (0.275), GDP per capita in 2003 (0.237) and licenses (0.128). 
-**~~~ add some more?~~~~**
+##**~~~ add some more?~~~~**
 
 ## 4.3 Linear Regression
 ### 4.3.1. Multiple Linear Regression with `lgdpper2003` (GDP per capita in 2003 (log)) as Dependent Variable
@@ -281,12 +281,12 @@ panel.cor <- function(x, y, digits = 2, prefix = "", cex.cor, ...)
     text(0.5, 0.5, txt, cex = cex.cor * r)
 }
 pairs(lgdpper2003 ~ lwdist + lpop2003 + MNC, data = mnc.prov, lower.panel = panel.smooth, upper.panel = panel.cor)
+```
 
-
+```{r, echo=FALSE, tidy=TRUE}
 #linear regression 
 lm_gdp2003 <- lm(lgdpper2003 ~ lwdist + MNC , data = mnc.prov)
 pander(lm_gdp2003)
-
 ```
 
 We can find out that the Adjusted R-squared is 0.6831, and we got the linear regression model function that:
@@ -294,7 +294,7 @@ $$lgdpper2003 = 8.27 - 0.44*lwdist + 0.49*MNC $$
 
 For the linear regression model result, $R^2 =0.6831$ means 68.31% of variance in Log of GDP per capita can be explained by geographic distance and MNC trades in a province. When holding $MNC$ fixed, every extra increase in $lwdist$ can lead to 44% percentage increasement in GDP per capita. When holding Geographic distance fixed, the change in MNC trades in a province can lead to 49% percentage changes in GDP per capita in the province. 
 
-### 4.3.2. Single Variable Linear Regression Test with `Revenue` as the Dependent Variable
+### 4.3.2. Single Variable Linear Regression Test with `revenue` as the Dependent Variable
 
 Based on our correlation analysis we want to look deeper into the variables which had the highest correlation with revenue. 
 
@@ -319,7 +319,6 @@ The market size variable has a positive inpact on revenue. The estimate of marke
 ```{r, echo=FALSE}
 rev_rel <- lm(revenue ~ relationship, data = mnc)
 pander(rev_rel)
-
 ```
 
 Relationship has a positive inpact on revenue. By increasing the number of relationships by one, revenue will increase by 19.5 %, holding all other variables constant. The p-value is less than 0.05 and it is significant on a 5 % level, and the revenue variable is described by 7.5 % in this model.
@@ -328,7 +327,6 @@ Relationship has a positive inpact on revenue. By increasing the number of relat
 ```{r, echo = FALSE}
 rev_lic <- lm(revenue ~ licenses, data = mnc)
 pander(rev_lic)
-
 ```
 
 Licenses has a positive inpact on revenue. The estimate of licenses tells us that 1 % change in licenses will result in 0.36 % change in revenue. The p-value is less than 0.05 and it is significant on a 5 % level. However, the revenue variable is described by only 1.6 % in this model. In this case, we would not include this factor when doing the multiple linear regression test.
@@ -341,10 +339,12 @@ ggplot(data = mnc, aes(x = lceopay, y = revenue)) + geom_point(na.rm = TRUE) + g
 
 ```
 
-#### 4.3.2.6 `lceopay` (Log of the CEO pay) as the Independent Variable with Different Ownership Structure
 ```{r, echo=FALSE}
-ggplot(data = mnc, aes(x = lceopay, y = revenue)) + geom_point(alpha = 1/2, na.rm = TRUE) + theme_minimal() + geom_smooth(na.rm = TRUE, aes(col = ownership), method = 'lm')
-
+ggplot(data = mnc, aes(x = lceopay, y = revenue)) + 
+  geom_point(aes(col = ownership), alpha = 1/2, na.rm = TRUE) + 
+  theme_grey() + geom_smooth(method = 'lm', na.rm = TRUE) +
+  facet_wrap(~ownership, ncol = 2, as.table = TRUE) +
+  guides(col = FALSE)
 ```
 
 The CEO pay (lceopay) has a positive inpact on revenue. The estimate of lceopay tells us that 1 % change in the CEO pay will result in 0.9 % change in revenue. The p-value is less than 0.05 and is significant on a 5 % level, and the revenue variable is described by 24.3 % in this model.
@@ -356,11 +356,9 @@ As a result of our correlation analysis and single regression models we would li
 ```{r, tidy = TRUE, results='hide'}
 rev_reg1 <- lm(revenue ~ lceopay + relationship + marketsize + lgdpper2003 + lemp + letcs, data = mnc)
 summary(rev_reg1)
-ggplot(data = mnc, aes(x = lceopay+relationship+marketsize+lgdpper2003+lemp+letcs, y = revenue)) + geom_point(na.rm = TRUE) + geom_smooth(method='lm',formula = y~x, na.rm = TRUE)
-
 ```
 
-```{r, results = 'asis', tidy = TRUE}
+```{r, results = 'asis', tidy = TRUE, echo=FALSE}
 stargazer(list(rev_ceo, rev_reg1), digits = 2, no.space = TRUE, type = 'latex', title = 'Regression Analysis')
 ```
 
@@ -390,7 +388,7 @@ Around 73.8 per cent of the companies in the sample is owned by a mix of foreign
 
 
 # References
-
+Cendrowski, S. (2015). China's Global 500 companies are bigger than ever—and mostly state-owned. *Fortune*. [online] Available from: http://fortune.com/2015/07/22/china-global-500-government-owned/ [Accessed 13 October 2016]
 Hlavac, M. (2015). *stargazer: Well-Formatted Regression and Summary Statistics Tables*. R package version 5.2. http://CRAN.R-project.org/package=stargazer  
 National Bureau of Statistics of China (2014). National Data. Available from: http://data.stats.gov.cn/english/easyquery.htm?cn=C01 [Accessed 13 October 2016]  
 You, J. & Du, G. (2012). Are Political Connections a Blessing or a Curse? Evidence from CEO Turnover in China, *Corporate Governance: An International Review*, 20(2). Accessed through: EBSCOHost.  
