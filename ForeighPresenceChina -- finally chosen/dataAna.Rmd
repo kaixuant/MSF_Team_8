@@ -24,11 +24,11 @@ Based on the above information and analysis, it may be interpreted that the rela
 This report analyse replication dataset provided by Zhu (2016) that consisted of information about different companies in 30 provinces in China. The relationship between variables that affect company revenue will be investigated using correlation test and other different statistical testing. Then, we will examine the significant variables using linear regression to calculate their impact to the log of company revenue.
 
 # 2. Theory
-The theory we have based our analysis on is a paper published in 2012 about political connections and how this affects a firm's performance. 
+The theory we have based our analysis on is a paper published in 2012 about political connections and how this affects a firm's performance (You & Du, 2012). 
 
 Companies with a strong relationship to the government benefit from easier access to government-related resources and bureaucratic processes, however, research conducted on this relationship with companies' financial performance is varied. In China, 76 out of 98 companies in 2014 Fortune 500 list, are state-owned (Cendrowski, 2015) and it shows the importance of government of China in the development of these companies.
 
-One of the theories on this topic is from Pfeiffer and Salancik (1978), they developed a theory stating that political connections will increase a firms value. Another theory, published by Jensen and Meckling (1976), argue that a firm which have a CEO with strong government connections might utilize this benefit in his own interests rather than the business' interest. We found these theories quite interesting and wanted to see if we could find any support for them in our data.
+One of the theories on this topic is from Pfeiffer and Salancik (1978), they developed a theory stating that political connections can increase a firm’s value. Another theory, published by Jensen and Meckling (1976), argue that a firm which have a CEO with strong government connections might utilize this benefit in his own interests rather than the business' interest. We found these theories quite interesting and wanted to see if we could find any support for them in our data.
 
 # 3. Methods
 The analysis is conducted using several statistical tools in R, i.e. statistical test and linear modelling. Some libraries such as `ggplot2` and `scales` are loaded to the console to visualise the data, as well as `pander` and `stargazer` for the numerical reporting.
@@ -390,10 +390,18 @@ Cendrowski, S. (2015) China's Global 500 companies are bigger than ever—and mo
 
 Hlavac, M. (2015) *stargazer: Well-Formatted Regression and Summary Statistics Tables*. R package version 5.2. http://CRAN.R-project.org/package=stargazer  
 
+Jensen, M.C. & Meckling W. H. (1976) Theory of the firm: Managerial behavior, agency costs and ownership structure. *Journal of Financial Economics*. 3 (4), 305-360. Available from: http://www.sciencedirect.com/science/article/pii/0304405X7690026X [Accessed 13th October 2016] 
+
 National Bureau of Statistics of China (2014). National Data. Available from: http://data.stats.gov.cn/english/easyquery.htm?cn=C01 [Accessed 13 October 2016]  
 
+<<<<<<< HEAD
+Pfeffer, J. & Salancik G. R. (1978) *The External Control of Organizations: A Resource Dependence Perspective*. New York, Harper & Row. Available from: http://web.unitn.it/files/download/12425/the_external_control_of_organizations_ch3_pfeffer.pdf [Accessed 15th October 2016] 
+
+You, J. & Du, G. (2012) Are Political Connections a Blessing or a Curse? Evidence from CEO Turnover in China, *Corporate Governance: An International Review*, 20(2). Accessed through: EBSCOHost.  
+=======
 You, J. & Du, G. (2012) Are Political Connections a Blessing or a Curse? Evidence from CEO Turnover in China, *Corporate Governance: An International Review*, 20(2). Accessed through: EBSCOHost.
 
 Zhu, B. (2015) *MNCs, Rents and Corruption: Evidence from China*. Princeton, Princeton University. Available from: https://www.princeton.edu/politics/about/file-repository/public/Zhu_MNCs-and-Corruption-in-China.pdf [Accessed 12 October 2016]
+>>>>>>> 44d7b3cde8945cf8e6faede5f5b8a23c86c398c9
 
 Zhu, B. (2016) *Replication Data for: MNCs, Rents, and Corruption: Evidence from China*, doi:10.7910/DVN/VT4KJA, Harvard Dataverse, V1 [UNF:6:LTJM6CHylp/JU5AfkjBK8Q==]  
