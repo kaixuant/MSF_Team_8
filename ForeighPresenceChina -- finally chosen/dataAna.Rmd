@@ -1,6 +1,12 @@
 ---
-title: "Group 8 Maths and Stats Project"
-output: pdf_document
+title: "Math and Statistics Foundations Project"
+output: 
+  pdf_document: 
+    toc: yes
+    toc_depth: 4
+
+date: 16th Oct, 2016
+group: No.8
 ---
 
 ```{r setup, include=FALSE}
@@ -8,9 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # 1. Introduction
-Business environment in China is unique. Multinational companies (MNC) often find it difficult to compete with local companies.  
-
-In China's transition to a market economy, the entire process is strongly intercepted and crontolled by the central government (Broadhurst, 2011). Thus, state-owned companies in China may have a stronger relationship with the government and be affected more by the government compared with other kinds of companies.
+In China's transition to a market economy, the entire process is strongly intercepted and crontolled by the central government (Broadhurst, 2011). Different forms of companies in China have relatively strong or weak relationship with the government under the central government's polices on the economy. In this case, state-owned companies in China may have a stronger relationship with the government and be affected more by the government compared with other kinds of companies. Such relationship makes thoes state-owned companies more competitive and lead multinational compaines (MNC) harder to survive in the current market of China.
 
 A stronger connection with the government may benefit the company with easy access to important information, such as big news or change of policies. It could benefit the company with prior gain of resources as well, such as controlled materials. Moreover, one state-owned company could operate more easily with relatively low risk of bankruptcy due to the help offered by the government.
 
@@ -39,8 +43,7 @@ library(pander)
 ## 3.1 Description
 
 ```{r, results='hide', tidy=TRUE}
-load("./ForeighPresenceChina -- finally chosen/ForeignPresence&ETCs.RData")
-#load("C:/Users/Kaixuan/Documents/MSF_Team_8/ForeighPresenceChina -- finally chosen/ForeignPresence&ETCs.RData")
+load("/Users/XINWEI_LI/Desktop/Math & Statistics Foundations/MSF_Team_8/ForeighPresenceChina -- finally chosen/ForeignPresence&ETCs.RData")
 mnc <- as.data.frame(x)
 ls.str(mnc)
 summary(mnc)
@@ -388,8 +391,13 @@ Around 73.8 per cent of the companies in the sample is owned by a mix of foreign
 
 # References
 Broadhurst, G, R. (2011) *Business and the risk of crime in China : the 2005-2006 China international crime against business survey.* ANU E Press Publishing. Available from: https://books.google.co.uk/books?id=LFw9KxnqQqYC&dq=Chinese+government+has+strong+control+on+the+economy&source=gbs_navlinks_s
+
 Cendrowski, S. (2015) China's Global 500 companies are bigger than ever—and mostly state-owned. *Fortune*. [online] Available from: http://fortune.com/2015/07/22/china-global-500-government-owned/ [Accessed 13 October 2016]
+
 Hlavac, M. (2015) *stargazer: Well-Formatted Regression and Summary Statistics Tables*. R package version 5.2. http://CRAN.R-project.org/package=stargazer  
+
 National Bureau of Statistics of China (2014). National Data. Available from: http://data.stats.gov.cn/english/easyquery.htm?cn=C01 [Accessed 13 October 2016]  
+
 You, J. & Du, G. (2012) Are Political Connections a Blessing or a Curse? Evidence from CEO Turnover in China, *Corporate Governance: An International Review*, 20(2). Accessed through: EBSCOHost.  
+
 Zhu, B. (2016) *Replication Data for: MNCs, Rents, and Corruption: Evidence from China*, doi:10.7910/DVN/VT4KJA, Harvard Dataverse, V1 [UNF:6:LTJM6CHylp/JU5AfkjBK8Q==]  
