@@ -1,12 +1,10 @@
 ---
 title: "Math and Statistics Foundations Project"
 author: "Group 8"
-
 output: 
   pdf_document: 
     toc: yes
-    toc_depth: 4
-
+    toc_depth: 2
 date: 16th Oct, 2016
 ---
 
@@ -15,6 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # 1. Introduction
+
 In China's transition to a market economy, the entire process is strongly intercepted and crontolled by the central government (Broadhurst, 2011). Different forms of companies in China have relatively strong or weak relationship with the government under the central government's polices on the economy. In this case, state-owned companies in China may have a stronger relationship with the government and be affected more by the government compared with other kinds of companies. Such relationship makes thoes state-owned companies more competitive and lead multinational compaines (MNC) harder to survive in the current market of China.
 
 A stronger connection with the government may benefit the company with easy access to important information, such as big news or change of policies. It could benefit the company with prior gain of resources as well, such as controlled materials. Moreover, one state-owned company could operate more easily with relatively low risk of bankruptcy due to the help offered by the government.
@@ -24,6 +23,7 @@ Based on the above information and analysis, it may be interpreted that the rela
 This report analyse replication dataset provided by Zhu (2016) that consisted of information about different companies in 30 provinces in China. The relationship between variables that affect company revenue will be investigated using correlation test and other different statistical testing. Then, we will examine the significant variables using linear regression to calculate their impact to the log of company revenue.
 
 # 2. Theory
+
 The theory we have based our analysis on is a paper published in 2012 about political connections and how this affects a firm's performance. 
 
 Companies with a strong relationship to the government benefit from easier access to government-related resources and bureaucratic processes, however, research conducted on this relationship with companies' financial performance is varied. In China, 76 out of 98 companies in 2014 Fortune 500 list, are state-owned (Cendrowski, 2015) and it shows the importance of government of China in the development of these companies.
@@ -31,6 +31,7 @@ Companies with a strong relationship to the government benefit from easier acces
 One of the theories on this topic is from Pfeiffer and Salancik (1978), they developed a theory stating that political connections will increase a firms value. Another theory, published by Jensen and Meckling (1976), argue that a firm which have a CEO with strong government connections might utilize this benefit in his own interests rather than the business' interest. We found these theories quite interesting and wanted to see if we could find any support for them in our data.
 
 # 3. Methods
+
 The analysis is conducted using several statistical tools in R, i.e. statistical test and linear modelling. Some libraries such as `ggplot2` and `scales` are loaded to the console to visualise the data, as well as `pander` and `stargazer` for the numerical reporting.
 
 ```{r library, results='hide'}
@@ -42,6 +43,7 @@ library(pander)
 ```
 
 ## 3.1 Description
+
 ```{r, results='hide', tidy=TRUE}
 load("/Users/XINWEI_LI/Desktop/Math & Statistics Foundations/MSF_Team_8/ForeighPresenceChina -- finally chosen/ForeignPresence&ETCs.RData")
 mnc <- as.data.frame(x)
@@ -53,6 +55,7 @@ summary(mnc)
 The dataset contains 40 variables and 11360 observations. The data covered 11360 different companies observed across 30 provinces in China out of a total of 276,474 companies recorded in 2004 by National Bureau of Statistics of China (2014). The variables are divided into three groups, i.e. firm-level variables, industry-level variables and province-level variables. Firm-level variables consist of the properties of each firm, which include the type of ownership, revenue, number of employees and several variables that highlight the relationship between a firm and the government of China in 2004. Industry-level variables illustrate the scale of the industry and the market share of different groups of companies, including foreign firms and the industry leaders. They also try to highlight the amount of government influence by measuring the linear combination of the amount of help received by government officials, as well as the median of tax rate incurred by each firm in the industry. Lastly, province-level variables indicate the macroeconomic information regarding a province, such as its GDP per capita and the level of MNC activities in the region (e.g. foreign direct investments and trades). Below are the details of each variable analysed in this report.
 
 ### Firm-Level Variables
+
 |Variable|Description|
 |:------------|:------------------------------------------------|
 |`idstd`|Company ID|
@@ -75,6 +78,7 @@ The dataset contains 40 variables and 11360 observations. The data covered 11360
 |`gm_govt`|Whether the general manager is appointed by the government. (1 = Yes, 0 = No)|
 
 ### Industry-Level Variables
+
 |Variable|Description|
 |:------------|:------------------------------------------------|
 |`foreign_output`|The share of output by foreign-owned firms|
@@ -91,6 +95,7 @@ The dataset contains 40 variables and 11360 observations. The data covered 11360
 |`prov_ind`|Industry ID by Province|
 
 ### Province-Level Variables
+
 |Variable|Description|
 |:------------ |:------------------------------------------------|
 |`MNC`|Principal factor analysis of FDI inflow and MNC trades in a province.|
@@ -102,6 +107,7 @@ The dataset contains 40 variables and 11360 observations. The data covered 11360
 |`provinceID`|Province ID|
 
 ## 3.2. Strength and Limitations
+
 This dataset represent the ties between firms and the government of China. Given the unique feature of Chinese industry, this dataset would highlight how strong the relationship with the goverment affect the CEO salary of a company or the company revenue in 2004. This data also contain different companies from different regions whose character and geographical features could affect the firms. 
 
 However, the dataset possess some limitations. Although industry ID numbers are provided, the sector was not clearly specified in the dataset or in previous publications. Moreover, the same industry in different provinces were coded differently, thus, the impact of a specific industry could not be measured. 
@@ -109,6 +115,7 @@ However, the dataset possess some limitations. Although industry ID numbers are 
 # 4. Analysis
 ## 4.1 Statistics Description of the Dataset 
 ### 4.1.1 Exploring Province-level Variables
+
 Provinces variable were separated from the datasets. Before the data was plotted, `province` variable needed to be converted to factor. The summary showed the sample of each province ranges between 85 (Xinjiang) and 846 (Shangdong).
 
 ```{r, tidy=TRUE}
@@ -138,6 +145,7 @@ It can be concluded that the Shanghai firms' revenues have the largest interval 
 From the above analysis, we may derive the observation that companies located in provinces with relatively higher GDP may gain more revenue than others.
 
 ### 4.1.2 Exploring GDP-related Variables
+
 ```{r, echo=FALSE, message = FALSE}
 pander(cor.test(mnc.prov[,"lpop2003"], mnc.prov[,"lgdpper2003"]))
 
@@ -153,6 +161,7 @@ pander(cor.test(mnc.prov[,"lwdist"], mnc.prov[,"lgdpper2003"]))
 The weighted geographic distance and GDP per Capita do not show any significant relationship. The p value is 0.3297, which is much larger than 0.05, thus, the Null Hypothesis cannot be rejected. Although there is no strong correlation, these two variables are positive correlated, which means large province enjoyed slightly more GDP per Capita.
 
 ### 4.1.3 T-test of Company Revenue for Beijing and Shanghai
+
 ```{r, echo = FALSE}
 pander(t.test(mnc[mnc[,"province"] == "Beijing","revenue"],mnc[mnc[,"province"] == "Shanghai","revenue"], alternative = "two.sided"))
 
@@ -160,7 +169,8 @@ pander(t.test(mnc[mnc[,"province"] == "Beijing","revenue"],mnc[mnc[,"province"] 
 
 We conducted T-test of revenue for Beijing and Shanghai, two biggest cities in China. The p value is 0.1419, which is larger than 0.05, so we can not reject the Null Hypothesis on a 95 % confidence level. We can not find a significant difference in the two means.
 
-### 4.1.4. Description of the Firms Ownership 
+### 4.1.4. Description of the Firms Ownership
+
 ```{r, echo = FALSE}
 # Making a new column including all the different ownerships
 mnc[,"ownership"] <- NA
@@ -178,6 +188,7 @@ ggplot(data=mnc) + geom_bar(aes(ownership))
 ```
 
 #### Average Revenue of Each Ownership
+
 ```{r}
 
 mean(mnc[mnc[,"ownership"]=="state", "revenue"])
@@ -192,11 +203,15 @@ ggplot(data=mnc) + geom_boxplot(aes(ownership, revenue, fill = ownership))
 
 As we can see of the barplot there is a lot of companies in the bar with "mixed" ownership compared to the other categories. Therefore it might be difficult to do any valuable analysis on this data. If we look at the boxplot we can see that it looks like the distribution of revenue might be different between the different kind of ownership.
 
-## 4.2 Correlation Analysis
+## 4.2 Correlation Analysis  
+
 ### 4.2.1 Correlation Test among Different Variables with `lemp` (log of total employees in 2004)
+
+In this session, we would like to test the correlation between the number of employee and other factors considered to be relative.
+
 ```{r, message=FALSE, echo=FALSE}
-ggplot(mnc) + geom_point(aes(lemp,revenue))
 pander(cor.test(mnc[,"lemp"],mnc[,"revenue"]))
+ggplot(data = mnc) + geom_point(aes(lemp,revenue))
 pander(cor.test(mnc[,"lemp"],mnc[,"lceopay"]))
 pander(cor.test(mnc[,"lemp"],mnc[,"letcs"]))
 
@@ -206,6 +221,7 @@ From the scatter diagram, we can find that the with the increasement of the firm
 
 ### 4.2.2 Correlation Test among Different Variables with `Revenue` (log of total business income)
 #### 4.2.2.1 Correlation Test with Government Relative Factors
+
 According to the dataset provided, we would like to examine the correlation of all factors relative to the government with the revenue of the company.
 In this case, we analysis the factors:
 
@@ -227,6 +243,7 @@ pander(cor.test(mnc[, "revenue"], mnc[, "interaction"]))
 Based on the correlation tests, it could be observed that the total business income of one company has a quite weak connection with the factors relative to the government, containing even negative correlation with some of the factors. In this case, the theory mentioned previously could not be proved since we hardly observe any strong positive or negative correlation among governmental factors with the performance of a company. Furthermore, the factors tested above may not be used as the independent variables for the linear regression model with the revenue as the dependent variables.
 
 #### 4.2.2.2 Correlation Test with Non-government Relative Factors
+
 Based on the above tests, government relative factors have very weak impacts on the revenue of the company. In this case, many other non-government relative factors should be examined for better interpretation of the dataset and smothier linear regression test.
 The factors are to be analyzed are:
 
@@ -263,6 +280,7 @@ Based on the correlation tests, it could be observed that the total business inc
 
 ## 4.3 Linear Regression
 ### 4.3.1. Multiple Linear Regression with `lgdpper2003` (GDP per capita in 2003 (log)) as Dependent Variable
+
 For province-level variables, let's make a regression model to see what kind of variables influence the GDP per capita and how they influence it.
 
 ```{r, echo=FALSE, tidy=TRUE}
@@ -292,9 +310,11 @@ $$lgdpper2003 = 8.27 - 0.44*lwdist + 0.49*MNC $$
 For the linear regression model result, $R^2 =0.6831$ means 68.31% of variance in Log of GDP per capita can be explained by geographic distance and MNC trades in a province. When holding $MNC$ fixed, every extra increase in $lwdist$ can lead to 44% percentage increasement in GDP per capita. When holding Geographic distance fixed, the change in MNC trades in a province can lead to 49% percentage changes in GDP per capita in the province. 
 
 ### 4.3.2. Single Variable Linear Regression Test with `revenue` as the Dependent Variable
+
 Based on our correlation analysis we want to look deeper into the variables which had the highest correlation with revenue. 
 
 #### 4.3.2.1 `lgdpper2003` (GDP per capita in 2003 (log)) as the Independent Variable
+
 ```{r, echo=FALSE}
 rev_gdp <- lm(revenue ~ lgdpper2003, data = mnc)
 pander(rev_gdp)
@@ -303,6 +323,7 @@ pander(rev_gdp)
 The log of GDP per capita in 2003 (lgdpper2003) has a positive inpact on revenue. By increasing the GDP per capita with 1 %, revenue will increase by approximately 1 %. The p-value is less than 0.05 and is significant on a 5% level, and the revenue variable is described by 5.6 % in this model.
 
 #### 4.3.2.2. `marketsize` (Market size) as the Independent Variable
+
 ```{r, echo=FALSE}
 rev_mark <- lm(revenue ~ marketsize, data = mnc)
 pander(rev_mark)
@@ -328,6 +349,7 @@ pander(rev_lic)
 Licenses has a positive inpact on revenue. The estimate of licenses tells us that 1 % change in licenses will result in 0.36 % change in revenue. The p-value is less than 0.05 and it is significant on a 5 % level. However, the revenue variable is described by only 1.6 % in this model. In this case, we would not include this factor when doing the multiple linear regression test.
 
 #### 4.3.2.5 `lceopay` (Log of the CEO pay) as the Independent Variable
+
 ```{r, echo = FALSE}
 rev_ceo <- lm(revenue ~ lceopay, data = mnc)
 pander(rev_ceo)
@@ -350,6 +372,7 @@ It is interesting to see the relationship between `lceopay` and `revenue` for ea
 
 
 ### 4.3.3 Multiple Linear Regression Test with `Revenue` as the Dependent Variable
+
 As a result of our correlation analysis and single regression models we would like to look further into the revenue variable by adding relationship, marketsize, CEO pay, number of employees, firm expenditure on entertainment and GDP per capita in 2003 as independent variables.  
 
 ```{r, tidy = TRUE, results='hide'}
@@ -370,6 +393,7 @@ By looking at the lceopay estimate we can see that 1 % change in the CEO pay wil
 
 # 5. Discussion and Conclusion
 ## 5.1 Discussion
+
 Based on past reports, the performance of a company is believed to have strong relationship with its connection to the government. Since the Chinese government has a strong interception on its country's economy, and many companies in China are state-owned, we wanted to check whether the revenue of one company is correlated with the governmental factors.
 
 However, in our correlation analysis about the dataset, we could not find any strong correlation between the company's revenue and governmental factors. Therefore, we went further to search for other factors that might have influence on the performance of the company. Beyond this, we found some interesting variables in the dataset that have strong correlation with the company's revenue.
@@ -384,6 +408,7 @@ Around 73.8 per cent of the companies in the sample is owned by a mix of foreign
 
 
 # References
+
 Broadhurst, G, R. (2011) *Business and the risk of crime in China : the 2005-2006 China international crime against business survey.* ANU E Press Publishing. Available from: https://books.google.co.uk/books?id=LFw9KxnqQqYC&dq=Chinese+government+has+strong+control+on+the+economy&source=gbs_navlinks_s
 
 Cendrowski, S. (2015) China's Global 500 companies are bigger than ever—and mostly state-owned. *Fortune*. [online] Available from: http://fortune.com/2015/07/22/china-global-500-government-owned/ [Accessed 13 October 2016]
