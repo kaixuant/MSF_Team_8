@@ -1,18 +1,13 @@
 ---
-<<<<<<< HEAD
 title: "Math and Statistics Foundations Project"
+author: "Group 8"
+
 output: 
   pdf_document: 
     toc: yes
     toc_depth: 4
 
 date: 16th Oct, 2016
-group: No.8
-=======
-title: "Maths and Stats Project"
-author: "Group 8"
-output: pdf_document
->>>>>>> b64d1b3340b1a4e7207faa72361ecce037e10b29
 ---
 
 ```{r setup, include=FALSE}
@@ -20,11 +15,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # 1. Introduction
-<<<<<<< HEAD
 In China's transition to a market economy, the entire process is strongly intercepted and crontolled by the central government (Broadhurst, 2011). Different forms of companies in China have relatively strong or weak relationship with the government under the central government's polices on the economy. In this case, state-owned companies in China may have a stronger relationship with the government and be affected more by the government compared with other kinds of companies. Such relationship makes thoes state-owned companies more competitive and lead multinational compaines (MNC) harder to survive in the current market of China.
-=======
-Business environment in China is unique. Multinational companies (MNC) often find it difficult to compete with local companies. In China's transition to a market economy, the entire process is strongly intercepted and crontolled by the central government (Broadhurst, 2011). Thus, state-owned companies in China may have a stronger relationship with the government and be affected more by the government compared with other kinds of companies.
->>>>>>> b64d1b3340b1a4e7207faa72361ecce037e10b29
 
 A stronger connection with the government may benefit the company with easy access to important information, such as big news or change of policies. It could benefit the company with prior gain of resources as well, such as controlled materials. Moreover, one state-owned company could operate more easily with relatively low risk of bankruptcy due to the help offered by the government.
 
@@ -51,7 +42,6 @@ library(pander)
 ```
 
 ## 3.1 Description
-
 ```{r, results='hide', tidy=TRUE}
 load("/Users/XINWEI_LI/Desktop/Math & Statistics Foundations/MSF_Team_8/ForeighPresenceChina -- finally chosen/ForeignPresence&ETCs.RData")
 mnc <- as.data.frame(x)
@@ -112,14 +102,13 @@ The dataset contains 40 variables and 11360 observations. The data covered 11360
 |`provinceID`|Province ID|
 
 ## 3.2. Strength and Limitations
-This dataset represent the ties between firms and the government of China. Given the unique feature of Chinese industry, this dataset would highlight how strong the relationship with the goverment affect the CEO salary of a company or the company revenue in 2004. This data also contain different companies from different regions whose character and geographical features could affect the firms.  
+This dataset represent the ties between firms and the government of China. Given the unique feature of Chinese industry, this dataset would highlight how strong the relationship with the goverment affect the CEO salary of a company or the company revenue in 2004. This data also contain different companies from different regions whose character and geographical features could affect the firms. 
 
 However, the dataset possess some limitations. Although industry ID numbers are provided, the sector was not clearly specified in the dataset or in previous publications. Moreover, the same industry in different provinces were coded differently, thus, the impact of a specific industry could not be measured. 
 
 # 4. Analysis
 ## 4.1 Statistics Description of the Dataset 
 ### 4.1.1 Exploring Province-level Variables
-
 Provinces variable were separated from the datasets. Before the data was plotted, `province` variable needed to be converted to factor. The summary showed the sample of each province ranges between 85 (Xinjiang) and 846 (Shangdong).
 
 ```{r, tidy=TRUE}
@@ -149,7 +138,6 @@ It can be concluded that the Shanghai firms' revenues have the largest interval 
 From the above analysis, we may derive the observation that companies located in provinces with relatively higher GDP may gain more revenue than others.
 
 ### 4.1.2 Exploring GDP-related Variables
-
 ```{r, echo=FALSE, message = FALSE}
 pander(cor.test(mnc.prov[,"lpop2003"], mnc.prov[,"lgdpper2003"]))
 
@@ -173,7 +161,6 @@ pander(t.test(mnc[mnc[,"province"] == "Beijing","revenue"],mnc[mnc[,"province"] 
 We conducted T-test of revenue for Beijing and Shanghai, two biggest cities in China. The p value is 0.1419, which is larger than 0.05, so we can not reject the Null Hypothesis on a 95 % confidence level. We can not find a significant difference in the two means.
 
 ### 4.1.4. Description of the Firms Ownership 
-
 ```{r, echo = FALSE}
 # Making a new column including all the different ownerships
 mnc[,"ownership"] <- NA
@@ -206,9 +193,7 @@ ggplot(data=mnc) + geom_boxplot(aes(ownership, revenue, fill = ownership))
 As we can see of the barplot there is a lot of companies in the bar with "mixed" ownership compared to the other categories. Therefore it might be difficult to do any valuable analysis on this data. If we look at the boxplot we can see that it looks like the distribution of revenue might be different between the different kind of ownership.
 
 ## 4.2 Correlation Analysis
-
 ### 4.2.1 Correlation Test among Different Variables with `lemp` (log of total employees in 2004)
-
 ```{r, message=FALSE, echo=FALSE}
 ggplot(mnc) + geom_point(aes(lemp,revenue))
 pander(cor.test(mnc[,"lemp"],mnc[,"revenue"]))
@@ -307,7 +292,6 @@ $$lgdpper2003 = 8.27 - 0.44*lwdist + 0.49*MNC $$
 For the linear regression model result, $R^2 =0.6831$ means 68.31% of variance in Log of GDP per capita can be explained by geographic distance and MNC trades in a province. When holding $MNC$ fixed, every extra increase in $lwdist$ can lead to 44% percentage increasement in GDP per capita. When holding Geographic distance fixed, the change in MNC trades in a province can lead to 49% percentage changes in GDP per capita in the province. 
 
 ### 4.3.2. Single Variable Linear Regression Test with `revenue` as the Dependent Variable
-
 Based on our correlation analysis we want to look deeper into the variables which had the highest correlation with revenue. 
 
 #### 4.3.2.1 `lgdpper2003` (GDP per capita in 2003 (log)) as the Independent Variable
@@ -357,6 +341,7 @@ ggplot(data = mnc, aes(x = lceopay, y = revenue)) +
   theme_grey() + geom_smooth(method = 'lm', na.rm = TRUE) +
   facet_wrap(~ownership, ncol = 2, as.table = TRUE) +
   guides(col = FALSE)
+
 ```
 
 The CEO pay (lceopay) has a positive inpact on revenue. The estimate of lceopay tells us that 1 % change in the CEO pay will result in 0.9 % change in revenue. The p-value is less than 0.05 and is significant on a 5 % level, and the revenue variable is described by 24.3 % in this model.
@@ -365,7 +350,6 @@ It is interesting to see the relationship between `lceopay` and `revenue` for ea
 
 
 ### 4.3.3 Multiple Linear Regression Test with `Revenue` as the Dependent Variable
-
 As a result of our correlation analysis and single regression models we would like to look further into the revenue variable by adding relationship, marketsize, CEO pay, number of employees, firm expenditure on entertainment and GDP per capita in 2003 as independent variables.  
 
 ```{r, tidy = TRUE, results='hide'}
